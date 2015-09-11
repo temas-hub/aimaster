@@ -40,17 +40,14 @@ public class Renderer(val model: Model) {
             shapeRenderer.setColor(Color.FOREST)
             shapeRenderer.circle(GAME_WIDTH / 2, GAME_HEIGHT / 2, 50f)*/
             shaper.begin(ShapeRenderer.ShapeType.Line)
-            if (model.lstPoints != null) {
-                val lastPoints = model.lstPoints!!
-                if (lastPoints.size > 0) {
-                    var first = lastPoints.get(lastPoints.size - 1)
-                    for (i in lastPoints.size - 2 downTo  0) {
-                        shaper.line(toGameCoords(first), toGameCoords(lastPoints.get(i)))
-                        first = lastPoints.get(i)
-                    }
+            val lastPoints = model.lastPoints
+            if (lastPoints.size > 0) {
+                var first = lastPoints.get(lastPoints.size - 1)
+                for (i in lastPoints.size - 2 downTo  0) {
+                    shaper.line(toGameCoords(first), toGameCoords(lastPoints.get(i)))
+                    first = lastPoints.get(i)
                 }
             }
-
         } finally {
             shaper.end()
         }

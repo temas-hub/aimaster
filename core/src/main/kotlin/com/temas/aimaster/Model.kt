@@ -12,14 +12,10 @@ import kotlin.properties.Delegates
 
 class Model {
 
-    var lstPoints: FixedList<Vector2>? = null
+    public val lastPoints: FixedList<Vector2> = FixedList(10, javaClass<Vector2>())
 
     fun update(delta: Float) {
         //TODO
-    }
-
-    fun saveLine(lastPoints: FixedList<Vector2>) {
-        lstPoints = lastPoints
     }
 
 }

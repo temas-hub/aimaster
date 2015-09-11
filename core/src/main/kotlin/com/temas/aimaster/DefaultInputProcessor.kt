@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2
 
 class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : InputProcessor by i{
 
-    private val lastPoints = FixedList(10, javaClass<Vector2>())
     private val minDistance = 10;
 
     private var startX : Float = -1f
@@ -22,7 +21,7 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
     override fun touchDown (screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
         startX = screenX.toFloat()
         startY = screenY.toFloat()
-        lastPoints.insert(Vector2(startX, startY))
+        controller.model.lastPoints.insert(Vector2(startX, startY))
         return false
     }
 
@@ -38,7 +37,7 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
 //            startX = -1f
 //            startY = -1f
 //        }
-        controller.model.saveLine(lastPoints)
+
         return false
     }
 
@@ -48,7 +47,7 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
         if (lenSq >= minDistance) {
             startX = screenX.toFloat()
             startY = screenY.toFloat()
-            lastPoints.insert(tmpVec)
+            controller.model.lastPoints.insert(tmpVec)
         }
         return false
     }
