@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Scaling
 import com.temas.aimaster.model.Model
+import java.util.*
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -33,17 +34,18 @@ public class Renderer(val model: Model) {
     }
 
     fun render(delta: Float) {
+        cam.update();
         try {
-            cam.update();
             shaper.setProjectionMatrix(cam.combined)
             /*shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
             shapeRenderer.setColor(Color.FOREST)
             shapeRenderer.circle(GAME_WIDTH / 2, GAME_HEIGHT / 2, 50f)*/
             shaper.begin(ShapeRenderer.ShapeType.Line)
-            val lastPoints = model.lastPoints
-            if (lastPoints.size > 0) {
-                var first = lastPoints.get(lastPoints.size - 1)
-                for (i in lastPoints.size - 2 downTo  0) {
+            if (model.lastPoints.size > 1) {
+                val lastPoints = ArrayList<Vector2>(model.lastPoints.size * 2)
+                model.smooth(model.lastPoints, lastPoints)
+                var first = lastPoints.get(lastPoints.size() - 1)
+                for (i in lastPoints.size() - 2 downTo  0) {
                     shaper.line(toGameCoords(first), toGameCoords(lastPoints.get(i)))
                     first = lastPoints.get(i)
                 }

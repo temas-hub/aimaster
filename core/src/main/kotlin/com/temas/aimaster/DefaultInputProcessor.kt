@@ -51,33 +51,4 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
         }
         return false
     }
-
-    public fun simplify(points: FixedList<Vector2>, sqTolerance: Float, out: FixedList<Vector2>) {
-        val len = points.size;
-
-        var point = Vector2();
-        var prevPoint = points.get(0);
-
-        out.clear();
-        out.add(prevPoint);
-
-        for (i in 1..len - 1) {
-            point = points.get(i);
-            if (distSq(point, prevPoint) > sqTolerance) {
-                out.add(point);
-                prevPoint = point;
-            }
-        }
-        if (!prevPoint.equals(point)) {
-            out.add(point);
-        }
-
-    }
-
-    public fun distSq(p1: Vector2, p2: Vector2): Float {
-        val dx = p1.x - p2.x
-        val dy = p1.y - p2.y
-        return dx * dx + dy * dy
-    }
-
 }
