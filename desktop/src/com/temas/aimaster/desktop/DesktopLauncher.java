@@ -7,7 +7,7 @@ import com.temas.aimaster.MainGame;
 public class DesktopLauncher {
 	public static void main (String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = "Clash";
+		cfg.title = "Aimaster";
 		//cfg.useGL30 = true;
 		if (args.length > 1) {
 			cfg.width = Integer.valueOf(args[0]);

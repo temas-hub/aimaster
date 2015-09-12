@@ -35,6 +35,26 @@ public class Renderer(val model: Model) {
 
     fun render(delta: Float) {
         cam.update();
+        drawBall()
+        drawArrow()
+    }
+
+    private fun drawBall() {
+        try {
+            shaper.setProjectionMatrix(cam.combined)
+            if (model.ball != null) {
+                shaper.begin(ShapeRenderer.ShapeType.Line)
+                val ball = model.ball!!
+                val defBallRadius = 20f
+                //shaper.circle(ball.pos.x, ball.pos.y, defBallRadius * (1 + ball.altitude))
+                shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + 10)
+            }
+        } finally {
+            shaper.end()
+        }
+    }
+
+    private fun drawArrow() {
         try {
             shaper.setProjectionMatrix(cam.combined)
             val dir = model.throwDirection

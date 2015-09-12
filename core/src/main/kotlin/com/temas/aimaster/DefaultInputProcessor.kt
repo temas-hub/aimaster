@@ -21,13 +21,16 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
     override fun touchDown (screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
         startX = screenX.toFloat()
         startY = screenY.toFloat()
-        controller.model.lastPoints.insert(Vector2(startX, startY))
+        val point = controller.renderer.toGameCoords(startX, startY)
+        controller.model.lastPoints.insert(point)
+        controller.model.throwDirection.firstPoint.set(point)
         return false
     }
 
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-
+        val point = controller.renderer.toGameCoords(Vector2(screenX.toFloat(), screenY.toFloat()))
+        controller.launch(point)
 //        try {
 //            if (startX != -1f) {
 //
@@ -42,12 +45,13 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
-        val tmpVec = Vector2(startX, startY)
-        val lenSq = tmpVec.dst2(screenX.toFloat(), screenY.toFloat())
+        val point = controller.renderer.toGameCoords(Vector2(startX, startY))
+        controller.model.throwDirection.lastPoint.set(point)
+        val lenSq = point.dst2(screenX.toFloat(), screenY.toFloat())
         if (lenSq >= minDistance) {
             startX = screenX.toFloat()
             startY = screenY.toFloat()
-            controller.model.lastPoints.insert(tmpVec)
+            controller.model.lastPoints.insert(point)
         }
         return false
     }
