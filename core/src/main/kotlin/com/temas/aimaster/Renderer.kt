@@ -37,21 +37,36 @@ public class Renderer(val model: Model) {
         cam.update();
         try {
             shaper.setProjectionMatrix(cam.combined)
-            /*shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-            shapeRenderer.setColor(Color.FOREST)
-            shapeRenderer.circle(GAME_WIDTH / 2, GAME_HEIGHT / 2, 50f)*/
-            shaper.begin(ShapeRenderer.ShapeType.Line)
-            if (model.lastPoints.size > 1) {
-                val lastPoints = ArrayList<Vector2>(model.lastPoints.size * 2)
-                model.smooth(model.lastPoints, lastPoints)
-                var first = lastPoints.get(lastPoints.size() - 1)
-                for (i in lastPoints.size() - 2 downTo  0) {
-                    shaper.line(toGameCoords(first), toGameCoords(lastPoints.get(i)))
-                    first = lastPoints.get(i)
-                }
+            val dir = model.throwDirection
+            if (dir.firstPoint.x != -1f) {
+                shaper.begin(ShapeRenderer.ShapeType.Line)
+                val dirVect = dir.lastPoint.cpy().sub(dir.firstPoint)
+                val endPoint = dir.lastPoint.cpy().sub(dirVect.scl(2f))
+                val normDir = dirVect.nor()
+                val perp = Vector2(-normDir.y, normDir.x)
+                val thickness = 20f
+                val perpDiv = perp.cpy().scl(thickness / 2)
+                val perpPoint1 = dir.firstPoint.cpy().sub(perpDiv)
+                val perpPoint2 = dir.firstPoint.cpy().add(perpDiv)
+                shaper.line(perpPoint1, perpPoint2)
+                shaper.line(perpPoint1, endPoint)
+                shaper.line(perpPoint2, endPoint)
             }
         } finally {
             shaper.end()
+        }
+    }
+
+    private fun drawTraceLine() {
+        shaper.begin(ShapeRenderer.ShapeType.Line)
+        if (model.lastPoints.size > 1) {
+            val lastPoints = ArrayList<Vector2>(model.lastPoints.size * 2)
+            model.smooth(model.lastPoints, lastPoints)
+            var first = lastPoints.get(lastPoints.size() - 1)
+            for (i in lastPoints.size() - 2 downTo  0) {
+                shaper.line(first, lastPoints.get(i))
+                first = lastPoints.get(i)
+            }
         }
     }
 
