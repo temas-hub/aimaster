@@ -26,7 +26,8 @@ class MainScreen(s: Screen) : Screen by s {
 
 
     override fun render(delta: Float) {
-        Gdx.gl.glClearColor(0.45f, 0.45f, 0.45f, 1f)  //#727272
+        //Gdx.gl.glClearColor(0.45f, 0.45f, 0.45f, 1f)  //#727272
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f)  //#727272
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         controller.update(delta)
     }

@@ -1,6 +1,7 @@
 package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Vector2
+import com.temas.aimaster.Arrow
 import com.temas.aimaster.Ball
 import com.temas.aimaster.FixedList
 import java.util.*
@@ -16,42 +17,30 @@ class Model {
 
     public val lastPoints: FixedList<Vector2> = FixedList(10, javaClass<Vector2>())
 
-    public val throwDirection: ThrowDirection = ThrowDirection()
-
     public var ball: Ball? = null
 
+    public var arrow: Arrow = Arrow()
+
     companion object {
-        public val defSpeed: Float = 30f;
+        public val flightSpeed: Float = 2f // whole distance per second
     }
 
     fun update(delta: Float) {
+
+        updateArrow(delta)
         moveBall3(delta)
 
     }
 
-    private fun moveBall(delta: Float) {
-        if (ball != null) {
-            val b = ball!!
-            val sigDir = Vector2(Math.signum(b.dir.x),Math.signum(b.dir.y))
-            //b.velocity = 20 * b.altitude
-            //b.speed += b.velocity * delta
-            b.speed = 5000 * b.altitude
-
-            val dist = sigDir.scl(b.speed).scl(delta)
-            b.pos.add(dist)
-            val traveled = b.pos.cpy().sub(b.starPoint)
-            val radDist = traveled.len() / b.dir.len()
-            b.altitude = Math.sin(radDist * 2 * Math.PI).toFloat()
-        }
+    private fun updateArrow(delta: Float) {
+        arrow.update(delta)
     }
-
 
     private fun moveBall3(delta: Float) {
         if (ball != null) {
             val b = ball!!
-            val flightTime = 3f
-            val newX = b.pos3.x + b.dir.x * flightTime * delta
-            val newY = b.pos3.y + b.dir.y * flightTime * delta
+            val newX = b.pos3.x + b.dir.x * flightSpeed * delta
+            val newY = b.pos3.y + b.dir.y * flightSpeed * delta
             val traveled = Vector2(newX, newY).sub(b.starPoint).len()
             val distKoef = 3f
             val totalDistance = b.dir.len() * distKoef
@@ -61,28 +50,6 @@ class Model {
                 b.pos3.set(newX, newY, z.toFloat())
             }
         }
-    }
-
-    public fun simplify(points: FixedList<Vector2>, sqTolerance: Float, out: FixedList<Vector2>) {
-        val len = points.size;
-
-        var point = Vector2();
-        var prevPoint = points.get(0);
-
-        out.clear();
-        out.add(prevPoint);
-
-        for (i in 1..len - 1) {
-            point = points.get(i);
-            if (distSq(point, prevPoint) > sqTolerance) {
-                out.add(point);
-                prevPoint = point;
-            }
-        }
-        if (!prevPoint.equals(point)) {
-            out.add(point);
-        }
-
     }
 
     public fun distSq(p1: Vector2, p2: Vector2): Float {
@@ -110,22 +77,14 @@ class Model {
     }
 
     fun launch(point: Vector2) {
-        throwDirection.firstPoint.set(-1f, -1f)
+        arrow.firstPoint.set(-1f, -1f)
     }
 
     fun createBall(point: Vector2): Ball {
-        val dir = throwDirection
-        val revDirVect = dir.lastPoint.cpy().sub(dir.firstPoint)
-        //val dirVect = dir.firstPoint.cpy().sub(revDirVect.scl(2f))
-        ball = Ball(dir.firstPoint.cpy(), defSpeed, 25f, 0.01f, Vector2(-revDirVect.x, -revDirVect.y))
+        val a = arrow
+        val revDirVect = a.dir
+        ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
         return ball as Ball
     }
-
-}
-
-data class ThrowDirection {
-    var firstPoint = Vector2(-1f, -1f)
-    var lastPoint = Vector2()
-
 
 }

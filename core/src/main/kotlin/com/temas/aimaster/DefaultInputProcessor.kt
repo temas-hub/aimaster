@@ -23,7 +23,7 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
         startY = screenY.toFloat()
         val point = controller.renderer.toGameCoords(startX, startY)
         controller.model.lastPoints.insert(point)
-        controller.model.throwDirection.firstPoint.set(point)
+        controller.model.arrow.firstPoint.set(point)
         return false
     }
 
@@ -46,7 +46,7 @@ class DefaultInputProcessor(i: InputProcessor, val controller: Controller) : Inp
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
         val point = controller.renderer.toGameCoords(Vector2(startX, startY))
-        controller.model.throwDirection.lastPoint.set(point)
+        controller.model.arrow.lastPoint.set(point)
         val lenSq = point.dst2(screenX.toFloat(), screenY.toFloat())
         if (lenSq >= minDistance) {
             startX = screenX.toFloat()

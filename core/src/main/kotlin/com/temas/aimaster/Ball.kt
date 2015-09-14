@@ -8,9 +8,6 @@ import com.badlogic.gdx.math.Vector3
  * @since 12/09/2015
  */
 
-public open class Ball(var starPoint: Vector2, var speed: Float, var velocity: Float, var altitude: Float, var dir: Vector2) {
-    public var pos: Vector2 = starPoint
-    public val endPoint: Vector2 = starPoint.cpy().add(dir)
-
+public open class Ball(var starPoint: Vector2, var dir: Vector2) {
     public val pos3: Vector3 = Vector3(starPoint.x, starPoint.y, 0f)
 }

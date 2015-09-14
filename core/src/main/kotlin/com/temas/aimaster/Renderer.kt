@@ -21,6 +21,7 @@ public class Renderer(val model: Model) {
     companion object {
         public val GAME_WIDTH : Float = 960f
         public val GAME_HEIGHT : Float = 640f
+        public val ARROW_THICKNESS : Float = 20f
     }
     private var viewportX: Int = 0
     private var viewportY: Int = 0
@@ -43,11 +44,10 @@ public class Renderer(val model: Model) {
         try {
             shaper.setProjectionMatrix(cam.combined)
             if (model.ball != null) {
-                shaper.begin(ShapeRenderer.ShapeType.Line)
+                shaper.begin(ShapeRenderer.ShapeType.Filled)
                 val ball = model.ball!!
-                val defBallRadius = 20f
-                //shaper.circle(ball.pos.x, ball.pos.y, defBallRadius * (1 + ball.altitude))
-                shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + 10)
+                val defBallRadius = 10f
+                shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
             }
         } finally {
             shaper.end()
@@ -57,20 +57,17 @@ public class Renderer(val model: Model) {
     private fun drawArrow() {
         try {
             shaper.setProjectionMatrix(cam.combined)
-            val dir = model.throwDirection
-            if (dir.firstPoint.x != -1f) {
+            val a = model.arrow
+            if (a.len != -1f) {
                 shaper.begin(ShapeRenderer.ShapeType.Line)
-                val dirVect = dir.lastPoint.cpy().sub(dir.firstPoint)
-                val endPoint = dir.lastPoint.cpy().sub(dirVect.scl(2f))
-                val normDir = dirVect.nor()
+                val normDir = a.dir.cpy().nor()
                 val perp = Vector2(-normDir.y, normDir.x)
-                val thickness = 20f
-                val perpDiv = perp.cpy().scl(thickness / 2)
-                val perpPoint1 = dir.firstPoint.cpy().sub(perpDiv)
-                val perpPoint2 = dir.firstPoint.cpy().add(perpDiv)
+                val perpDiv = perp.cpy().scl(ARROW_THICKNESS / 2)
+                val perpPoint1 = a.firstPoint.cpy().sub(perpDiv)
+                val perpPoint2 = a.firstPoint.cpy().add(perpDiv)
                 shaper.line(perpPoint1, perpPoint2)
-                shaper.line(perpPoint1, endPoint)
-                shaper.line(perpPoint2, endPoint)
+                shaper.line(perpPoint1, a.endPoint)
+                shaper.line(perpPoint2, a.endPoint)
             }
         } finally {
             shaper.end()
