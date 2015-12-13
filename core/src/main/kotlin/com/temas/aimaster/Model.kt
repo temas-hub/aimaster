@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.Arrow
 import com.temas.aimaster.Ball
 import com.temas.aimaster.FixedList
+import com.temas.aimaster.Target
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -16,46 +17,18 @@ import kotlin.properties.Delegates
 class Model {
 
     public val lastPoints: FixedList<Vector2> = FixedList(10, javaClass<Vector2>())
+    public val arrow: Arrow = Arrow()
+    public val target: Target = Target(40f, 100f)
 
     public var ball: Ball? = null
 
-    public var arrow: Arrow = Arrow()
-
     companion object {
-        public val flightSpeed: Float = 2f // whole distance per second
     }
 
     fun update(delta: Float) {
-
-        updateArrow(delta)
-        moveBall3(delta)
-
-    }
-
-    private fun updateArrow(delta: Float) {
+        target.update(delta)
         arrow.update(delta)
-    }
-
-    private fun moveBall3(delta: Float) {
-        if (ball != null) {
-            val b = ball!!
-            val newX = b.pos3.x + b.dir.x * flightSpeed * delta
-            val newY = b.pos3.y + b.dir.y * flightSpeed * delta
-            val traveled = Vector2(newX, newY).sub(b.starPoint).len()
-            val distKoef = 3f
-            val totalDistance = b.dir.len() * distKoef
-            if (traveled < totalDistance) {
-                val verticalSpeed: Double = Math.sin(traveled / totalDistance * 2 * Math.PI) * 100
-                val z = b.pos3.z + delta * verticalSpeed
-                b.pos3.set(newX, newY, z.toFloat())
-            }
-        }
-    }
-
-    public fun distSq(p1: Vector2, p2: Vector2): Float {
-        val dx = p1.x - p2.x
-        val dy = p1.y - p2.y
-        return dx * dx + dy * dy
+        ball?.update(delta)
     }
 
     public fun smooth(input: FixedList<Vector2>, output: ArrayList<Vector2>) {

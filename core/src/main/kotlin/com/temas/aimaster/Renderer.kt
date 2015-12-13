@@ -36,15 +36,29 @@ public class Renderer(val model: Model) {
 
     fun render(delta: Float) {
         cam.update();
+        drawTarget()
         drawBall()
         drawArrow()
+    }
+
+    private fun drawTarget() {
+        val oldColor = shaper.getColor()
+        try {
+            shaper.setProjectionMatrix(cam.combined)
+            shaper.begin(ShapeRenderer.ShapeType.Filled)
+            shaper.setColor(Color.OLIVE)
+            shaper.circle(model.target.center.x, model.target.center.y, model.target.radius)
+        } finally {
+            shaper.setColor(oldColor)
+            shaper.end()
+        }
     }
 
     private fun drawBall() {
         try {
             shaper.setProjectionMatrix(cam.combined)
             if (model.ball != null) {
-                shaper.begin(ShapeRenderer.ShapeType.Filled)
+                shaper.begin(ShapeRenderer.ShapeType.Line)
                 val ball = model.ball!!
                 val defBallRadius = 10f
                 shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
