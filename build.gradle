@@ -1,10 +1,15 @@
+
 buildscript {
+    ext{
+        kotlinVer = '1.0.0-beta-3595'
+    }
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
     }
 }
 
@@ -31,7 +36,7 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java"
-
+    apply plugin: "kotlin"
 
     dependencies {
         compile project(":core")
@@ -42,11 +47,12 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
     }
 }
 
 project(":android") {
-    apply plugin: "android"
+    apply plugin: 'android'
 
     configurations { natives }
 
@@ -74,7 +80,7 @@ project(":android") {
 
 project(":core") {
     apply plugin: "java"
-
+    apply plugin: "kotlin"
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -84,6 +90,7 @@ project(":core") {
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
     }
 }
 
