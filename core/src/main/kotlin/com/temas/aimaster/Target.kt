@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.temas.aimaster.renderer.Renderer
 import java.util.*
 
 /**
@@ -13,10 +12,19 @@ import java.util.*
  */
 
 public class Target(var speed: Float, var radius: Float) {
+    private val NUM_OF_CHANGE_DIR_TRIES: Int = 10;
+    private val CENTRAL_POINT = Vector2(Renderer.GAME_WIDTH / 2, Renderer.GAME_HEIGHT / 2);
+
     private val rnd = Random()
     private val screenBounds = Rectangle(0f,0f,Renderer.GAME_WIDTH, Renderer.GAME_HEIGHT)
+    private val p1 = Vector2(screenBounds.x, screenBounds.y)
+    private val p2 = Vector2(screenBounds.x + screenBounds.width, screenBounds.y)
+    private val p3 = Vector2(screenBounds.x + screenBounds.width, screenBounds.y + screenBounds.height)
+    private val p4 = Vector2(screenBounds.x, screenBounds.y + screenBounds.height)
 
-    public var center: Vector2 = Vector2(Renderer.GAME_WIDTH / 2, Renderer.GAME_HEIGHT / 2)
+
+
+    public var center: Vector2 = CENTRAL_POINT;
     public var moveDir: Vector2 = Vector2.Zero
 
     fun update(delta: Float) {
@@ -24,17 +32,29 @@ public class Target(var speed: Float, var radius: Float) {
             moveDir = getRandomVector()
         }
         var targetCircle = getNewPoistion(delta)
-        while (interects(targetCircle)) {
-            targetCircle = getNewPoistion(delta)
-        }
+        targetCircle = makeSureItISWithInTheScreen(delta, targetCircle)
         center.set(targetCircle.x, targetCircle.y)
     }
 
+
+
+    private fun makeSureItISWithInTheScreen(delta: Float, targetCircle: Circle): Circle {
+        var res = targetCircle
+        if (interects(res)) {
+            for (i in 1..NUM_OF_CHANGE_DIR_TRIES) {
+                if (interects(res)) {
+                    moveDir = getRandomVector()
+                    res = getNewPoistion(delta)
+                }
+            }
+            if (interects(res)) {
+                res = Circle(CENTRAL_POINT, radius)
+            }
+        }
+        return res
+    }
+
     private fun interects(cir: Circle): Boolean {
-        val p1 = Vector2(screenBounds.x, screenBounds.y)
-        val p2 = Vector2(screenBounds.x + screenBounds.width, screenBounds.y)
-        val p3 = Vector2(screenBounds.x + screenBounds.width, screenBounds.y + screenBounds.height)
-        val p4 = Vector2(screenBounds.x, screenBounds.y + screenBounds.height)
 
         val center = Vector2(cir.x, cir.y)
 
@@ -45,8 +65,7 @@ public class Target(var speed: Float, var radius: Float) {
     }
 
     private fun getNewPoistion(delta: Float): Circle {
-        var newCenter = center.cpy()
-        newCenter = newCenter.add(moveDir.cpy().scl(speed * delta))
+        var newCenter = center.cpy().add(moveDir.cpy().scl(speed * delta))
         val targetCircle = Circle(newCenter, radius)
         return targetCircle
     }
@@ -54,7 +73,7 @@ public class Target(var speed: Float, var radius: Float) {
     private fun getRandomVector(): Vector2 {
         val x: Float = (rnd.nextInt(21) - 10) / 10f
         val y: Float = (rnd.nextInt(21) - 10) / 10f
-        return Vector2(x,y)
+        return Vector2(x,y).nor()
     }
 
 }

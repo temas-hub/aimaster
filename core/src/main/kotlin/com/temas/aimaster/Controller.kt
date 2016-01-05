@@ -2,7 +2,7 @@ package com.temas.aimaster
 
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.model.Model
-import com.temas.aimaster.renderer.Renderer
+import com.temas.aimaster.Renderer
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>

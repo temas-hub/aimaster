@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Aimaster";
 		//cfg.useGL30 = true;
-		if (args.length > 1) {
+		if (args.length > 1) { // use -PappArgs=[697,1080] as gradle script parameter
 			cfg.width = Integer.valueOf(args[0]);
 			cfg.height = Integer.valueOf(args[1]);
 		} else {        // 0.6453

@@ -1,4 +1,4 @@
-package com.temas.aimaster.renderer
+package com.temas.aimaster
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -19,8 +19,8 @@ import java.util.*
 
 public class Renderer(val model: Model) {
     companion object {
-        public val GAME_WIDTH : Float = 960f
-        public val GAME_HEIGHT : Float = 640f
+        public val GAME_WIDTH : Float = 640f
+        public val GAME_HEIGHT : Float = 960f
         public val ARROW_THICKNESS : Float = 20f
     }
     private var viewportX: Int = 0
@@ -36,67 +36,54 @@ public class Renderer(val model: Model) {
 
     fun render(delta: Float) {
         cam.update();
+        shaper.projectionMatrix = cam.combined
+        shaper.begin(ShapeRenderer.ShapeType.Filled)
+        shaper.color = Color.BROWN
         drawTarget()
+        shaper.color = Color.BLACK
         drawBall()
+        shaper.end()
+        shaper.begin(ShapeRenderer.ShapeType.Line)
+        shaper.color = Color.WHITE
         drawArrow()
+        shaper.end()
     }
 
     private fun drawTarget() {
-        val oldColor = shaper.getColor()
-        try {
-            shaper.setProjectionMatrix(cam.combined)
-            shaper.begin(ShapeRenderer.ShapeType.Filled)
-            shaper.setColor(Color.OLIVE)
-            shaper.circle(model.target.center.x, model.target.center.y, model.target.radius)
-        } finally {
-            shaper.setColor(oldColor)
-            shaper.end()
-        }
+        shaper.color = Color.OLIVE
+        shaper.circle(model.target.center.x, model.target.center.y, model.target.radius)
     }
 
     private fun drawBall() {
-        try {
-            shaper.setProjectionMatrix(cam.combined)
-            if (model.ball != null) {
-                shaper.begin(ShapeRenderer.ShapeType.Line)
-                val ball = model.ball!!
-                val defBallRadius = 10f
-                shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
-            }
-        } finally {
-            shaper.end()
+        if (model.ball != null) {
+            val ball = model.ball!!
+            val defBallRadius = 10f
+            shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
         }
     }
 
     private fun drawArrow() {
-        try {
-            shaper.setProjectionMatrix(cam.combined)
-            val a = model.arrow
-            if (a.len != -1f) {
-                shaper.begin(ShapeRenderer.ShapeType.Line)
-                val normDir = a.dir.cpy().nor()
-                val perp = Vector2(-normDir.y, normDir.x)
-                val perpDiv = perp.cpy().scl(ARROW_THICKNESS / 2)
-                val perpPoint1 = a.firstPoint.cpy().sub(perpDiv)
-                val perpPoint2 = a.firstPoint.cpy().add(perpDiv)
-                shaper.line(perpPoint1, perpPoint2)
-                shaper.line(perpPoint1, a.endPoint)
-                shaper.line(perpPoint2, a.endPoint)
-            }
-        } finally {
-            shaper.end()
+        val a = model.arrow
+        if (a.len != -1f) {
+            val normDir = a.dir.cpy().nor()
+            val perp = Vector2(-normDir.y, normDir.x)
+            val perpDiv = perp.cpy().scl(ARROW_THICKNESS / 2)
+            val perpPoint1 = a.firstPoint.cpy().sub(perpDiv)
+            val perpPoint2 = a.firstPoint.cpy().add(perpDiv)
+            shaper.line(perpPoint1, perpPoint2)
+            shaper.line(perpPoint1, a.endPoint)
+            shaper.line(perpPoint2, a.endPoint)
         }
     }
 
     private fun drawTraceLine() {
-        shaper.begin(ShapeRenderer.ShapeType.Line)
         if (model.lastPoints.size > 1) {
             val lastPoints = ArrayList<Vector2>(model.lastPoints.size * 2)
             model.smooth(model.lastPoints, lastPoints)
-            var first = lastPoints.get(lastPoints.size() - 1)
-            for (i in lastPoints.size() - 2 downTo  0) {
-                shaper.line(first, lastPoints.get(i))
-                first = lastPoints.get(i)
+            var first = lastPoints.get(lastPoints.size - 1)
+            for (i in lastPoints.size - 2 downTo  0) {
+                shaper.line(first, lastPoints[i])
+                first = lastPoints[i]
             }
         }
     }

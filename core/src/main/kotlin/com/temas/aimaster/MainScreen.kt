@@ -2,11 +2,10 @@ package com.temas.aimaster
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputAdapter
-import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.GL20
 import com.temas.aimaster.model.Model
-import com.temas.aimaster.renderer.Renderer
+import com.temas.aimaster.Renderer
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -21,13 +20,13 @@ class MainScreen(s: Screen) : Screen by s {
 
     init {
         controller.init()
-        Gdx.input.setInputProcessor(DefaultInputProcessor(InputAdapter(), controller))
+        Gdx.input.inputProcessor = DefaultInputProcessor(InputAdapter(), controller)
     }
 
 
     override fun render(delta: Float) {
-        //Gdx.gl.glClearColor(0.45f, 0.45f, 0.45f, 1f)  //#727272
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f)  //#727272
+        Gdx.gl.glClearColor(0.45f, 0.45f, 0.45f, 1f)  //#727272
+        //Gdx.gl.glClearColor(0f, 0f, 0f, 1f)  //#727272
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         controller.update(delta)
     }
