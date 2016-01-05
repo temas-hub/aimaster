@@ -17,7 +17,7 @@ class Model {
 
     public val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
     public val arrow: Arrow = Arrow()
-    public val target: Target = Target(300f, 100f)
+    public val target: Target = Target(150f, 100f)
 
     public var ball: Ball? = null
 
