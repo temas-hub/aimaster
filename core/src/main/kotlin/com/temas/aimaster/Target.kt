@@ -24,11 +24,11 @@ public class Target(var speed: Float, var radius: Float) {
 
 
 
-    public var center: Vector2 = CENTRAL_POINT;
-    public var moveDir: Vector2 = Vector2.Zero
+    var center: Vector2 = CENTRAL_POINT;
+    var moveDir: Vector2 = Vector2.Zero
 
     fun update(delta: Float) {
-        if (moveDir.isZero()) {
+        if (moveDir.isZero) {
             moveDir = getRandomVector()
         }
         var targetCircle = getNewPoistion(delta)

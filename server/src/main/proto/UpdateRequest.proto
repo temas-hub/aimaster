@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message UpdateRequest {
+    required UserInfo userInfo = 1;
+}
+
+message UserInfo {
+    required string name = 1;
+}
+

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message UpdateResponse {
+    required TargetInfo target = 1;
+}
+
+message TargetInfo {
+    required int32 x = 1;
+    required int32 y = 2;
+}
+
