@@ -1,0 +1,11 @@
+syntax = "proto3";
+package com.temas.aimaster;
+
+message UpdateRequest {
+    UserInfo userInfo = 1;
+}
+
+message UserInfo {
+    string name = 1;
+}
+

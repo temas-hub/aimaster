@@ -1,13 +1,68 @@
-sourceCompatibility = 1.7
+apply plugin: "java"
+apply plugin: "kotlin"
+apply plugin: 'com.google.protobuf'
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-sourceSets {
-    main.java.srcDirs = [ "src/" ]
-    main.kotlin.srcDirs = [ "src/" ]
+protobuf {
+    generatedFilesBaseDir = "src"
+    // Configure the protoc executable
+    protoc {
+        // Download from repositories
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
+    }
 }
 
+sourceSets {
+    main {
+        proto {
+            // In addition to the default 'src/main/proto'
+            srcDir "$projectDir/src/main/proto"
+        }
+    }
+}
+
+buildscript {
+    ext{
+        kotlinVer = '1.0.0-beta-3595'
+        protobufVersion = '3.0.0-alpha-3'
+    }
+    ext{
+        protobufPluginVersion = '0.7.3'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:$protobufPluginVersion"
+    }
+}
+
+sourceCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+    main.kotlin.srcDirs = ["src/main/kotlin"]
+}
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+    compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+    compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
+    compile "io.netty:netty-all:$nettyVersion"
+    compile "com.google.protobuf:protobuf-java:$protobufVersion"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
 
 eclipse.project {
     name = appName + "-core"
+}
+dependencies {
+    compile "com.google.protobuf:protobuf-java:$protobufVersion"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
 }
