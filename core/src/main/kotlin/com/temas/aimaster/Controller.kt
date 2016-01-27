@@ -12,6 +12,7 @@ import com.temas.aimaster.Renderer
 class Controller(val model: Model, val renderer: Renderer) {
     fun init() {
         renderer.load()
+        Multiplayer.init()
     }
 
     fun update(delta: Float) {
@@ -22,7 +23,6 @@ class Controller(val model: Model, val renderer: Renderer) {
     fun launch(point: Vector2) {
         model.createBall(point)
         model.launch(point)
-
     }
 
 }

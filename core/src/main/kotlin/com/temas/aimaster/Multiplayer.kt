@@ -29,7 +29,7 @@ object Multiplayer {
 
     val group = NioEventLoopGroup(1)
     val b = Bootstrap()
-    val requestDecoder = object : MessageToMessageDecoder<DatagramPacket>() {
+    val responseDecoder = object : MessageToMessageDecoder<DatagramPacket>() {
         override fun decode(ctx: ChannelHandlerContext, msg: DatagramPacket, out: MutableList<Any>) {
             out.add(msg.content().retain())
         }
@@ -48,9 +48,9 @@ object Multiplayer {
     val channelHandler = object : ChannelInitializer<NioDatagramChannel>() {
         override fun initChannel(ch: NioDatagramChannel) {
             val pipeline  = ch.pipeline()
-            pipeline.addLast(requestDecoder,
+            pipeline.addLast(responseDecoder,
                             ProtobufEncoder(),
-                            ProtobufDecoder(Request.getDefaultInstance()),
+                            ProtobufDecoder(Response.getDefaultInstance()),
                             responseListener)
         }
     }
@@ -59,7 +59,7 @@ object Multiplayer {
         b.group(group).channel(NioDatagramChannel::class.java).handler(channelHandler)
     }
 
-    public fun register() {
+    public fun init() {
         // Start the connection attempt.
         try {
             val channelFuture = b.connect(HOST, PORT)
