@@ -21,25 +21,24 @@ import com.badlogic.gdx.utils.Array;
  * @param type the class type of the elements in this list
  *
  */
-public open class FixedList<T>(capacity: Int, type: Class<T>): Array<T>(false, capacity, type)  {
+open class FixedList<T>(capacity: Int, type: Class<T>): Array<T>(false, capacity, type)  {
     /**
      * Inserts the item into index zero, shifting all items to the right,
      * but without increasing the list's size past its array capacity.
      * @param t the element to insert
      */
     public fun insert(t: T) {
-        items = this.items;
+        items = this.items
 
         // increase size if we have a new point
-        size = Math.min(size + 1, items.size());
+        size = Math.min(size + 1, items.size)
 
         // shift elements right
-
         for(i in size-1 downTo  1) {
-            items.set(i, items.get(i - 1))
+            items[i] = items[i - 1]
         }
         // insert new item at first index
-        items[0] = t;
+        items[0] = t
     }
 
 

@@ -22,7 +22,7 @@ sourceSets {
 
 buildscript {
     ext{
-        kotlinVer = '1.0.0-beta-3595'
+        kotlinVer = '1.0.3'
         protobufVersion = '3.0.0-alpha-3'
     }
     ext{
@@ -33,7 +33,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
         classpath "com.google.protobuf:protobuf-gradle-plugin:$protobufPluginVersion"
     }
@@ -41,10 +41,6 @@ buildscript {
 
 sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-sourceSets {
-    main.java.srcDirs = ["src/main/java"]
-    main.kotlin.srcDirs = ["src/main/kotlin"]
-}
 dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
