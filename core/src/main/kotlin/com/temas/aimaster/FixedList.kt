@@ -7,7 +7,7 @@ package com.temas.aimaster
  * way for new additions.
  *
  * @param <T> generic type
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 10/09/2015
  */
 

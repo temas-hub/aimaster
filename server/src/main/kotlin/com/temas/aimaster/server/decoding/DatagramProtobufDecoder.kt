@@ -8,7 +8,7 @@ import io.netty.channel.socket.DatagramPacket
 import io.netty.handler.codec.MessageToMessageDecoder
 
 /**
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 27.01.2016
  */
 open class DatagramProtobufDecoder(val prototype: MessageLite, val extensionRegistry: ExtensionRegistryLite?) : MessageToMessageDecoder<DatagramPacket>() {

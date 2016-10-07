@@ -26,6 +26,17 @@ allprojects {
     }
 }
 
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "D:\\.m2"
+        }
+    }
+}
+
+
 tasks.eclipse.doLast {
     delete ".project"
 }

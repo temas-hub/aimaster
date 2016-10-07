@@ -14,11 +14,9 @@ import io.netty.util.concurrent.GenericFutureListener
 import com.temas.aimaster.UpdateRequestOuterClass.UpdateRequest as Request
 import com.temas.aimaster.UpdateRequestOuterClass.UserInfo as UserInfo
 
-import com.temas.aimaster.UpdateResponseOuterClass.UpdateResponse as Response
-import com.temas.aimaster.UpdateResponseOuterClass.TargetInfo as TargetInfo
 
 /**
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 21.01.2016
  */
 object Multiplayer {
@@ -50,7 +48,7 @@ object Multiplayer {
             val pipeline  = ch.pipeline()
             pipeline.addLast(responseDecoder,
                             ProtobufEncoder(),
-                            ProtobufDecoder(Response.getDefaultInstance()),
+                            ProtobufDecoder(ModelType.TargetInfo.getDefaultInstance()),
                             responseListener)
         }
     }

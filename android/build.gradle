@@ -13,6 +13,7 @@ apply plugin: 'android'
 
 configurations { natives }
 
+
 dependencies {
     compile project(":core")
     compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"

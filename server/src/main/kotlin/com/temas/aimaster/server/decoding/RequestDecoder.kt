@@ -9,7 +9,7 @@ import com.temas.aimaster.UpdateRequestOuterClass.UpdateRequest as Request
 import com.temas.aimaster.UpdateRequestOuterClass.UserInfo as UserInfo
 
 /**
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 27.01.2016
  */
 class RequestDecoder(val messageObject: MessageLite) : DatagramProtobufDecoder(messageObject){

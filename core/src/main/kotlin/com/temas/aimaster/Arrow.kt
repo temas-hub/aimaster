@@ -3,7 +3,7 @@ package com.temas.aimaster
 import com.badlogic.gdx.math.Vector2
 
 /**
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 14/09/2015
  */
 public class Arrow () {

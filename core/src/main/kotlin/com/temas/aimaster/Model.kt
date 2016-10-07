@@ -15,17 +15,22 @@ import java.util.*
 
 class Model {
 
-    public val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
-    public val arrow: Arrow = Arrow()
-    public val target: Target = Target(150f, 100f)
+    val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
+    val arrow: Arrow = Arrow()
+    val target: Target = Target(150f, 100f)
 
-    public var ball: Ball? = null
+    //var ball: Ball? = null
+    val stones = ArrayList<Stone>()
 
 
     fun update(delta: Float) {
-        target.update(delta)
+        //target.update(delta)
+        target.center.set(target.getNewPoistion(delta)) //TODO refactor Target
         arrow.update(delta)
-        ball?.update(delta)
+        //ball?.update(delta)
+        stones.forEach {
+            it.update(delta)
+        }
     }
 
     public fun smooth(input: FixedList<Vector2>, output: ArrayList<Vector2>) {
@@ -54,7 +59,13 @@ class Model {
         val a = arrow
         val revDirVect = a.dir
         ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
-        return ball as Ball
+        return ball!!
+    }
+
+    fun createStone(): Stone{
+        val s = Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
+        stones.add(s)
+        return s
     }
 
 }

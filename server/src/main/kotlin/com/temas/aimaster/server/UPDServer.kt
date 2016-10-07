@@ -21,7 +21,7 @@ import com.temas.aimaster.UpdateResponseOuterClass.UpdateResponse as Response
 import com.temas.aimaster.UpdateResponseOuterClass.TargetInfo as TargetInfo
 
 /**
- * @author Artem Zhdanov <azhdanov@griddynamics.com>
+ * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 21.01.2016
  */
 public class UDPServer {

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package com.temas.aimaster;
+
+
+message Vector2 {
+    float x = 1;
+    float y = 2;
+}
+
+message TargetInfo {
+    Vector2 position = 1;
+    Vector2 moveDir = 2;
+    float radius = 3;
+    float speed = 4;
+}

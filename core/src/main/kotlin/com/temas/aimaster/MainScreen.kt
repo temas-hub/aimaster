@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.GL20
 import com.temas.aimaster.model.Model
 import com.temas.aimaster.Renderer
+import com.temas.aimaster.multiplayer.NardonClient
+import com.temas.aimaster.multiplayer.NadronClient
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
