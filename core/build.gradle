@@ -49,6 +49,7 @@ dependencies {
     compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
     compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
 //    compile "io.netty:netty-all:$nettyVersion"

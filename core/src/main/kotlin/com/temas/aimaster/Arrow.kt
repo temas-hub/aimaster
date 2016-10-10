@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2
 public class Arrow () {
     public var len: Float = -1f
     public var dir: Vector2 = Vector2.Zero
-    val throwKoef = 1.5f
+    val throwKoef = 1.8f
     var firstPoint = Vector2(-1f, -1f)
     var lastPoint = Vector2()
     var endPoint = Vector2()

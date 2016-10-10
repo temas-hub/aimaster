@@ -21,11 +21,12 @@ class Model {
 
     //var ball: Ball? = null
     val stones = ArrayList<Stone>()
+    val physics = PhysicsWorld()
 
 
     fun update(delta: Float) {
-        //target.update(delta)
-        target.center.set(target.getNewPoistion(delta)) //TODO refactor Target
+        physics.update(delta)
+        target.update(delta)
         arrow.update(delta)
         //ball?.update(delta)
         stones.forEach {
@@ -55,15 +56,15 @@ class Model {
         arrow.firstPoint.set(-1f, -1f)
     }
 
-    fun createBall(point: Vector2): Ball {
-        val a = arrow
-        val revDirVect = a.dir
-        ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
-        return ball!!
-    }
+//    fun createBall(point: Vector2): Ball {
+//        val a = arrow
+//        val revDirVect = a.dir
+//        ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
+//        return ball!!
+//    }
 
     fun createStone(): Stone{
-        val s = Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
+        val s = Stone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
         stones.add(s)
         return s
     }

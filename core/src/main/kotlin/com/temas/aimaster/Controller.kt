@@ -2,7 +2,6 @@ package com.temas.aimaster
 
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.model.Model
-import com.temas.aimaster.multiplayer.NardonClient
 import com.temas.aimaster.multiplayer.NadronClient
 
 /**

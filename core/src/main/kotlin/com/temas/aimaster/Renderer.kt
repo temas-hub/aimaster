@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Matrix4
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 import com.badlogic.gdx.utils.Scaling
 import com.temas.aimaster.model.Model
+import com.temas.aimaster.model.PhysicsWorld
 import java.util.*
 
 /**
@@ -29,6 +32,8 @@ public class Renderer(val model: Model) {
     private var viewportHeight: Int = 0
     private val shaper = ShapeRenderer()
     private val cam = OrthographicCamera()
+    private val debugRenderer = Box2DDebugRenderer()
+    private var debugMatrix: Matrix4? = null
 
     fun load() {
         //TODO textures
@@ -41,12 +46,20 @@ public class Renderer(val model: Model) {
         shaper.color = Color.BROWN
         drawTarget()
         shaper.color = Color.BLACK
-        drawBall()
+        //drawBall()
+        drawStones()
         shaper.end()
         shaper.begin(ShapeRenderer.ShapeType.Line)
         shaper.color = Color.WHITE
         drawArrow()
+        debugMatrix = shaper.projectionMatrix.cpy().scale(PhysicsWorld.PIXELS_TO_METERS,
+                PhysicsWorld.PIXELS_TO_METERS, 0f)
         shaper.end()
+        drawPhysicsDebug()
+    }
+
+    private fun drawPhysicsDebug() {
+        debugRenderer.render(model.physics.world, debugMatrix)
     }
 
     private fun drawTarget() {
@@ -54,13 +67,19 @@ public class Renderer(val model: Model) {
         shaper.circle(model.target.center.x, model.target.center.y, model.target.radius)
     }
 
-    private fun drawBall() {
-        if (model.ball != null) {
-            val ball = model.ball!!
-            val defBallRadius = 10f
-            shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
+    private fun drawStones() {
+        model.stones.forEach {
+            shaper.circle(it.pos.x, it.pos.y, it.rad)
         }
     }
+
+//    private fun drawBall() {
+//        if (model.ball != null) {
+//            val ball = model.ball!!
+//            val defBallRadius = 10f
+//            shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
+//        }
+//    }
 
     private fun drawArrow() {
         val a = model.arrow

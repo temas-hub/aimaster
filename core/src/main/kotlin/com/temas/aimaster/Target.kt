@@ -21,37 +21,37 @@ public class Target(var speed: Float, var radius: Float) {
     var moveDir: Vector2 = Vector2.Zero
 
     fun update(delta: Float) {
-        if (moveDir.isZero) {
+        /*if (moveDir.isZero) {
             moveDir = getRandomVector()
         }
         var targetCircle = getNewPoistion(delta)
         targetCircle = makeSureItISWithInTheScreen(delta, targetCircle)
-        center.set(targetCircle.x, targetCircle.y)
+        center.set(targetCircle.x, targetCircle.y)*/
     }
 
 
 
-    private fun makeSureItISWithInTheScreen(delta: Float, targetCircle: Circle): Circle {
-        var res = targetCircle
-        if (I.intersects(res)) {
-            for (i in 1..NUM_OF_CHANGE_DIR_TRIES) {
-                if (I.intersects(res)) {
-                    moveDir = getRandomVector()
-                    res = getNewPoistion(delta)
-                }
-            }
-            if (I.intersects(res)) {
-                res = Circle(CENTRAL_POINT, radius)
-            }
-        }
-        return res
-    }
+//    private fun makeSureItISWithInTheScreen(delta: Float, targetCircle: Circle): Circle {
+//        var res = targetCircle
+//        if (I.intersects(res)) {
+//            for (i in 1..NUM_OF_CHANGE_DIR_TRIES) {
+//                if (I.intersects(res)) {
+//                    moveDir = getRandomVector()
+//                    res = getNewPoistion(delta)
+//                }
+//            }
+//            if (I.intersects(res)) {
+//                res = Circle(CENTRAL_POINT, radius)
+//            }
+//        }
+//        return res
+//    }
 
-    fun getNewPoistion(delta: Float): Circle {
-        var newCenter = center.cpy().add(moveDir.cpy().scl(speed * delta))
-        val targetCircle = Circle(newCenter, radius)
-        return targetCircle
-    }
+//    fun getNewPoistion(delta: Float): Circle {
+//        var newCenter = center.cpy().add(moveDir.cpy().scl(speed * delta))
+//        val targetCircle = Circle(newCenter, radius)
+//        return targetCircle
+//    }
 
     private fun getRandomVector(): Vector2 {
         val x: Float = (rnd.nextInt(21) - 10) / 10f

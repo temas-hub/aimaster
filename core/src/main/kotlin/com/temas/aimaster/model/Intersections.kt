@@ -43,9 +43,4 @@ object Intersections {
         return Intersector.intersectSegmentCircle(p2, p3, cir.center, cir.radius) ||
                 Intersector.intersectSegmentCircle(p4, p1, cir.center, cir.radius)
     }
-
-
-    fun Stone.reflectedStone(otherStone: Stone){
-
-    }
 }
