@@ -1,0 +1,27 @@
+syntax = "proto3";
+package com.temas.aimaster;
+
+import public "common.proto";
+
+message TargetInfo {
+    Vector2 position = 1;
+    Vector2 moveDir = 2;
+    float radius = 3;
+    float speed = 4;
+}
+
+message StoneInfo {
+    int32 id = 1;
+    Vector2 startPoint = 2;
+    Vector2 direction = 3;
+    float speed = 4;
+}
+
+
+
+message ModelType {
+    int64 timestamp = 1;
+    TargetInfo targetInfo = 2;
+    repeated StoneInfo stones = 3;
+}
+

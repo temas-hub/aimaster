@@ -12,6 +12,9 @@ class PhysicsWorld {
         val PIXELS_TO_METERS = 100f
         val STONE_WEIGHT = 17f
         val STONE_RADIUS = 7.5f
+        val TIME_STEP = 1f/60f
+        val VELOCITY_ITERATIONS = 6
+        val POSITION_ITERATIONS = 2
 
         fun toMeters(v: Vector2) = v.cpy().scl(1/PIXELS_TO_METERS)
         fun toPixels(v: Vector2) = v.cpy().scl(PIXELS_TO_METERS)
@@ -49,7 +52,20 @@ class PhysicsWorld {
 
 
     fun update(delta: Float) {
-        world.step(1f/60f, 6, 2)
+        world.step(1f/60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
+    }
+
+
+    private fun doPhysicsStep(deltaTime: Float) {
+        var accumulator = 0f
+        // fixed time step
+        // max frame time to avoid spiral of death (on slow devices)
+        val frameTime = Math.min(deltaTime, 0.25f)
+        accumulator += frameTime
+        while (accumulator >= TIME_STEP) {
+            world.step(TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
+            accumulator -= TIME_STEP
+        }
     }
 
 }

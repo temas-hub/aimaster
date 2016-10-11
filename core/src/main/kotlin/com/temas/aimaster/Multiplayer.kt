@@ -11,8 +11,8 @@ import io.netty.handler.codec.MessageToMessageDecoder
 import io.netty.handler.codec.protobuf.ProtobufDecoder
 import io.netty.handler.codec.protobuf.ProtobufEncoder
 import io.netty.util.concurrent.GenericFutureListener
-import com.temas.aimaster.UpdateRequestOuterClass.UpdateRequest as Request
-import com.temas.aimaster.UpdateRequestOuterClass.UserInfo as UserInfo
+//import com.temas.aimaster.UpdateRequestOuterClass.UpdateRequest as Request
+//import com.temas.aimaster.UpdateRequestOuterClass.UserInfo as UserInfo
 
 
 /**
@@ -48,7 +48,7 @@ object Multiplayer {
             val pipeline  = ch.pipeline()
             pipeline.addLast(responseDecoder,
                             ProtobufEncoder(),
-                            ProtobufDecoder(ModelType.TargetInfo.getDefaultInstance()),
+                            ProtobufDecoder(ServerInfo.TargetInfo.getDefaultInstance()),
                             responseListener)
         }
     }
@@ -68,8 +68,8 @@ object Multiplayer {
                 }
              })
             val channel = channelFuture.sync().channel()
-            val request = Request.newBuilder().setUserInfo(UserInfo.newBuilder().setName(channel.localAddress().toString())).build()
-            channel.writeAndFlush(request)
+//            val request = Request.newBuilder().setUserInfo(UserInfo.newBuilder().setName(channel.localAddress().toString())).build()
+//            channel.writeAndFlush(request)
         } catch(e: Exception) {
             e.printStackTrace()
         }

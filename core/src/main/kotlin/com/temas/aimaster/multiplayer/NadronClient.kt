@@ -1,7 +1,8 @@
 package com.temas.aimaster.multiplayer
 
 import com.google.protobuf.MessageLite
-import com.temas.aimaster.ModelType
+import com.temas.aimaster.ClientInfoOuterClass
+import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.model.Model
 import io.nadron.client.app.Session
 import io.nadron.client.app.impl.SessionFactory
@@ -12,6 +13,8 @@ import io.nadron.client.event.impl.AbstractSessionEventHandler
 import io.nadron.client.util.LoginHelper
 import io.netty.buffer.ByteBuf
 import org.slf4j.LoggerFactory
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -26,20 +29,25 @@ class NadronClient(val model: Model) {
     companion object {
         private val taskExecutor = Executors.newSingleThreadScheduledExecutor()
         private val LOG = LoggerFactory.getLogger(NadronClient::class.java)
+        val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
     }
+
+    val commandQuque = LinkedList<ClientInfoOuterClass.ClientInfo>()
 
     private inner class InBoundHandler(session: Session) : AbstractSessionEventHandler(session) {
 
-        private val prototype: MessageLite = ModelType.TargetInfo.getDefaultInstance()
+        private val prototype: MessageLite = ServerInfo.TargetInfo.getDefaultInstance()
         private var latestUpdateTime: Long = 0
 
         override fun onDataIn(event: Event) {
             if (event.timeStamp > latestUpdateTime) {
                 latestUpdateTime = event.timeStamp
+                updateQueue(latestUpdateTime)
                 val buffer = event.source as NettyMessageBuffer
-                val worldState = buffer.readObject { convertToProto(it) } as ModelType.TargetInfo
+                val worldState = buffer.readObject { convertToProto(it) } as ServerInfo.ModelType
                 ++inPacketCount
-                LOG.debug("Received state x= ${worldState.position.x}, y=${worldState.position.y} Packet number = $inPacketCount")
+                LOG.debug("Received state timestamp = ${simpleDateFormat.format(Date(worldState.timestamp))} " +
+                        "x= ${worldState.targetInfo.position.x}, y=${worldState.targetInfo.position.y} Packet number = $inPacketCount")
                 updateModel(worldState)
                 if (!taskExecutor.isShutdown) {
                     taskExecutor.shutdown()
@@ -62,18 +70,23 @@ class NadronClient(val model: Model) {
 
             return prototype.parserForType.parseFrom(array, offset, length)
         }
-    }
-
-    private fun updateModel(worldState: ModelType.TargetInfo) {
-        with(model.target) {
-            center.x = worldState.position.x
-            center.y = worldState.position.y
-            moveDir.x = worldState.moveDir.x
-            moveDir.y = worldState.moveDir.y
-            radius = worldState.radius
-            speed = worldState.speed
+        private fun updateModel(serverModel: ServerInfo.ModelType) {
+            val worldState = serverModel.targetInfo
+            with(model.target) {
+                center.x = worldState.position.x
+                center.y = worldState.position.y
+                moveDir.x = worldState.moveDir.x
+                moveDir.y = worldState.moveDir.y
+                radius = worldState.radius
+                speed = worldState.speed
+            }
         }
     }
+
+    private fun updateQueue(latestUpdateTime: Long) {
+        commandQuque.removeAll { it.timestamp < latestUpdateTime }
+    }
+
 
     fun update(delta: Float) {
         //TODO send update to server

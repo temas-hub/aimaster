@@ -1,5 +1,6 @@
 package com.temas.aimaster.model
 
+import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.Arrow
 import com.temas.aimaster.Ball
@@ -25,7 +26,6 @@ class Model {
 
 
     fun update(delta: Float) {
-        physics.update(delta)
         target.update(delta)
         arrow.update(delta)
         //ball?.update(delta)
@@ -67,6 +67,21 @@ class Model {
         val s = Stone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
         stones.add(s)
         return s
+    }
+
+
+    fun checkStop(st: Stone) {
+        if (st.state == Stone.STATE.MOVE) {
+            if (st.velocity <= 0.0005f) {
+                st.velocity = 0f
+                st.state = Stone.STATE.STAY
+            }
+            if (st.state != Stone.STATE.STICKED &&
+                    Intersector.overlaps(st.circle(), target.circle())) {
+                target.addStone(st)
+                st.state = Stone.STATE.STICKED
+            }
+        }
     }
 
 }

@@ -20,21 +20,7 @@ class RoomModel {
         stones.forEach {
             it.update(delta)
             // TODO collisions
-            checkStop(it)
-        }
-    }
-
-    private fun checkStop(st: Stone) {
-        if (st.state == Stone.STATE.MOVE) {
-            if (st.velocity <= 0.0005f) {
-                st.velocity = 0f
-                st.state = Stone.STATE.STAY
-            }
-            if (st.state != Stone.STATE.STICKED &&
-                    Intersector.overlaps(st.circle(), target.circle())) {
-                target.addStone(st)
-                st.state = Stone.STATE.STICKED
-            }
+//            checkStop(it)
         }
     }
 

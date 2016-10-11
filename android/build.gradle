@@ -8,6 +8,12 @@ buildscript {
     }
 }
 
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}
+
 
 apply plugin: 'com.android.application'
 

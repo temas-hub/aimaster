@@ -2,6 +2,7 @@ package com.temas.aimaster
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
+import com.temas.aimaster.model.Stone
 import com.temas.aimaster.model.Intersections as I
 import java.util.*
 
@@ -19,6 +20,8 @@ public class Target(var speed: Float, var radius: Float) {
 
     var center: Vector2 = CENTRAL_POINT;
     var moveDir: Vector2 = Vector2.Zero
+
+    val stickedStones = ArrayList<Stone>()
 
     fun update(delta: Float) {
         /*if (moveDir.isZero) {
@@ -58,5 +61,11 @@ public class Target(var speed: Float, var radius: Float) {
         val y: Float = (rnd.nextInt(21) - 10) / 10f
         return Vector2(x,y).nor()
     }
+
+    fun addStone(st: Stone) {
+        stickedStones.add(st)
+    }
+
+    fun circle() = Circle(center, radius)
 
 }

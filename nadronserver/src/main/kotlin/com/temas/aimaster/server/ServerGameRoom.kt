@@ -2,14 +2,14 @@ package com.temas.gameserver.aimmaster
 
 import com.google.protobuf.MessageLite
 import com.google.protobuf.MessageLiteOrBuilder
-import com.temas.aimaster.ModelType
-import com.temas.aimaster.core.RoomModel
+import com.temas.aimaster.Common
+import com.temas.aimaster.ServerInfo
+import com.temas.aimaster.model.Model
 import io.nadron.app.PlayerSession
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
 import io.nadron.communication.NettyMessageBuffer
 import io.nadron.event.Events
-import io.nadron.event.NetworkEvent
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.slf4j.LoggerFactory
@@ -26,7 +26,7 @@ private var outPacketCount: Long = 0
 
 class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder) {
 
-    val model: RoomModel = RoomModel()
+    val model = Model()
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ServerGameRoom::class.java)
@@ -76,11 +76,11 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
 
     private fun buildUpdateData(): MessageLiteOrBuilder {
 
-        return ModelType.TargetInfo.newBuilder().
+        return ServerInfo.TargetInfo.newBuilder().
             setPosition(
-                    ModelType.Vector2.newBuilder().setX(model.target.center.x).
+                    Common.Vector2.newBuilder().setX(model.target.center.x).
                             setY(model.target.center.y).build()).
-            setMoveDir(ModelType.Vector2.newBuilder().setX(model.target.moveDir.x).
+            setMoveDir(Common.Vector2.newBuilder().setX(model.target.moveDir.x).
                     setY(model.target.moveDir.y).build()).
             setRadius(model.target.radius).
             setSpeed(model.target.speed).build()
