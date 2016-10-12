@@ -3,7 +3,6 @@ package com.temas.aimaster.model
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.Arrow
-import com.temas.aimaster.Ball
 import com.temas.aimaster.FixedList
 import com.temas.aimaster.Target
 import java.util.*
@@ -14,7 +13,7 @@ import java.util.*
  */
 
 
-class Model {
+class Model(val physics: PhysicsWorld?) {
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
     val arrow: Arrow = Arrow()
@@ -22,7 +21,7 @@ class Model {
 
     //var ball: Ball? = null
     val stones = ArrayList<Stone>()
-    val physics = PhysicsWorld()
+
 
 
     fun update(delta: Float) {
@@ -64,7 +63,10 @@ class Model {
 //    }
 
     fun createStone(): Stone{
-        val s = Stone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
+        val s = if (physics != null)
+                    PhysicalStone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
+                else
+                    Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
         stones.add(s)
         return s
     }
@@ -85,3 +87,5 @@ class Model {
     }
 
 }
+
+

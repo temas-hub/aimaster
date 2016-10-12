@@ -11,9 +11,9 @@ import java.util.*
  * @since 14/09/2015
  */
 
-public class Target(var speed: Float, var radius: Float) {
-    private val NUM_OF_CHANGE_DIR_TRIES: Int = 10;
-    private val CENTRAL_POINT = Vector2(Renderer.GAME_WIDTH / 2, Renderer.GAME_HEIGHT / 2);
+open class Target(var speed: Float, var radius: Float) {
+    private val NUM_OF_CHANGE_DIR_TRIES: Int = 10
+    protected val CENTRAL_POINT = Vector2(Renderer.GAME_WIDTH / 2, Renderer.GAME_HEIGHT / 2)
 
     private val rnd = Random()
 
@@ -23,7 +23,10 @@ public class Target(var speed: Float, var radius: Float) {
 
     val stickedStones = ArrayList<Stone>()
 
-    fun update(delta: Float) {
+    open fun update(delta: Float) {
+
+        var newCenter = center.cpy().add(moveDir.cpy().scl(speed * delta))
+        center.set(newCenter)
         /*if (moveDir.isZero) {
             moveDir = getRandomVector()
         }
@@ -56,7 +59,7 @@ public class Target(var speed: Float, var radius: Float) {
 //        return targetCircle
 //    }
 
-    private fun getRandomVector(): Vector2 {
+    protected fun getRandomVector(): Vector2 {
         val x: Float = (rnd.nextInt(21) - 10) / 10f
         val y: Float = (rnd.nextInt(21) - 10) / 10f
         return Vector2(x,y).nor()

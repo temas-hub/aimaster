@@ -5,6 +5,7 @@ import com.google.protobuf.MessageLiteOrBuilder
 import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.model.Model
+import com.temas.aimaster.model.PhysicsWorld
 import io.nadron.app.PlayerSession
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
@@ -26,7 +27,7 @@ private var outPacketCount: Long = 0
 
 class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder) {
 
-    val model = Model()
+    val model = Model(PhysicsWorld())
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ServerGameRoom::class.java)
