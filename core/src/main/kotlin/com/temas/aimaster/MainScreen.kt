@@ -15,7 +15,7 @@ import com.temas.aimaster.multiplayer.NadronClient
 
 class MainScreen(s: Screen) : Screen by s {
 
-    val model = Model(null)
+    val model = Model()
     val renderer = Renderer(model)
     val controller = Controller(model, renderer)
 

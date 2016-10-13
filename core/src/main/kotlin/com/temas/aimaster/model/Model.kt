@@ -2,9 +2,9 @@ package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
-import com.temas.aimaster.Arrow
+import com.temas.aimaster.model.Arrow
 import com.temas.aimaster.FixedList
-import com.temas.aimaster.Target
+import com.temas.aimaster.model.Target
 import java.util.*
 
 /**
@@ -13,18 +13,23 @@ import java.util.*
  */
 
 
-class Model(val physics: PhysicsWorld?) {
+open class Model {
+
+    companion object {
+        val TARGET_SPEED = 150f
+        val TARGET_RADIUS = 100f
+    }
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
     val arrow: Arrow = Arrow()
-    val target: Target = Target(150f, 100f)
+    val target: Target by lazy {createTarget()}
 
     //var ball: Ball? = null
     val stones = ArrayList<Stone>()
 
 
 
-    fun update(delta: Float) {
+    open fun update(delta: Float) {
         target.update(delta)
         arrow.update(delta)
         //ball?.update(delta)
@@ -62,13 +67,12 @@ class Model(val physics: PhysicsWorld?) {
 //        return ball!!
 //    }
 
-    fun createStone(): Stone{
-        val s = if (physics != null)
-                    PhysicalStone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
-                else
-                    Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
-        stones.add(s)
-        return s
+    open fun createStone(): Stone{
+        return Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
+    }
+
+    open fun createTarget(): Target {
+        return Target(TARGET_SPEED, TARGET_RADIUS)
     }
 
 
@@ -85,7 +89,6 @@ class Model(val physics: PhysicsWorld?) {
             }
         }
     }
-
 }
 
 

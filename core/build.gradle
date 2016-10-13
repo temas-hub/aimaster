@@ -3,7 +3,7 @@ apply plugin: "kotlin"
 apply plugin: 'com.google.protobuf'
 
 protobuf {
-    generatedFilesBaseDir = "src/main/java"
+    generatedFilesBaseDir = "$projectDir/src"
     // Configure the protoc executable
     protoc {
         // Download from repositories
@@ -19,6 +19,7 @@ sourceSets {
         }
     }
 }
+
 
 buildscript {
     ext{
@@ -44,13 +45,13 @@ sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+//    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
     compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-    compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+//    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+//    compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
 //    compile "io.netty:netty-all:$nettyVersion"
     compile "com.google.protobuf:protobuf-java:$protobufVersion"
@@ -58,11 +59,5 @@ dependencies {
     compile "org.slf4j:slf4j-api:1.7.21"
     compile "org.slf4j:slf4j-log4j12:1.7.21"
     compile "log4j:log4j:1.2.16"
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-
-
-dependencies {
-    compile "com.google.protobuf:protobuf-java:$protobufVersion"
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

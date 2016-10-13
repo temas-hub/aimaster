@@ -1,7 +1,8 @@
-package com.temas.aimaster.model
+package com.temas.aimaster.core
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
+import com.temas.aimaster.model.Stone
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>

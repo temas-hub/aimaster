@@ -36,7 +36,7 @@ class NadronClient(val model: Model) {
 
     private inner class InBoundHandler(session: Session) : AbstractSessionEventHandler(session) {
 
-        private val prototype: MessageLite = ServerInfo.TargetInfo.getDefaultInstance()
+        private val prototype: MessageLite = ServerInfo.ModelType.getDefaultInstance()
         private var latestUpdateTime: Long = 0
 
         override fun onDataIn(event: Event) {

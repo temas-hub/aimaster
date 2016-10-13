@@ -22,13 +22,12 @@ class Controller(val model: Model, val renderer: Renderer) {
         model.update(delta)
         multiPlayer.update(delta)
         renderer.render(delta)
-        model.physics.update(delta)
     }
 
     fun launch(point: Vector2) {
         //model.createBall(point)
 
-        model.createStone()
+        model.stones.add(model.createStone())
         model.launch(point)
     }
 

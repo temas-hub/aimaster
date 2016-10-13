@@ -1,7 +1,8 @@
-package com.temas.aimaster.model
+package com.temas.aimaster.core
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
+import com.temas.aimaster.model.Intersections
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -16,9 +17,9 @@ class PhysicsWorld {
         val VELOCITY_ITERATIONS = 6
         val POSITION_ITERATIONS = 2
 
-        fun toMeters(v: Vector2) = v.cpy().scl(1/PIXELS_TO_METERS)
+        fun toMeters(v: Vector2) = v.cpy().scl(1/ PIXELS_TO_METERS)
         fun toPixels(v: Vector2) = v.cpy().scl(PIXELS_TO_METERS)
-        fun toMeters(v: Float) = v /PIXELS_TO_METERS
+        fun toMeters(v: Float) = v / PIXELS_TO_METERS
 
         fun toPixels(v: Float)= v * PIXELS_TO_METERS
     }

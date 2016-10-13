@@ -1,4 +1,4 @@
-package com.temas.aimaster
+package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Vector2
 

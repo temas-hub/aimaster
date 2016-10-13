@@ -1,8 +1,8 @@
-package com.temas.aimaster
+package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
-import com.temas.aimaster.model.Stone
+import com.temas.aimaster.Renderer
 import com.temas.aimaster.model.Intersections as I
 import java.util.*
 
@@ -24,9 +24,9 @@ open class Target(var speed: Float, var radius: Float) {
     val stickedStones = ArrayList<Stone>()
 
     open fun update(delta: Float) {
-
-        var newCenter = center.cpy().add(moveDir.cpy().scl(speed * delta))
-        center.set(newCenter)
+        center.add(moveDir.cpy().scl(speed * delta))
+        //var newCenter = center.cpy().add(moveDir.cpy().scl(delta))
+        //center.set(newCenter)
         /*if (moveDir.isZero) {
             moveDir = getRandomVector()
         }
