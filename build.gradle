@@ -30,9 +30,7 @@ allprojects {
 allprojects {
     repositories {
         mavenCentral()
-        maven {
-            url "D:\\.m2"
-        }
+        mavenLocal()
     }
 }
 
