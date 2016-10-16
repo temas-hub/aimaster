@@ -7,14 +7,17 @@ import com.badlogic.gdx.math.Vector2
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 07.10.2016
  */
-open class Stone(val startPoint: Vector2,
+open class Stone(val id: Int = ++ID_COUNTER,
+                 val startPoint: Vector2,
                  val rad: Float = DEFAULT_RADIUS,
-                 val dir: Vector2,
-                 var velocity: Float = START_VELOCITY) {
+                 var velocity: Vector2,
+                 val creationTime:Long = System.currentTimeMillis()) {
 
     companion object {
+        var ID_COUNTER = 0;
         val DEFAULT_RADIUS = 20f
         val START_VELOCITY = 2f
+
 //        val acceleration: Float = -0.0005f
 //        val collisionVelocityLoss: Float = 0.001f
     }
@@ -32,8 +35,8 @@ open class Stone(val startPoint: Vector2,
 
     open fun update(delta: Float) {
         if (state == STATE.MOVE) {
-            val newX = pos.x + dir.x * velocity * delta
-            val newY = pos.y + dir.y * velocity * delta
+            val newX = pos.x + velocity.x * delta
+            val newY = pos.y + velocity.y * delta
             pos.set(newX, newY)
 //                velocity = -acceleration * delta
 //

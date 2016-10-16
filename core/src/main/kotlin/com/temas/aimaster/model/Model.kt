@@ -68,7 +68,7 @@ open class Model {
 //    }
 
     open fun createStone(): Stone{
-        return Stone(startPoint = arrow.firstPoint, dir = arrow.dir)
+        return Stone(startPoint = arrow.firstPoint, velocity = arrow.dir)
     }
 
     open fun createTarget(): Target {
@@ -78,8 +78,8 @@ open class Model {
 
     fun checkStop(st: Stone) {
         if (st.state == Stone.STATE.MOVE) {
-            if (st.velocity <= 0.0005f) {
-                st.velocity = 0f
+            if (st.velocity.len() <= 0.0005f) {
+                st.velocity.set(0f,0f)
                 st.state = Stone.STATE.STAY
             }
             if (st.state != Stone.STATE.STICKED &&

@@ -1,22 +1,78 @@
 package com.temas.gameserver.aimmaster
 
+import com.google.protobuf.MessageLite
+import com.temas.aimaster.ClientProto
+import com.temas.aimaster.core.PhysicalModel
 import io.nadron.app.Session
+import io.nadron.client.communication.NettyMessageBuffer
 import io.nadron.event.Event
 import io.nadron.event.impl.DefaultSessionEventHandler
+import io.netty.buffer.ByteBuf
+import org.slf4j.LoggerFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 21.09.2016
  */
-class SessionEventHandler(session : Session) : DefaultSessionEventHandler(session) {
+
+var inPacketCount: Long = 0
+
+class SessionEventHandler(val model: PhysicalModel, session : Session) : DefaultSessionEventHandler(session) {
+
+    companion object {
+        private val LOG = LoggerFactory.getLogger(SessionEventHandler::class.java)
+        val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
+    }
+
+    private val prototype: MessageLite = ClientProto.ClientData.getDefaultInstance()
+    var lastUpdateTime: Long = 0
+    var lastStoneId: Int = -1;
 
 
     override fun onDataIn(event: Event) {
-        handleClientData(event.source)
+        if (event.timeStamp > lastUpdateTime) {
+            lastUpdateTime = event.timeStamp
+            handleClientData(event)
+        }
+
     }
 
-    private fun  handleClientData(source: Any) {
-        println(source)
+    private fun  handleClientData(event: Event) {
+        val buffer = event.source as NettyMessageBuffer
+        val clientData = buffer.readObject { convertToProto(it) } as ClientProto.ClientData
+        ++inPacketCount
+        LOG.debug("Received client state timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
+                "stones count= ${clientData.stonesCount}, Packet number = ${inPacketCount}")
+        updateModel(clientData)
+    }
+
+    private fun updateModel(clientData: ClientProto.ClientData) {
+
+        clientData.stonesList.forEach {
+            if (it.id > lastStoneId) {
+                val stone = model.addStone(it.id, it.startPoint.x, it.startPoint.y, it.velocity.x, it.velocity.y)
+                lastStoneId = it.id
+                stone.update(it.timeDelta.toFloat())
+            }
+        }
+    }
+
+    fun convertToProto(msg: ByteBuf): MessageLite {
+        val array: ByteArray
+        val offset: Int
+        val length = msg.readableBytes()
+        if (msg.hasArray()) {
+            array = msg.array()
+            offset = msg.arrayOffset() + msg.readerIndex()
+        } else {
+            array = ByteArray(length)
+            msg.getBytes(msg.readerIndex(), array, 0, length)
+            offset = 0
+        }
+
+        return prototype.parserForType.parseFrom(array, offset, length)
     }
 
 }

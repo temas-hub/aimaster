@@ -1,5 +1,6 @@
 package com.temas.aimaster.core
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
 import com.temas.aimaster.model.Target
 import com.temas.aimaster.model.Model
@@ -20,7 +21,7 @@ class PhysicalModel(val physics: PhysicsWorld): Model() {
     }
 
     override open fun createStone(): Stone {
-        return PhysicalStone(startPoint = arrow.firstPoint, dir = arrow.dir, world = physics.world)
+        throw UnsupportedOperationException("Refactor this") //TODO refactor
     }
 
     override fun createTarget(): Target {
@@ -33,5 +34,14 @@ class PhysicalModel(val physics: PhysicsWorld): Model() {
 
     fun startGameSession() {
         (target as PhysicalTarget).start()
+    }
+
+    fun addStone(id: Int, startX: Float, startY: Float, velocityX: Float, velocityY: Float): Stone {
+        val physicalStone = PhysicalStone(id, startPoint = Vector2(startX, startY),
+                velocity = Vector2(velocityX, velocityY),
+                world = physics.world)
+        stones.add(physicalStone)
+
+        return physicalStone
     }
 }

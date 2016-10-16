@@ -8,12 +8,12 @@ import com.temas.aimaster.model.Stone
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 12.10.2016
  */
-class PhysicalStone(startPoint: Vector2,
+class PhysicalStone(id: Int,
+                    startPoint: Vector2,
                     rad: Float = Stone.DEFAULT_RADIUS,
-                    dir: Vector2, velocity:
-                    Float = Stone.START_VELOCITY,
+                    velocity: Vector2,
                     val world: World):
-        Stone(startPoint, rad, dir, velocity) {
+        Stone(id, startPoint, rad, velocity) {
 
     val body = createStoneBody()
 
@@ -40,7 +40,7 @@ class PhysicalStone(startPoint: Vector2,
         val body = world.createBody(bodyDef)
         body.createFixture(fixtureDef)
         body.userData = this
-        body.linearVelocity = PhysicsWorld.toMeters(dir).scl(2.0f)
+        body.linearVelocity = PhysicsWorld.toMeters(velocity).scl(2.0f)
 
         shape.dispose()
 
