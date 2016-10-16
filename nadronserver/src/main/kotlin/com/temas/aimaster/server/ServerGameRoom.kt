@@ -44,7 +44,7 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
 
     override fun onLogin(playerSession: PlayerSession) {
         LOG.debug("Player with name: '${playerSession.player.name}' was logged in")
-        playerSession.addHandler(SessionEventHandler(playerSession))
+        playerSession.addHandler(SessionEventHandler(model, playerSession))
         if (players.isEmpty()) {
             startGameSession()
         }
