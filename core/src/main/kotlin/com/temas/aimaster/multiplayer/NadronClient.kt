@@ -1,8 +1,6 @@
 package com.temas.aimaster.multiplayer
 
 import com.google.protobuf.MessageLite
-import com.google.protobuf.MessageLiteOrBuilder
-import com.temas.aimaster.ClientInfoOuterClass
 import com.temas.aimaster.ClientProto
 import com.temas.aimaster.ClientProto.ClientData
 import com.temas.aimaster.Common

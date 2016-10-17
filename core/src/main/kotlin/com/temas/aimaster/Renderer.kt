@@ -32,7 +32,7 @@ public class Renderer(val model: Model) {
     private val shaper = ShapeRenderer()
     private val cam = OrthographicCamera()
     //private val debugRenderer = Box2DDebugRenderer()
-    private var debugMatrix: Matrix4? = null
+    //private var debugMatrix: Matrix4? = null
 
     fun load() {
         //TODO textures

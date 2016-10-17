@@ -23,25 +23,24 @@ sourceSets {
 
 buildscript {
     ext{
-        kotlinVer = '1.0.3'
+        kotlinVer = '1.0.4'
         protobufVersion = '3.0.0-alpha-3'
     }
     ext{
-        protobufPluginVersion = '0.7.3'
+        protobufPluginVersion = '0.8.0'
     }
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
         classpath "com.google.protobuf:protobuf-gradle-plugin:$protobufPluginVersion"
     }
 }
 
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"

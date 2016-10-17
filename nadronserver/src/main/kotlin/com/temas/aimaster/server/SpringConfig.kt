@@ -26,7 +26,7 @@ open class SpringConfig {
     //TODO implement it own implementation of the protocol with Protobuf
     @Autowired
     @Qualifier("messageBufferProtocol")
-    private val messageBufferProtocol: Protocol? = null
+    private lateinit var messageBufferProtocol: Protocol
 
     private val game : Game = SimpleGame(1, "aimmaster")
 

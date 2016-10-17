@@ -1,10 +1,10 @@
 buildscript {
+    System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
     repositories {
-        mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
+        classpath 'com.android.tools.build:gradle:2.2.0'
     }
 }
 
@@ -43,6 +43,15 @@ dependencies {
 android {
     buildToolsVersion "24.0.3"
     compileSdkVersion 24
+    defaultConfig {
+        jackOptions {
+            enabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
