@@ -2,6 +2,7 @@ package com.temas.aimaster
 
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.model.Model
+import com.temas.aimaster.model.Stone
 import com.temas.aimaster.multiplayer.NadronClient
 
 /**
@@ -27,7 +28,7 @@ class Controller(val model: Model, val renderer: Renderer) {
     fun launch(point: Vector2) {
         //model.createBall(point)
 
-        model.stones.add(model.createStone())
+        model.stones.add(Stone(startPoint = model.arrow.firstPoint, velocity = model.arrow.dir))
         model.launch(point)
     }
 

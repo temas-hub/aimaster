@@ -4,7 +4,7 @@ import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
 import com.temas.aimaster.core.PhysicalModel
 import io.nadron.app.Session
-import io.nadron.client.communication.NettyMessageBuffer
+import io.nadron.communication.NettyMessageBuffer
 import io.nadron.event.Event
 import io.nadron.event.impl.DefaultSessionEventHandler
 import io.netty.buffer.ByteBuf
@@ -43,8 +43,8 @@ class SessionEventHandler(val model: PhysicalModel, session : Session) : Default
         val buffer = event.source as NettyMessageBuffer
         val clientData = buffer.readObject { convertToProto(it) } as ClientProto.ClientData
         ++inPacketCount
-        LOG.debug("Received client state timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
-                "stones count= ${clientData.stonesCount}, Packet number = ${inPacketCount}")
+        LOG.debug("Received client state server timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
+                "stones count= ${clientData.stonesCount}, Packet number = $inPacketCount; ")
         updateModel(clientData)
     }
 

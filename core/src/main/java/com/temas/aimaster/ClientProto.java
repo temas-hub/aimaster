@@ -814,6 +814,11 @@ public final class ClientProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <code>optional int64 timeStamp = 1;</code>
+     */
+    long getTimeStamp();
+
+    /**
      * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
      */
     java.util.List<com.temas.aimaster.ClientProto.Stone> 
@@ -849,6 +854,7 @@ public final class ClientProto {
       super(builder);
     }
     private ClientData() {
+      timeStamp_ = 0L;
       stones_ = java.util.Collections.emptyList();
     }
 
@@ -876,10 +882,15 @@ public final class ClientProto {
               }
               break;
             }
+            case 8: {
+
+              timeStamp_ = input.readInt64();
+              break;
+            }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 stones_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.Stone>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               stones_.add(input.readMessage(com.temas.aimaster.ClientProto.Stone.PARSER, extensionRegistry));
               break;
@@ -893,7 +904,7 @@ public final class ClientProto {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           stones_ = java.util.Collections.unmodifiableList(stones_);
         }
         makeExtensionsImmutable();
@@ -909,6 +920,16 @@ public final class ClientProto {
       return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ClientData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.temas.aimaster.ClientProto.ClientData.class, com.temas.aimaster.ClientProto.ClientData.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private long timeStamp_;
+    /**
+     * <code>optional int64 timeStamp = 1;</code>
+     */
+    public long getTimeStamp() {
+      return timeStamp_;
     }
 
     public static final int STONES_FIELD_NUMBER = 2;
@@ -958,6 +979,9 @@ public final class ClientProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (timeStamp_ != 0L) {
+        output.writeInt64(1, timeStamp_);
+      }
       for (int i = 0; i < stones_.size(); i++) {
         output.writeMessage(2, stones_.get(i));
       }
@@ -969,6 +993,10 @@ public final class ClientProto {
       if (size != -1) return size;
 
       size = 0;
+      if (timeStamp_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, timeStamp_);
+      }
       for (int i = 0; i < stones_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, stones_.get(i));
@@ -1085,9 +1113,11 @@ public final class ClientProto {
       }
       public Builder clear() {
         super.clear();
+        timeStamp_ = 0L;
+
         if (stonesBuilder_ == null) {
           stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           stonesBuilder_.clear();
         }
@@ -1114,15 +1144,18 @@ public final class ClientProto {
       public com.temas.aimaster.ClientProto.ClientData buildPartial() {
         com.temas.aimaster.ClientProto.ClientData result = new com.temas.aimaster.ClientProto.ClientData(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.timeStamp_ = timeStamp_;
         if (stonesBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             stones_ = java.util.Collections.unmodifiableList(stones_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.stones_ = stones_;
         } else {
           result.stones_ = stonesBuilder_.build();
         }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1138,11 +1171,14 @@ public final class ClientProto {
 
       public Builder mergeFrom(com.temas.aimaster.ClientProto.ClientData other) {
         if (other == com.temas.aimaster.ClientProto.ClientData.getDefaultInstance()) return this;
+        if (other.getTimeStamp() != 0L) {
+          setTimeStamp(other.getTimeStamp());
+        }
         if (stonesBuilder_ == null) {
           if (!other.stones_.isEmpty()) {
             if (stones_.isEmpty()) {
               stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureStonesIsMutable();
               stones_.addAll(other.stones_);
@@ -1155,7 +1191,7 @@ public final class ClientProto {
               stonesBuilder_.dispose();
               stonesBuilder_ = null;
               stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               stonesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getStonesFieldBuilder() : null;
@@ -1191,12 +1227,38 @@ public final class ClientProto {
       }
       private int bitField0_;
 
+      private long timeStamp_ ;
+      /**
+       * <code>optional int64 timeStamp = 1;</code>
+       */
+      public long getTimeStamp() {
+        return timeStamp_;
+      }
+      /**
+       * <code>optional int64 timeStamp = 1;</code>
+       */
+      public Builder setTimeStamp(long value) {
+        
+        timeStamp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 timeStamp = 1;</code>
+       */
+      public Builder clearTimeStamp() {
+        
+        timeStamp_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.temas.aimaster.ClientProto.Stone> stones_ =
         java.util.Collections.emptyList();
       private void ensureStonesIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           stones_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.Stone>(stones_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -1346,7 +1408,7 @@ public final class ClientProto {
       public Builder clearStones() {
         if (stonesBuilder_ == null) {
           stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           stonesBuilder_.clear();
@@ -1423,7 +1485,7 @@ public final class ClientProto {
           stonesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.temas.aimaster.ClientProto.Stone, com.temas.aimaster.ClientProto.Stone.Builder, com.temas.aimaster.ClientProto.StoneOrBuilder>(
                   stones_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           stones_ = null;
@@ -1507,9 +1569,9 @@ public final class ClientProto {
       "\014common.proto\"\206\001\n\005Stone\022\n\n\002id\030\001 \001(\005\022\021\n\tt" +
       "imeDelta\030\002 \001(\003\022/\n\nstartPoint\030\003 \001(\0132\033.com" +
       ".temas.aimaster.Vector2\022-\n\010velocity\030\004 \001(" +
-      "\0132\033.com.temas.aimaster.Vector2\"7\n\nClient" +
-      "Data\022)\n\006stones\030\002 \003(\0132\031.com.temas.aimaste" +
-      "r.StoneP\000b\006proto3"
+      "\0132\033.com.temas.aimaster.Vector2\"J\n\nClient" +
+      "Data\022\021\n\ttimeStamp\030\001 \001(\003\022)\n\006stones\030\002 \003(\0132" +
+      "\031.com.temas.aimaster.StoneP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1535,7 +1597,7 @@ public final class ClientProto {
     internal_static_com_temas_aimaster_ClientData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ClientData_descriptor,
-        new java.lang.String[] { "Stones", });
+        new java.lang.String[] { "TimeStamp", "Stones", });
     com.temas.aimaster.Common.getDescriptor();
   }
 

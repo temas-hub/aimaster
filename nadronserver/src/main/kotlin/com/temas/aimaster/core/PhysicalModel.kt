@@ -20,10 +20,6 @@ class PhysicalModel(val physics: PhysicsWorld): Model() {
         physics.update(delta)
     }
 
-    override open fun createStone(): Stone {
-        throw UnsupportedOperationException("Refactor this") //TODO refactor
-    }
-
     override fun createTarget(): Target {
         return PhysicalTarget(TARGET_SPEED, TARGET_RADIUS, physics.world)
     }

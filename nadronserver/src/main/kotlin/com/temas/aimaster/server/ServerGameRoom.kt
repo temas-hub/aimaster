@@ -2,10 +2,12 @@ package com.temas.gameserver.aimmaster
 
 import com.google.protobuf.MessageLite
 import com.google.protobuf.MessageLiteOrBuilder
+import com.temas.aimaster.ClientProto
 import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.core.PhysicalModel
 import com.temas.aimaster.core.PhysicsWorld
+import com.temas.aimaster.model.Stone
 import io.nadron.app.PlayerSession
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
@@ -81,17 +83,27 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
     }
 
     private fun buildUpdateData(): ServerInfo.ModelType {
-        return ServerInfo.ModelType.newBuilder().
+        val builder =  ServerInfo.ModelType.newBuilder().
                 setTimestamp(System.currentTimeMillis()).
                 setTargetInfo(ServerInfo.TargetInfo.newBuilder().
                         setPosition(
                                 Common.Vector2.newBuilder().setX(model.target.center.x).
-                                        setY(model.target.center.y).build()).
+                                        setY(model.target.center.y)).
                         setMoveDir(Common.Vector2.newBuilder().setX(model.target.moveDir.x).
-                                setY(model.target.moveDir.y).build()).
+                                setY(model.target.moveDir.y)).
                         setRadius(model.target.radius).
-                        setSpeed(model.target.speed)).build()
+                        setSpeed(model.target.speed))
+        model.stones.forEach {
+            builder.addStones(createStoneData(it))
+        }
+        return builder.build()
+    }
 
+    private fun createStoneData(s: Stone): ServerInfo.StoneInfo.Builder {
+        return ServerInfo.StoneInfo.newBuilder()
+                .setId(s.id)
+                .setPosition(Common.Vector2.newBuilder().setX(s.pos.x).setY(s.pos.y))
+                .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))
     }
 
 

@@ -1,5 +1,6 @@
 package com.temas.aimaster.multiplayer
 
+import com.badlogic.gdx.math.Vector2
 import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
 import com.temas.aimaster.ClientProto.ClientData
@@ -34,14 +35,13 @@ private var outPacketCount: Long = 0
 class NadronClient(val model: Model) {
 
     companion object {
-        private val taskExecutor = Executors.newSingleThreadScheduledExecutor()
         private val LOG = LoggerFactory.getLogger(NadronClient::class.java)
         val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
     }
 
     var latestServerUpdateTime: Long = 0
     var latestClientTime: Long = 0
-    var session: Session? = null
+    lateinit var session: Session
 
     private inner class InBoundHandler(session: Session) : AbstractSessionEventHandler(session) {
 
@@ -57,9 +57,6 @@ class NadronClient(val model: Model) {
                 LOG.debug("Received state timestamp = ${simpleDateFormat.format(Date(worldState.timestamp))} " +
                         "x= ${worldState.targetInfo.position.x}, y=${worldState.targetInfo.position.y} Packet number = $inPacketCount")
                 updateModel(worldState)
-                if (!taskExecutor.isShutdown) {
-                    taskExecutor.shutdown()
-                }
             }
         }
 
@@ -79,30 +76,42 @@ class NadronClient(val model: Model) {
             return prototype.parserForType.parseFrom(array, offset, length)
         }
         private fun updateModel(serverModel: ServerInfo.ModelType) {
-            val worldState = serverModel.targetInfo
+            val serverTargetInfo = serverModel.targetInfo
             with(model.target) {
-                center.x = worldState.position.x
-                center.y = worldState.position.y
-                moveDir.x = worldState.moveDir.x
-                moveDir.y = worldState.moveDir.y
-                radius = worldState.radius
-                speed = worldState.speed
+                center.x = serverTargetInfo.position.x
+                center.y = serverTargetInfo.position.y
+                moveDir.x = serverTargetInfo.moveDir.x
+                moveDir.y = serverTargetInfo.moveDir.y
+                radius = serverTargetInfo.radius
+                speed = serverTargetInfo.speed
             }
+            serverModel.stonesList.forEach { s->
+                val localStone = model.stones.find { it.id == s.id }
+                if (localStone == null) { //other player's stone
+                    model.stones.add(Stone(id = -1,
+                            startPoint = Vector2(s.position.x, s.position.y),
+                            velocity = Vector2(s.velocity.x, s.velocity.y)))
+                } else {
+                    localStone.pos.set(s.position.x, s.position.y)
+                    localStone.velocity.set(s.velocity.x, s.velocity.y)
+                }
+            }
+
         }
     }
 
 
     fun update(delta: Float) {
         //TODO send update to server
-        if (session != null) {
+        if (session.isWriteable) {
             sendUpdate()
         }
     }
 
     private fun sendUpdate() {
 
-        val clientData = ClientData.newBuilder()
-        model.stones.forEach {
+        val clientData = ClientData.newBuilder().setTimeStamp(System.currentTimeMillis())
+        model.stones.filter { it.id > 0 }.forEach {
             val stoneData = createStoneData(it)
             clientData.addStones(stoneData)
         }
@@ -111,7 +120,7 @@ class NadronClient(val model: Model) {
         val buffer = worldStateBuffer.writeObject({ convertToBuffer(it) }, clientData.build())
         val event = Events.networkEvent(buffer, DeliveryGuarantyOptions.FAST)
         ++outPacketCount
-        session!!.onEvent(event)
+        session.onEvent(event)
     }
 
     fun convertToBuffer(obj : ClientProto.ClientData): ByteBuf {
@@ -142,17 +151,9 @@ class NadronClient(val model: Model) {
         val sessionFactory = SessionFactory(loginHelper)
         val clientSession = sessionFactory.createAndConnectSession()
 
-        val task = Runnable {
-            val messageBuffer = NettyMessageBuffer()
-            messageBuffer.writeInt(1)
-            messageBuffer.writeInt(2)
-            val event = Events.networkEvent(messageBuffer, io.nadron.client.communication.DeliveryGuaranty.DeliveryGuarantyOptions.FAST)
-            clientSession.onEvent(event)
-        }
-
-        taskExecutor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS)
         val handler = InBoundHandler(clientSession)
         clientSession.addHandler(handler)
+        sessionFactory.connectSession(clientSession)
         session = clientSession
     }
 }

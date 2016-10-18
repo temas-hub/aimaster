@@ -14,8 +14,8 @@ import io.nadron.util.Credentials
 class DefaultLookupService(val game: Game,
                            val refKeyGameRoomMap: Map<String, GameRoom>) : LookupService {
 
-    private lateinit var redSlot: Player
-    private lateinit var blueSlot: Player
+    private var redSlot: Player? = null
+    private var blueSlot: Player? = null
 
 
     override fun gameRoomLookup(gameContextKey: Any): GameRoom? {

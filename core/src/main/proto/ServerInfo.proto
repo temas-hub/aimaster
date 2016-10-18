@@ -12,12 +12,9 @@ message TargetInfo {
 
 message StoneInfo {
     int32 id = 1;
-    Vector2 startPoint = 2;
-    Vector2 direction = 3;
-    float speed = 4;
+    Vector2 position = 2;
+    Vector2 velocity = 3;
 }
-
-
 
 message ModelType {
     int64 timestamp = 1;

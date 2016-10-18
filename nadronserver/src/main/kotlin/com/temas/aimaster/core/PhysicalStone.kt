@@ -18,7 +18,8 @@ class PhysicalStone(id: Int,
     val body = createStoneBody()
 
     override fun update(delta: Float) {
-        pos.set(body.position)
+        pos.set(PhysicsWorld.toPixels(body.position))
+        velocity.set(PhysicsWorld.toPixels(body.linearVelocity))
     }
 
     private fun createStoneBody(): Body {

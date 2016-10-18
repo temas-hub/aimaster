@@ -819,35 +819,30 @@ public final class ServerInfo {
     int getId();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    boolean hasStartPoint();
+    boolean hasPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    com.temas.aimaster.Common.Vector2 getStartPoint();
+    com.temas.aimaster.Common.Vector2 getPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder();
+    com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
      */
-    boolean hasDirection();
+    boolean hasVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
      */
-    com.temas.aimaster.Common.Vector2 getDirection();
+    com.temas.aimaster.Common.Vector2 getVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
      */
-    com.temas.aimaster.Common.Vector2OrBuilder getDirectionOrBuilder();
-
-    /**
-     * <code>optional float speed = 4;</code>
-     */
-    float getSpeed();
+    com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
   }
   /**
    * Protobuf type {@code com.temas.aimaster.StoneInfo}
@@ -862,7 +857,6 @@ public final class ServerInfo {
     }
     private StoneInfo() {
       id_ = 0;
-      speed_ = 0F;
     }
 
     @java.lang.Override
@@ -896,33 +890,28 @@ public final class ServerInfo {
             }
             case 18: {
               com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
-              if (startPoint_ != null) {
-                subBuilder = startPoint_.toBuilder();
+              if (position_ != null) {
+                subBuilder = position_.toBuilder();
               }
-              startPoint_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              position_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(startPoint_);
-                startPoint_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(position_);
+                position_ = subBuilder.buildPartial();
               }
 
               break;
             }
             case 26: {
               com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
-              if (direction_ != null) {
-                subBuilder = direction_.toBuilder();
+              if (velocity_ != null) {
+                subBuilder = velocity_.toBuilder();
               }
-              direction_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(direction_);
-                direction_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(velocity_);
+                velocity_ = subBuilder.buildPartial();
               }
 
-              break;
-            }
-            case 37: {
-
-              speed_ = input.readFloat();
               break;
             }
           }
@@ -958,55 +947,46 @@ public final class ServerInfo {
       return id_;
     }
 
-    public static final int STARTPOINT_FIELD_NUMBER = 2;
-    private com.temas.aimaster.Common.Vector2 startPoint_;
+    public static final int POSITION_FIELD_NUMBER = 2;
+    private com.temas.aimaster.Common.Vector2 position_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    public boolean hasStartPoint() {
-      return startPoint_ != null;
+    public boolean hasPosition() {
+      return position_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    public com.temas.aimaster.Common.Vector2 getStartPoint() {
-      return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+    public com.temas.aimaster.Common.Vector2 getPosition() {
+      return position_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
      */
-    public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
-      return getStartPoint();
-    }
-
-    public static final int DIRECTION_FIELD_NUMBER = 3;
-    private com.temas.aimaster.Common.Vector2 direction_;
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
-     */
-    public boolean hasDirection() {
-      return direction_ != null;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
-     */
-    public com.temas.aimaster.Common.Vector2 getDirection() {
-      return direction_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : direction_;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
-     */
-    public com.temas.aimaster.Common.Vector2OrBuilder getDirectionOrBuilder() {
-      return getDirection();
+    public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
+      return getPosition();
     }
 
-    public static final int SPEED_FIELD_NUMBER = 4;
-    private float speed_;
+    public static final int VELOCITY_FIELD_NUMBER = 3;
+    private com.temas.aimaster.Common.Vector2 velocity_;
     /**
-     * <code>optional float speed = 4;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
      */
-    public float getSpeed() {
-      return speed_;
+    public boolean hasVelocity() {
+      return velocity_ != null;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    public com.temas.aimaster.Common.Vector2 getVelocity() {
+      return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
+      return getVelocity();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1024,14 +1004,11 @@ public final class ServerInfo {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (startPoint_ != null) {
-        output.writeMessage(2, getStartPoint());
+      if (position_ != null) {
+        output.writeMessage(2, getPosition());
       }
-      if (direction_ != null) {
-        output.writeMessage(3, getDirection());
-      }
-      if (speed_ != 0F) {
-        output.writeFloat(4, speed_);
+      if (velocity_ != null) {
+        output.writeMessage(3, getVelocity());
       }
     }
 
@@ -1045,17 +1022,13 @@ public final class ServerInfo {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (startPoint_ != null) {
+      if (position_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getStartPoint());
+          .computeMessageSize(2, getPosition());
       }
-      if (direction_ != null) {
+      if (velocity_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getDirection());
-      }
-      if (speed_ != 0F) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, speed_);
+          .computeMessageSize(3, getVelocity());
       }
       memoizedSerializedSize = size;
       return size;
@@ -1170,20 +1143,18 @@ public final class ServerInfo {
         super.clear();
         id_ = 0;
 
-        if (startPointBuilder_ == null) {
-          startPoint_ = null;
+        if (positionBuilder_ == null) {
+          position_ = null;
         } else {
-          startPoint_ = null;
-          startPointBuilder_ = null;
+          position_ = null;
+          positionBuilder_ = null;
         }
-        if (directionBuilder_ == null) {
-          direction_ = null;
+        if (velocityBuilder_ == null) {
+          velocity_ = null;
         } else {
-          direction_ = null;
-          directionBuilder_ = null;
+          velocity_ = null;
+          velocityBuilder_ = null;
         }
-        speed_ = 0F;
-
         return this;
       }
 
@@ -1207,17 +1178,16 @@ public final class ServerInfo {
       public com.temas.aimaster.ServerInfo.StoneInfo buildPartial() {
         com.temas.aimaster.ServerInfo.StoneInfo result = new com.temas.aimaster.ServerInfo.StoneInfo(this);
         result.id_ = id_;
-        if (startPointBuilder_ == null) {
-          result.startPoint_ = startPoint_;
+        if (positionBuilder_ == null) {
+          result.position_ = position_;
         } else {
-          result.startPoint_ = startPointBuilder_.build();
+          result.position_ = positionBuilder_.build();
         }
-        if (directionBuilder_ == null) {
-          result.direction_ = direction_;
+        if (velocityBuilder_ == null) {
+          result.velocity_ = velocity_;
         } else {
-          result.direction_ = directionBuilder_.build();
+          result.velocity_ = velocityBuilder_.build();
         }
-        result.speed_ = speed_;
         onBuilt();
         return result;
       }
@@ -1236,14 +1206,11 @@ public final class ServerInfo {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasStartPoint()) {
-          mergeStartPoint(other.getStartPoint());
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
         }
-        if (other.hasDirection()) {
-          mergeDirection(other.getDirection());
-        }
-        if (other.getSpeed() != 0F) {
-          setSpeed(other.getSpeed());
+        if (other.hasVelocity()) {
+          mergeVelocity(other.getVelocity());
         }
         onChanged();
         return this;
@@ -1297,264 +1264,238 @@ public final class ServerInfo {
         return this;
       }
 
-      private com.temas.aimaster.Common.Vector2 startPoint_ = null;
+      private com.temas.aimaster.Common.Vector2 position_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> startPointBuilder_;
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> positionBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public boolean hasStartPoint() {
-        return startPointBuilder_ != null || startPoint_ != null;
+      public boolean hasPosition() {
+        return positionBuilder_ != null || position_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public com.temas.aimaster.Common.Vector2 getStartPoint() {
-        if (startPointBuilder_ == null) {
-          return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+      public com.temas.aimaster.Common.Vector2 getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
         } else {
-          return startPointBuilder_.getMessage();
+          return positionBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public Builder setStartPoint(com.temas.aimaster.Common.Vector2 value) {
-        if (startPointBuilder_ == null) {
+      public Builder setPosition(com.temas.aimaster.Common.Vector2 value) {
+        if (positionBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          startPoint_ = value;
+          position_ = value;
           onChanged();
         } else {
-          startPointBuilder_.setMessage(value);
+          positionBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public Builder setStartPoint(
+      public Builder setPosition(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
-        if (startPointBuilder_ == null) {
-          startPoint_ = builderForValue.build();
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
           onChanged();
         } else {
-          startPointBuilder_.setMessage(builderForValue.build());
+          positionBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public Builder mergeStartPoint(com.temas.aimaster.Common.Vector2 value) {
-        if (startPointBuilder_ == null) {
-          if (startPoint_ != null) {
-            startPoint_ =
-              com.temas.aimaster.Common.Vector2.newBuilder(startPoint_).mergeFrom(value).buildPartial();
+      public Builder mergePosition(com.temas.aimaster.Common.Vector2 value) {
+        if (positionBuilder_ == null) {
+          if (position_ != null) {
+            position_ =
+              com.temas.aimaster.Common.Vector2.newBuilder(position_).mergeFrom(value).buildPartial();
           } else {
-            startPoint_ = value;
+            position_ = value;
           }
           onChanged();
         } else {
-          startPointBuilder_.mergeFrom(value);
+          positionBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public Builder clearStartPoint() {
-        if (startPointBuilder_ == null) {
-          startPoint_ = null;
+      public Builder clearPosition() {
+        if (positionBuilder_ == null) {
+          position_ = null;
           onChanged();
         } else {
-          startPoint_ = null;
-          startPointBuilder_ = null;
+          position_ = null;
+          positionBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public com.temas.aimaster.Common.Vector2.Builder getStartPointBuilder() {
+      public com.temas.aimaster.Common.Vector2.Builder getPositionBuilder() {
         
         onChanged();
-        return getStartPointFieldBuilder().getBuilder();
+        return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
-      public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
-        if (startPointBuilder_ != null) {
-          return startPointBuilder_.getMessageOrBuilder();
+      public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
         } else {
-          return startPoint_ == null ?
-              com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+          return position_ == null ?
+              com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
-          getStartPointFieldBuilder() {
-        if (startPointBuilder_ == null) {
-          startPointBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
-                  getStartPoint(),
+                  getPosition(),
                   getParentForChildren(),
                   isClean());
-          startPoint_ = null;
+          position_ = null;
         }
-        return startPointBuilder_;
+        return positionBuilder_;
       }
 
-      private com.temas.aimaster.Common.Vector2 direction_ = null;
+      private com.temas.aimaster.Common.Vector2 velocity_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> directionBuilder_;
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public boolean hasDirection() {
-        return directionBuilder_ != null || direction_ != null;
+      public boolean hasVelocity() {
+        return velocityBuilder_ != null || velocity_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public com.temas.aimaster.Common.Vector2 getDirection() {
-        if (directionBuilder_ == null) {
-          return direction_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : direction_;
+      public com.temas.aimaster.Common.Vector2 getVelocity() {
+        if (velocityBuilder_ == null) {
+          return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
         } else {
-          return directionBuilder_.getMessage();
+          return velocityBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public Builder setDirection(com.temas.aimaster.Common.Vector2 value) {
-        if (directionBuilder_ == null) {
+      public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
+        if (velocityBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          direction_ = value;
+          velocity_ = value;
           onChanged();
         } else {
-          directionBuilder_.setMessage(value);
+          velocityBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public Builder setDirection(
+      public Builder setVelocity(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
-        if (directionBuilder_ == null) {
-          direction_ = builderForValue.build();
+        if (velocityBuilder_ == null) {
+          velocity_ = builderForValue.build();
           onChanged();
         } else {
-          directionBuilder_.setMessage(builderForValue.build());
+          velocityBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public Builder mergeDirection(com.temas.aimaster.Common.Vector2 value) {
-        if (directionBuilder_ == null) {
-          if (direction_ != null) {
-            direction_ =
-              com.temas.aimaster.Common.Vector2.newBuilder(direction_).mergeFrom(value).buildPartial();
+      public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
+        if (velocityBuilder_ == null) {
+          if (velocity_ != null) {
+            velocity_ =
+              com.temas.aimaster.Common.Vector2.newBuilder(velocity_).mergeFrom(value).buildPartial();
           } else {
-            direction_ = value;
+            velocity_ = value;
           }
           onChanged();
         } else {
-          directionBuilder_.mergeFrom(value);
+          velocityBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public Builder clearDirection() {
-        if (directionBuilder_ == null) {
-          direction_ = null;
+      public Builder clearVelocity() {
+        if (velocityBuilder_ == null) {
+          velocity_ = null;
           onChanged();
         } else {
-          direction_ = null;
-          directionBuilder_ = null;
+          velocity_ = null;
+          velocityBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public com.temas.aimaster.Common.Vector2.Builder getDirectionBuilder() {
+      public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
         
         onChanged();
-        return getDirectionFieldBuilder().getBuilder();
+        return getVelocityFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      public com.temas.aimaster.Common.Vector2OrBuilder getDirectionOrBuilder() {
-        if (directionBuilder_ != null) {
-          return directionBuilder_.getMessageOrBuilder();
+      public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
+        if (velocityBuilder_ != null) {
+          return velocityBuilder_.getMessageOrBuilder();
         } else {
-          return direction_ == null ?
-              com.temas.aimaster.Common.Vector2.getDefaultInstance() : direction_;
+          return velocity_ == null ?
+              com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 direction = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
-          getDirectionFieldBuilder() {
-        if (directionBuilder_ == null) {
-          directionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getVelocityFieldBuilder() {
+        if (velocityBuilder_ == null) {
+          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
-                  getDirection(),
+                  getVelocity(),
                   getParentForChildren(),
                   isClean());
-          direction_ = null;
+          velocity_ = null;
         }
-        return directionBuilder_;
-      }
-
-      private float speed_ ;
-      /**
-       * <code>optional float speed = 4;</code>
-       */
-      public float getSpeed() {
-        return speed_;
-      }
-      /**
-       * <code>optional float speed = 4;</code>
-       */
-      public Builder setSpeed(float value) {
-        
-        speed_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float speed = 4;</code>
-       */
-      public Builder clearSpeed() {
-        
-        speed_ = 0F;
-        onChanged();
-        return this;
+        return velocityBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2560,14 +2501,14 @@ public final class ServerInfo {
       "common.proto\"\210\001\n\nTargetInfo\022-\n\010position\030" +
       "\001 \001(\0132\033.com.temas.aimaster.Vector2\022,\n\007mo" +
       "veDir\030\002 \001(\0132\033.com.temas.aimaster.Vector2" +
-      "\022\016\n\006radius\030\003 \001(\002\022\r\n\005speed\030\004 \001(\002\"\207\001\n\tSton" +
-      "eInfo\022\n\n\002id\030\001 \001(\005\022/\n\nstartPoint\030\002 \001(\0132\033." +
-      "com.temas.aimaster.Vector2\022.\n\tdirection\030" +
-      "\003 \001(\0132\033.com.temas.aimaster.Vector2\022\r\n\005sp" +
-      "eed\030\004 \001(\002\"\201\001\n\tModelType\022\021\n\ttimestamp\030\001 \001" +
-      "(\003\0222\n\ntargetInfo\030\002 \001(\0132\036.com.temas.aimas",
-      "ter.TargetInfo\022-\n\006stones\030\003 \003(\0132\035.com.tem" +
-      "as.aimaster.StoneInfoP\000b\006proto3"
+      "\022\016\n\006radius\030\003 \001(\002\022\r\n\005speed\030\004 \001(\002\"u\n\tStone" +
+      "Info\022\n\n\002id\030\001 \001(\005\022-\n\010position\030\002 \001(\0132\033.com" +
+      ".temas.aimaster.Vector2\022-\n\010velocity\030\003 \001(" +
+      "\0132\033.com.temas.aimaster.Vector2\"\201\001\n\tModel" +
+      "Type\022\021\n\ttimestamp\030\001 \001(\003\0222\n\ntargetInfo\030\002 " +
+      "\001(\0132\036.com.temas.aimaster.TargetInfo\022-\n\006s",
+      "tones\030\003 \003(\0132\035.com.temas.aimaster.StoneIn" +
+      "foP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2593,7 +2534,7 @@ public final class ServerInfo {
     internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_StoneInfo_descriptor,
-        new java.lang.String[] { "Id", "StartPoint", "Direction", "Speed", });
+        new java.lang.String[] { "Id", "Position", "Velocity", });
     internal_static_com_temas_aimaster_ModelType_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_temas_aimaster_ModelType_fieldAccessorTable = new

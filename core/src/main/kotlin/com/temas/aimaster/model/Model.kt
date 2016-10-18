@@ -1,5 +1,6 @@
 package com.temas.aimaster.model
 
+import com.badlogic.gdx.ai.steer.behaviors.MatchVelocity
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.model.Arrow
@@ -66,10 +67,6 @@ open class Model {
 //        ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
 //        return ball!!
 //    }
-
-    open fun createStone(): Stone{
-        return Stone(startPoint = arrow.firstPoint, velocity = arrow.dir)
-    }
 
     open fun createTarget(): Target {
         return Target(TARGET_SPEED, TARGET_RADIUS)
