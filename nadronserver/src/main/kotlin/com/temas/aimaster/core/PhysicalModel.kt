@@ -31,13 +31,4 @@ class PhysicalModel(val physics: PhysicsWorld): Model() {
     fun startGameSession() {
         (target as PhysicalTarget).start()
     }
-
-    fun addStone(id: Int, startX: Float, startY: Float, velocityX: Float, velocityY: Float): Stone {
-        val physicalStone = PhysicalStone(id, startPoint = Vector2(startX, startY),
-                velocity = Vector2(velocityX, velocityY),
-                world = physics.world)
-        stones.add(physicalStone)
-
-        return physicalStone
-    }
 }

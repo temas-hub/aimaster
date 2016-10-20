@@ -28,7 +28,7 @@ class Controller(val model: Model, val renderer: Renderer) {
     fun launch(point: Vector2) {
         //model.createBall(point)
 
-        model.stones.add(Stone(startPoint = model.arrow.firstPoint, velocity = model.arrow.dir))
+        model.stones.add(Stone(startPoint = model.arrow.firstPoint.cpy(), velocity = model.arrow.dir.cpy()))
         model.launch(point)
     }
 

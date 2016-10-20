@@ -53,7 +53,7 @@ class PhysicsWorld {
 
 
     fun update(delta: Float) {
-        world.step(1f/60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
+        world.step(delta, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
     }
 
 

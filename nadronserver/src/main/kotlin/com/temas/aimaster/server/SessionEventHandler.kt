@@ -1,8 +1,12 @@
 package com.temas.gameserver.aimmaster
 
+import com.badlogic.gdx.math.Vector2
 import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
 import com.temas.aimaster.core.PhysicalModel
+import com.temas.aimaster.core.PhysicalStone
+import com.temas.aimaster.model.Stone
+import io.nadron.app.PlayerSession
 import io.nadron.app.Session
 import io.nadron.communication.NettyMessageBuffer
 import io.nadron.event.Event
@@ -19,7 +23,7 @@ import java.util.*
 
 var inPacketCount: Long = 0
 
-class SessionEventHandler(val model: PhysicalModel, session : Session) : DefaultSessionEventHandler(session) {
+class SessionEventHandler(val model: PhysicalModel, val session : PlayerSession) : DefaultSessionEventHandler(session) {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(SessionEventHandler::class.java)
@@ -28,7 +32,7 @@ class SessionEventHandler(val model: PhysicalModel, session : Session) : Default
 
     private val prototype: MessageLite = ClientProto.ClientData.getDefaultInstance()
     var lastUpdateTime: Long = 0
-    var lastStoneId: Int = -1;
+    var lastStoneId: Int = -1
 
 
     override fun onDataIn(event: Event) {
@@ -52,9 +56,21 @@ class SessionEventHandler(val model: PhysicalModel, session : Session) : Default
 
         clientData.stonesList.forEach {
             if (it.id > lastStoneId) {
-                val stone = model.addStone(it.id, it.startPoint.x, it.startPoint.y, it.velocity.x, it.velocity.y)
+                val clientStone = Stone(startPoint = Vector2(it.startPoint.x, it.startPoint.y),
+                                        velocity = Vector2(it.velocity.x, it.velocity.y))
+                val timeToReplay = System.currentTimeMillis() - it.timeDelta.toFloat()
+                if (timeToReplay < 0) {
+                    throw IllegalStateException("Client time time cannot be later than server time")
+                }
+                clientStone.update(timeToReplay)
+                val serverStone =
+                        PhysicalStone(player = session.player,
+                                        id = it.id,
+                                        startPoint = clientStone.pos,
+                                        velocity = clientStone.velocity,
+                                        world = model.physics.world)
                 lastStoneId = it.id
-                stone.update(it.timeDelta.toFloat())
+                model.stones.add(serverStone)
             }
         }
     }

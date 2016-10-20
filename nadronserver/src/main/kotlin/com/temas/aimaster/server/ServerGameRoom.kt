@@ -68,10 +68,10 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
                 val event = Events.networkEvent(buffer, DeliveryGuarantyOptions.FAST)
                 ++outPacketCount
                 it.onEvent(event)
+                LOG.debug("Sent state timestamp = ${simpleDateFormat.format(Date(serverUpdateData.timestamp))} " +
+                        "x= ${serverUpdateData.targetInfo.position.x}, y=${serverUpdateData.targetInfo.position.y} " +
+                        "Packet number = $outPacketCount to client ${it.player.name}")
             }
-
-            LOG.debug("Sent state timestamp = ${simpleDateFormat.format(Date(serverUpdateData.timestamp))} " +
-                    "x= ${serverUpdateData.targetInfo.position.x}, y=${serverUpdateData.targetInfo.position.y} Packet number = ${outPacketCount}")
         } catch (ex: Exception) {
             LOG.error("Error during update task", ex)
         }
