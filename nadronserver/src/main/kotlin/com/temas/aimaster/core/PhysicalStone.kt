@@ -19,22 +19,29 @@ class PhysicalStone(val serverId: Int = ++ID_CONTER,
         Stone(id, startPoint, rad, velocity) {
 
     companion object {
-        var ID_CONTER = 0
+        private var ID_CONTER = 0
+        private val STOP_SPEED_SQUARE = 0.04f
     }
 
     val body = createStoneBody()
 
     override fun update(delta: Float) {
-        pos.set(PhysicsWorld.toPixels(body.position))
-        velocity.set(PhysicsWorld.toPixels(body.linearVelocity))
+        if (state == STATE.MOVE) {
+            pos.set(PhysicsWorld.toPixels(body.position))
+            velocity.set(PhysicsWorld.toPixels(body.linearVelocity))
+            if (body.linearVelocity.len2() < STOP_SPEED_SQUARE) {
+                body.linearVelocity = Vector2(0f,0f)
+                body.angularVelocity = 0f
+            }
+        }
     }
 
     private fun createStoneBody(): Body {
         val bodyDef = BodyDef()
         bodyDef.type = BodyDef.BodyType.DynamicBody
         bodyDef.position.set(PhysicsWorld.toMeters(startPoint))
-        bodyDef.linearDamping = 0.35f
-        bodyDef.angularDamping = 0.35f
+        bodyDef.linearDamping = Stone.VELOCITY_DAMPING
+        bodyDef.angularDamping = Stone.VELOCITY_DAMPING
 
         val shape = CircleShape()
         shape.position.set(PhysicsWorld.toMeters(startPoint))
