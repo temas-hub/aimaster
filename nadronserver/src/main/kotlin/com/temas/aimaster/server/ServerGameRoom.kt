@@ -6,6 +6,7 @@ import com.temas.aimaster.ClientProto
 import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.core.PhysicalModel
+import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.PhysicsWorld
 import com.temas.aimaster.model.Stone
 import io.nadron.app.PlayerSession
@@ -99,8 +100,9 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         return builder.build()
     }
 
-    private fun createStoneData(s: Stone): ServerInfo.StoneInfo.Builder {
+    private fun createStoneData(s: PhysicalStone): ServerInfo.StoneInfo.Builder {
         return ServerInfo.StoneInfo.newBuilder()
+                .setPlayerId(s.player.id as Int)
                 .setId(s.id)
                 .setPosition(Common.Vector2.newBuilder().setX(s.pos.x).setY(s.pos.y))
                 .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))

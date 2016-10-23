@@ -11,9 +11,10 @@ message TargetInfo {
 }
 
 message StoneInfo {
-    int32 id = 1;
-    Vector2 position = 2;
-    Vector2 velocity = 3;
+    int32 playerId = 1;
+    int32 id = 2;
+    Vector2 position = 3;
+    Vector2 velocity = 4;
 }
 
 message ModelType {

@@ -8,6 +8,7 @@ import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.model.Model
 import com.temas.aimaster.model.Stone
+import io.nadron.client.app.PlayerSession
 import io.nadron.client.app.Session
 import io.nadron.client.app.impl.SessionFactory
 import io.nadron.client.communication.DeliveryGuaranty.*
@@ -85,19 +86,26 @@ class NadronClient(val model: Model) {
                 radius = serverTargetInfo.radius
                 speed = serverTargetInfo.speed
             }
+            val playerId = (session as PlayerSession).player.id
             serverModel.stonesList.forEach { s->
-                val localStone = model.stones.find { it.id == s.id }
-                if (localStone == null) { //other player's stone
-                    val newStone = Stone(id = -1,
-                            startPoint = Vector2(s.position.x, s.position.y),
-                            velocity = Vector2(s.velocity.x, s.velocity.y))
-                    newStone.pos.set(Vector2(s.position.x, s.position.y))
-                    model.stones.add(newStone)
 
-                } else {
-                    localStone.pos.set(s.position.x, s.position.y)
-                    localStone.velocity.set(s.velocity.x, s.velocity.y)
+                if (s.playerId != playerId) { //other player's stone
+                    val localStone = model.stones.find { it.id == s.id }
+                    if (localStone == null) {
+                        LOG.error("Stone with id = $s.id not found")
+                    } else {
+                        localStone.pos.set(s.position.x, s.position.y)
+                        localStone.velocity.set(s.velocity.x, s.velocity.y)
+                    }
                 }
+//                else { //
+//                    val newStone = Stone(id = -1,
+//                            startPoint = Vector2(s.position.x, s.position.y),
+//                            velocity = Vector2(s.velocity.x, s.velocity.y))
+//                    newStone.pos.set(Vector2(s.position.x, s.position.y))
+//                    model.stones.add(newStone)
+//
+//                }
             }
 
         }

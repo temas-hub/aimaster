@@ -814,33 +814,38 @@ public final class ServerInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 id = 1;</code>
+     * <code>optional int32 playerId = 1;</code>
+     */
+    int getPlayerId();
+
+    /**
+     * <code>optional int32 id = 2;</code>
      */
     int getId();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     boolean hasPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     com.temas.aimaster.Common.Vector2 getPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     boolean hasVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     com.temas.aimaster.Common.Vector2 getVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
   }
@@ -856,6 +861,7 @@ public final class ServerInfo {
       super(builder);
     }
     private StoneInfo() {
+      playerId_ = 0;
       id_ = 0;
     }
 
@@ -885,10 +891,15 @@ public final class ServerInfo {
             }
             case 8: {
 
+              playerId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
               id_ = input.readInt32();
               break;
             }
-            case 18: {
+            case 26: {
               com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
               if (position_ != null) {
                 subBuilder = position_.toBuilder();
@@ -901,7 +912,7 @@ public final class ServerInfo {
 
               break;
             }
-            case 26: {
+            case 34: {
               com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
               if (velocity_ != null) {
                 subBuilder = velocity_.toBuilder();
@@ -938,52 +949,61 @@ public final class ServerInfo {
               com.temas.aimaster.ServerInfo.StoneInfo.class, com.temas.aimaster.ServerInfo.StoneInfo.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
+    public static final int PLAYERID_FIELD_NUMBER = 1;
+    private int playerId_;
+    /**
+     * <code>optional int32 playerId = 1;</code>
+     */
+    public int getPlayerId() {
+      return playerId_;
+    }
+
+    public static final int ID_FIELD_NUMBER = 2;
     private int id_;
     /**
-     * <code>optional int32 id = 1;</code>
+     * <code>optional int32 id = 2;</code>
      */
     public int getId() {
       return id_;
     }
 
-    public static final int POSITION_FIELD_NUMBER = 2;
+    public static final int POSITION_FIELD_NUMBER = 3;
     private com.temas.aimaster.Common.Vector2 position_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     public boolean hasPosition() {
       return position_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2 getPosition() {
       return position_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
       return getPosition();
     }
 
-    public static final int VELOCITY_FIELD_NUMBER = 3;
+    public static final int VELOCITY_FIELD_NUMBER = 4;
     private com.temas.aimaster.Common.Vector2 velocity_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public boolean hasVelocity() {
       return velocity_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public com.temas.aimaster.Common.Vector2 getVelocity() {
       return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
       return getVelocity();
@@ -1001,14 +1021,17 @@ public final class ServerInfo {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (playerId_ != 0) {
+        output.writeInt32(1, playerId_);
+      }
       if (id_ != 0) {
-        output.writeInt32(1, id_);
+        output.writeInt32(2, id_);
       }
       if (position_ != null) {
-        output.writeMessage(2, getPosition());
+        output.writeMessage(3, getPosition());
       }
       if (velocity_ != null) {
-        output.writeMessage(3, getVelocity());
+        output.writeMessage(4, getVelocity());
       }
     }
 
@@ -1018,17 +1041,21 @@ public final class ServerInfo {
       if (size != -1) return size;
 
       size = 0;
+      if (playerId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, playerId_);
+      }
       if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+          .computeInt32Size(2, id_);
       }
       if (position_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getPosition());
+          .computeMessageSize(3, getPosition());
       }
       if (velocity_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getVelocity());
+          .computeMessageSize(4, getVelocity());
       }
       memoizedSerializedSize = size;
       return size;
@@ -1141,6 +1168,8 @@ public final class ServerInfo {
       }
       public Builder clear() {
         super.clear();
+        playerId_ = 0;
+
         id_ = 0;
 
         if (positionBuilder_ == null) {
@@ -1177,6 +1206,7 @@ public final class ServerInfo {
 
       public com.temas.aimaster.ServerInfo.StoneInfo buildPartial() {
         com.temas.aimaster.ServerInfo.StoneInfo result = new com.temas.aimaster.ServerInfo.StoneInfo(this);
+        result.playerId_ = playerId_;
         result.id_ = id_;
         if (positionBuilder_ == null) {
           result.position_ = position_;
@@ -1203,6 +1233,9 @@ public final class ServerInfo {
 
       public Builder mergeFrom(com.temas.aimaster.ServerInfo.StoneInfo other) {
         if (other == com.temas.aimaster.ServerInfo.StoneInfo.getDefaultInstance()) return this;
+        if (other.getPlayerId() != 0) {
+          setPlayerId(other.getPlayerId());
+        }
         if (other.getId() != 0) {
           setId(other.getId());
         }
@@ -1238,15 +1271,41 @@ public final class ServerInfo {
         return this;
       }
 
+      private int playerId_ ;
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public int getPlayerId() {
+        return playerId_;
+      }
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public Builder setPlayerId(int value) {
+        
+        playerId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public Builder clearPlayerId() {
+        
+        playerId_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int id_ ;
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public Builder setId(int value) {
         
@@ -1255,7 +1314,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>optional int32 id = 2;</code>
        */
       public Builder clearId() {
         
@@ -1268,13 +1327,13 @@ public final class ServerInfo {
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> positionBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public boolean hasPosition() {
         return positionBuilder_ != null || position_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2 getPosition() {
         if (positionBuilder_ == null) {
@@ -1284,7 +1343,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder setPosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -1300,7 +1359,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder setPosition(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -1314,7 +1373,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder mergePosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -1332,7 +1391,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder clearPosition() {
         if (positionBuilder_ == null) {
@@ -1346,7 +1405,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getPositionBuilder() {
         
@@ -1354,7 +1413,7 @@ public final class ServerInfo {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -1365,7 +1424,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 2;</code>
+       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
@@ -1385,13 +1444,13 @@ public final class ServerInfo {
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public boolean hasVelocity() {
         return velocityBuilder_ != null || velocity_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2 getVelocity() {
         if (velocityBuilder_ == null) {
@@ -1401,7 +1460,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -1417,7 +1476,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder setVelocity(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -1431,7 +1490,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -1449,7 +1508,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder clearVelocity() {
         if (velocityBuilder_ == null) {
@@ -1463,7 +1522,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
         
@@ -1471,7 +1530,7 @@ public final class ServerInfo {
         return getVelocityFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
         if (velocityBuilder_ != null) {
@@ -1482,7 +1541,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
@@ -2501,14 +2560,14 @@ public final class ServerInfo {
       "common.proto\"\210\001\n\nTargetInfo\022-\n\010position\030" +
       "\001 \001(\0132\033.com.temas.aimaster.Vector2\022,\n\007mo" +
       "veDir\030\002 \001(\0132\033.com.temas.aimaster.Vector2" +
-      "\022\016\n\006radius\030\003 \001(\002\022\r\n\005speed\030\004 \001(\002\"u\n\tStone" +
-      "Info\022\n\n\002id\030\001 \001(\005\022-\n\010position\030\002 \001(\0132\033.com" +
-      ".temas.aimaster.Vector2\022-\n\010velocity\030\003 \001(" +
-      "\0132\033.com.temas.aimaster.Vector2\"\201\001\n\tModel" +
-      "Type\022\021\n\ttimestamp\030\001 \001(\003\0222\n\ntargetInfo\030\002 " +
-      "\001(\0132\036.com.temas.aimaster.TargetInfo\022-\n\006s",
-      "tones\030\003 \003(\0132\035.com.temas.aimaster.StoneIn" +
-      "foP\000b\006proto3"
+      "\022\016\n\006radius\030\003 \001(\002\022\r\n\005speed\030\004 \001(\002\"\207\001\n\tSton" +
+      "eInfo\022\020\n\010playerId\030\001 \001(\005\022\n\n\002id\030\002 \001(\005\022-\n\010p" +
+      "osition\030\003 \001(\0132\033.com.temas.aimaster.Vecto" +
+      "r2\022-\n\010velocity\030\004 \001(\0132\033.com.temas.aimaste" +
+      "r.Vector2\"\201\001\n\tModelType\022\021\n\ttimestamp\030\001 \001" +
+      "(\003\0222\n\ntargetInfo\030\002 \001(\0132\036.com.temas.aimas",
+      "ter.TargetInfo\022-\n\006stones\030\003 \003(\0132\035.com.tem" +
+      "as.aimaster.StoneInfoP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2534,7 +2593,7 @@ public final class ServerInfo {
     internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_StoneInfo_descriptor,
-        new java.lang.String[] { "Id", "Position", "Velocity", });
+        new java.lang.String[] { "PlayerId", "Id", "Position", "Velocity", });
     internal_static_com_temas_aimaster_ModelType_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_temas_aimaster_ModelType_fieldAccessorTable = new

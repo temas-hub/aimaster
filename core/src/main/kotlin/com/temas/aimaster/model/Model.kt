@@ -14,20 +14,9 @@ import java.util.*
  */
 
 
-open class Model {
-
-    companion object {
-        val TARGET_SPEED = 150f
-        val TARGET_RADIUS = 100f
-    }
+open class Model: AbstractModel<Stone>() {
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
-    val arrow: Arrow = Arrow()
-    val target: Target by lazy {createTarget()}
-
-    //var ball: Ball? = null
-    val stones = ArrayList<Stone>()
-
 
 
     open fun update(delta: Float) {
@@ -67,10 +56,6 @@ open class Model {
 //        ball = Ball(a.firstPoint.cpy(), Vector2(revDirVect.x, revDirVect.y))
 //        return ball!!
 //    }
-
-    open fun createTarget(): Target {
-        return Target(TARGET_SPEED, TARGET_RADIUS)
-    }
 
 
     fun checkStop(st: Stone) {
