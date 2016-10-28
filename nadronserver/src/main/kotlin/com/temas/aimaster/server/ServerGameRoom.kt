@@ -2,13 +2,11 @@ package com.temas.gameserver.aimmaster
 
 import com.google.protobuf.MessageLite
 import com.google.protobuf.MessageLiteOrBuilder
-import com.temas.aimaster.ClientProto
 import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
-import com.temas.aimaster.core.PhysicalModel
-import com.temas.aimaster.core.PhysicalStone
-import com.temas.aimaster.core.PhysicsWorld
-import com.temas.aimaster.model.Stone
+import com.temas.aimaster.core.ServerModel
+import com.temas.aimaster.core.ServerStone
+import com.temas.aimaster.model.PhysicsWorld
 import io.nadron.app.PlayerSession
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
@@ -32,7 +30,7 @@ private var outPacketCount: Long = 0
 
 class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder) {
 
-    val model = PhysicalModel(PhysicsWorld())
+    val model = ServerModel(PhysicsWorld())
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ServerGameRoom::class.java)
@@ -100,7 +98,7 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         return builder.build()
     }
 
-    private fun createStoneData(s: PhysicalStone): ServerInfo.StoneInfo.Builder {
+    private fun createStoneData(s: ServerStone): ServerInfo.StoneInfo.Builder {
         return ServerInfo.StoneInfo.newBuilder()
                 .setPlayerId(s.player.id as Int)
                 .setId(s.id)

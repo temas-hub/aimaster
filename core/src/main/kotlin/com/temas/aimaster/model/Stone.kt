@@ -7,14 +7,15 @@ import com.badlogic.gdx.math.Vector2
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 07.10.2016
  */
-open class Stone(val id: Int = ++ID_COUNTER,
+open class Stone(val id: Int,
+                 val playerId: Int,
                  val startPoint: Vector2,
                  val rad: Float = DEFAULT_RADIUS,
                  var velocity: Vector2,
                  val creationTime:Long = System.currentTimeMillis()) {
 
     companion object {
-        private var ID_COUNTER = 0
+        var ID_COUNTER = 0
         val DEFAULT_RADIUS = 20f
         val VELOCITY_DAMPING = 0.35f
     }
@@ -24,6 +25,9 @@ open class Stone(val id: Int = ++ID_COUNTER,
         STAY,
         STICKED
     }
+
+    constructor(playerId: Int, startPoint: Vector2, velocity: Vector2):
+        this(id = ++ID_COUNTER, playerId = playerId, startPoint = startPoint, velocity = velocity)
 
     val pos = Vector2(startPoint.x, startPoint.y)
     var state: STATE = STATE.MOVE
@@ -45,5 +49,10 @@ open class Stone(val id: Int = ++ID_COUNTER,
 //                    velocity = -collisionVelocityLoss
 //                }
         }
+    }
+
+    open fun updateFromServer(position: Vector2, velocity: Vector2) {
+        pos.set(position.x, position.y)
+        velocity.set(velocity.x, velocity.y)
     }
 }

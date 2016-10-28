@@ -16,14 +16,13 @@ import io.nadron.client.communication.NettyMessageBuffer
 import io.nadron.client.event.Event
 import io.nadron.client.event.Events
 import io.nadron.client.event.impl.AbstractSessionEventHandler
+import io.nadron.client.event.impl.StartEventHandler
 import io.nadron.client.util.LoginHelper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -43,6 +42,13 @@ class NadronClient(val model: Model) {
     var latestServerUpdateTime: Long = 0
     var latestClientTime: Long = 0
     lateinit var session: Session
+    var playerId: Int = -1
+        get() {
+            if (field == -1) {
+                throw IllegalStateException("PlayerId is not initialized")
+            }
+            return field
+        }
 
     private inner class InBoundHandler(session: Session) : AbstractSessionEventHandler(session) {
 
@@ -86,26 +92,18 @@ class NadronClient(val model: Model) {
                 radius = serverTargetInfo.radius
                 speed = serverTargetInfo.speed
             }
-            val playerId = (session as PlayerSession).player.id
+            //val playerId = (session as PlayerSession).player.id
             serverModel.stonesList.forEach { s->
-
-                if (s.playerId != playerId) { //other player's stone
-                    val localStone = model.stones.find { it.id == s.id }
-                    if (localStone == null) {
-                        LOG.error("Stone with id = $s.id not found")
-                    } else {
-                        localStone.pos.set(s.position.x, s.position.y)
-                        localStone.velocity.set(s.velocity.x, s.velocity.y)
-                    }
+                val stone = model.stones.find { it.id == s.id && it.playerId == s.playerId}
+                if (stone == null) {
+                    val newStone = Stone(s.id, s.playerId, startPoint = Vector2(s.position.x, s.position.y),
+                            velocity = Vector2(s.velocity.x, s.velocity.y))
+                    model.stones.add(newStone)
+                } else {
+//                    stone.pos.set(s.position.x, s.position.y)
+//                    stone.velocity.set(s.velocity.x, s.velocity.y)
+                    stone.updateFromServer(Vector2(s.position.x, s.position.y), Vector2(s.velocity.x, s.velocity.y))
                 }
-//                else { //
-//                    val newStone = Stone(id = -1,
-//                            startPoint = Vector2(s.position.x, s.position.y),
-//                            velocity = Vector2(s.velocity.x, s.velocity.y))
-//                    newStone.pos.set(Vector2(s.position.x, s.position.y))
-//                    model.stones.add(newStone)
-//
-//                }
             }
 
         }
@@ -163,6 +161,13 @@ class NadronClient(val model: Model) {
         val clientSession = sessionFactory.createSession()
         val handler = InBoundHandler(clientSession)
         clientSession.addHandler(handler)
+        clientSession.addHandler(object : StartEventHandler(clientSession) {
+            override fun onEvent(event: Event) {
+                val buffer = event.source as NettyMessageBuffer
+                playerId = buffer.readInt()
+                session.removeHandler(this)
+            }
+        })
         sessionFactory.connectSession(clientSession)
         session = clientSession
     }

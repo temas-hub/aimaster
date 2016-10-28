@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
 import com.temas.aimaster.model.Arrow
 import com.temas.aimaster.FixedList
+import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.model.Target
 import java.util.*
 
@@ -14,7 +15,7 @@ import java.util.*
  */
 
 
-open class Model: AbstractModel<Stone>() {
+open class Model(physics: PhysicsWorld): AbstractModel<Stone>(physics) {
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
 

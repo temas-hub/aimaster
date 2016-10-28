@@ -5,7 +5,7 @@ import java.util.*
 /**
  * Created by temas on 10/23/2016.
  */
-open class AbstractModel<T: Stone> {
+open class AbstractModel<T: Stone>(val physics: PhysicsWorld) {
 
 
     companion object {

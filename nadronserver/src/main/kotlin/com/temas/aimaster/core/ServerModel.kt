@@ -3,14 +3,13 @@ package com.temas.aimaster.core
 import com.badlogic.gdx.physics.box2d.Body
 import com.temas.aimaster.model.AbstractModel
 import com.temas.aimaster.model.Target
-import com.temas.aimaster.model.Model
-import com.temas.aimaster.model.Stone
+import com.temas.aimaster.model.PhysicsWorld
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 13.10.2016
  */
-class PhysicalModel(val physics: PhysicsWorld): AbstractModel<PhysicalStone>() {
+class ServerModel(physics: PhysicsWorld): AbstractModel<ServerStone>(physics) {
 
     fun update(delta: Float) {
         target.update(delta)

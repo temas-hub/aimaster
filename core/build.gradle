@@ -44,13 +44,12 @@ sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-//    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
     compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-//    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-//    compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVer"
 //    compile "io.netty:netty-all:$nettyVersion"
     compile "com.google.protobuf:protobuf-java:$protobufVersion"

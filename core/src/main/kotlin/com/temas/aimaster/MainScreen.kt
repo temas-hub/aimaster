@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.GL20
 import com.temas.aimaster.model.Model
 import com.temas.aimaster.Renderer
+import com.temas.aimaster.model.PhysicsWorld
 import com.temas.aimaster.multiplayer.NadronClient
 
 /**
@@ -15,7 +16,7 @@ import com.temas.aimaster.multiplayer.NadronClient
 
 class MainScreen(s: Screen) : Screen by s {
 
-    val model = Model()
+    val model = Model(PhysicsWorld())
     val renderer = Renderer(model)
     val controller = Controller(model, renderer)
 

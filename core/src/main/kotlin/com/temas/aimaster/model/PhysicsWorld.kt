@@ -1,4 +1,4 @@
-package com.temas.aimaster.core
+package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
@@ -57,7 +57,7 @@ class PhysicsWorld {
     }
 
 
-    private fun doPhysicsStep(deltaTime: Float) {
+    fun doPhysicsStep(deltaTime: Float) {
         var accumulator = 0f
         // fixed time step
         // max frame time to avoid spiral of death (on slow devices)
