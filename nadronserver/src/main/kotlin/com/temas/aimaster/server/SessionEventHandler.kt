@@ -3,6 +3,7 @@ package com.temas.gameserver.aimmaster
 import com.badlogic.gdx.math.Vector2
 import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
+import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
 import com.temas.aimaster.core.ServerStone
 import com.temas.aimaster.server.SimulationRoom
@@ -33,6 +34,8 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
     var lastUpdateTime: Long = 0
     var lastStoneId: Int = -1
 
+    var lastPackId: Long = -1
+
     val simulationRoom = SimulationRoom()
 
 
@@ -49,35 +52,53 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
         val clientData = buffer.readObject { convertToProto(it) } as ClientProto.ClientData
         ++inPacketCount
         LOG.debug("Received client state server timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
-                "stones count= ${clientData.stonesCount}, Packet number = $inPacketCount; ")
+                "stones count= ${clientData.throwActionsCount}, Packet number = $inPacketCount; ")
         updateModel(clientData)
     }
 
     private fun updateModel(clientData: ClientProto.ClientData) {
+        if (lastPackId < clientData.packId) {
+            lastPackId = clientData.packId
+            val currentTime = System.currentTimeMillis()
+            clientData.throwActionsList.forEach {
+                if (it.id > lastStoneId) {
+                    //                val clientStone = Stone(playerId = session.player.id as Int,
+                    //                                        startPoint = Vector2(it.startPoint.x, it.startPoint.y),
+                    //                                        velocity = Vector2(it.velocity.x, it.velocity.y))
+//                    val timeToReplay = (currentTime - it.timeDelta).toFloat()
+//                    if (timeToReplay < 0) {
+//                        throw IllegalStateException("Client time time cannot be later than server time")
+//                    }
+                    //                val simulatedStone = simulationRoom.simulate(
+                    //                        Vector2(it.startPoint.x, it.startPoint.y),
+                    //                        Vector2(it.velocity.x, it.velocity.y),
+                    //                        timeToReplay,
+                    //                        {
+                    ////                            p,v -> ServerStone(player = session.player,
+                    ////                                    id = it.id,
+                    ////                                    startPoint = p,
+                    ////                                    velocity = v,
+                    ////                                    world = model.physics.world)
+                    //                            p,v -> PhysicalStone(playerId = session.player.id as Int,
+                    //                                id = it.id,
+                    //                                startPoint = p,
+                    //                                velocity = v,
+                    //                                world = model.physics.world)
+                    //                        })
+                    val stone = PhysicalStone(playerId = session.player.id as Int,
+                            id = it.id,
+                            startPoint = Vector2(it.startPoint.x, it.startPoint.y),
+                            velocity = Vector2(it.velocity.x, it.velocity.y),
+                            world = model.physics.world)
+                    //                val simulatedStone = PhysicalStone(playerId = session.player.id as Int,
+                    //                                                    id = it.id,
+                    //                                                    startPoint = Vector2(it.startPoint.x, it.startPoint.y),
+                    //                                                velocity = Vector2(it.velocity.x, it.velocity.y),
+                    //                                                world = model.physics.world)
 
-        clientData.stonesList.forEach {
-            if (it.id > lastStoneId) {
-//                val clientStone = Stone(playerId = session.player.id as Int,
-//                                        startPoint = Vector2(it.startPoint.x, it.startPoint.y),
-//                                        velocity = Vector2(it.velocity.x, it.velocity.y))
-                val timeToReplay = (System.currentTimeMillis() - it.timeDelta).toFloat()
-                if (timeToReplay < 0) {
-                    throw IllegalStateException("Client time time cannot be later than server time")
+                    lastStoneId = it.id
+                    model.stones.add(stone)
                 }
-                val simulatedStone = simulationRoom.simulate(
-                        Vector2(it.startPoint.x, it.startPoint.y),
-                        Vector2(it.velocity.x, it.velocity.y),
-                        timeToReplay / 1000f,
-                        {
-                            p,v -> ServerStone(player = session.player,
-                                    id = it.id,
-                                    startPoint = p,
-                                    velocity = v,
-                                    world = model.physics.world)
-                        })
-
-                lastStoneId = it.id
-                model.stones.add(simulatedStone)
             }
         }
     }

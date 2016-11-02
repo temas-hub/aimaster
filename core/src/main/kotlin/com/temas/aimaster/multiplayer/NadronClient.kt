@@ -8,6 +8,7 @@ import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.model.Model
 import com.temas.aimaster.model.Stone
+import com.temas.aimaster.model.ThrownStone
 import io.nadron.client.app.PlayerSession
 import io.nadron.client.app.Session
 import io.nadron.client.app.impl.SessionFactory
@@ -30,17 +31,18 @@ import java.util.*
  */
 
 private var inPacketCount: Long = 0
-private var outPacketCount: Long = 0
+
 
 class NadronClient(val model: Model) {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(NadronClient::class.java)
         val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
+        private var outPacketCount: Long = 0
     }
 
-    var latestServerUpdateTime: Long = 0
-    var latestClientTime: Long = 0
+    @Volatile var latestServerUpdateTime: Long = 0
+    @Volatile var latestClientTime: Long = 0
     lateinit var session: Session
     var playerId: Int = -1
         get() {
@@ -99,6 +101,9 @@ class NadronClient(val model: Model) {
                     val newStone = Stone(s.id, s.playerId, startPoint = Vector2(s.position.x, s.position.y),
                             velocity = Vector2(s.velocity.x, s.velocity.y))
                     model.stones.add(newStone)
+                    if (s.playerId == playerId) {
+                        model.thrown.removeAll { it.id == s.id }
+                    }
                 } else {
 //                    stone.pos.set(s.position.x, s.position.y)
 //                    stone.velocity.set(s.velocity.x, s.velocity.y)
@@ -119,16 +124,15 @@ class NadronClient(val model: Model) {
 
     private fun sendUpdate() {
 
-        val clientData = ClientData.newBuilder().setTimeStamp(System.currentTimeMillis())
-        model.stones.filter { it.id > 0 }.forEach {
+        val clientData = ClientData.newBuilder().setTimeStamp(System.currentTimeMillis()).setPackId(++outPacketCount)
+        model.thrown.filter { it.id > 0 }.forEach {
             val stoneData = createThrownStoneData(it)
-            clientData.addStones(stoneData)
+            clientData.addThrowActions(stoneData)
         }
 
         val worldStateBuffer = NettyMessageBuffer()
         val buffer = worldStateBuffer.writeObject({ convertToBuffer(it) }, clientData.build())
         val event = Events.networkEvent(buffer, DeliveryGuarantyOptions.FAST)
-        ++outPacketCount
         session.onEvent(event)
     }
 
@@ -136,13 +140,21 @@ class NadronClient(val model: Model) {
         return Unpooled.wrappedBuffer((obj as MessageLite).toByteArray())
     }
 
-    private fun createThrownStoneData(s: Stone): ClientProto.Stone.Builder {
-        val serverUpdateAndThrowDiff = s.creationTime - latestClientTime
-        return ClientProto.Stone.newBuilder()
+//    private fun createThrownStoneData(s: Stone): ClientProto.Stone.Builder {
+//        val serverUpdateAndThrowDiff = Math.max(s.creationTime - latestClientTime, 0)
+//        return ClientProto.Stone.newBuilder()
+//                .setId(s.id)
+//                .setTimeDelta(latestServerUpdateTime + serverUpdateAndThrowDiff)
+//                .setStartPoint(Common.Vector2.newBuilder().setX(s.startPoint.x).setY(s.startPoint.y))
+//                .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))
+//
+//    }
+
+    private fun createThrownStoneData(s: ThrownStone): ClientProto.ThrownStone.Builder {
+        return ClientProto.ThrownStone.newBuilder()
                 .setId(s.id)
-                .setTimeDelta(latestServerUpdateTime + serverUpdateAndThrowDiff)
-                .setStartPoint(Common.Vector2.newBuilder().setX(s.startPoint.x).setY(s.startPoint.y))
-                .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))
+                .setStartPoint(Common.Vector2.newBuilder().setX(s.pos.x).setY(s.pos.y))
+                .setVelocity(Common.Vector2.newBuilder().setX(s.vel.x).setY(s.vel.y))
 
     }
 

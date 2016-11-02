@@ -2,7 +2,7 @@ package com.temas.aimaster.core
 
 import com.badlogic.gdx.physics.box2d.*
 import com.temas.aimaster.model.Intersections
-import com.temas.aimaster.model.Model
+import com.temas.aimaster.model.PhysicsWorld
 import com.temas.aimaster.model.Target
 
 /**

@@ -809,6 +809,748 @@ public final class ClientProto {
 
   }
 
+  public interface ThrownStoneOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.temas.aimaster.ThrownStone)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 id = 1;</code>
+     */
+    int getId();
+
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    boolean hasStartPoint();
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    com.temas.aimaster.Common.Vector2 getStartPoint();
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder();
+
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    boolean hasVelocity();
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    com.temas.aimaster.Common.Vector2 getVelocity();
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.temas.aimaster.ThrownStone}
+   */
+  public  static final class ThrownStone extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.temas.aimaster.ThrownStone)
+      ThrownStoneOrBuilder {
+    // Use ThrownStone.newBuilder() to construct.
+    private ThrownStone(com.google.protobuf.GeneratedMessage.Builder builder) {
+      super(builder);
+    }
+    private ThrownStone() {
+      id_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ThrownStone(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              id_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
+              if (startPoint_ != null) {
+                subBuilder = startPoint_.toBuilder();
+              }
+              startPoint_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(startPoint_);
+                startPoint_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
+              com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
+              if (velocity_ != null) {
+                subBuilder = velocity_.toBuilder();
+              }
+              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(velocity_);
+                velocity_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.temas.aimaster.ClientProto.ThrownStone.class, com.temas.aimaster.ClientProto.ThrownStone.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
+    /**
+     * <code>optional int32 id = 1;</code>
+     */
+    public int getId() {
+      return id_;
+    }
+
+    public static final int STARTPOINT_FIELD_NUMBER = 2;
+    private com.temas.aimaster.Common.Vector2 startPoint_;
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    public boolean hasStartPoint() {
+      return startPoint_ != null;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    public com.temas.aimaster.Common.Vector2 getStartPoint() {
+      return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     */
+    public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
+      return getStartPoint();
+    }
+
+    public static final int VELOCITY_FIELD_NUMBER = 3;
+    private com.temas.aimaster.Common.Vector2 velocity_;
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    public boolean hasVelocity() {
+      return velocity_ != null;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    public com.temas.aimaster.Common.Vector2 getVelocity() {
+      return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     */
+    public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
+      return getVelocity();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0) {
+        output.writeInt32(1, id_);
+      }
+      if (startPoint_ != null) {
+        output.writeMessage(2, getStartPoint());
+      }
+      if (velocity_ != null) {
+        output.writeMessage(3, getVelocity());
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, id_);
+      }
+      if (startPoint_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getStartPoint());
+      }
+      if (velocity_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getVelocity());
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.temas.aimaster.ClientProto.ThrownStone prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.temas.aimaster.ThrownStone}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.temas.aimaster.ThrownStone)
+        com.temas.aimaster.ClientProto.ThrownStoneOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.temas.aimaster.ClientProto.ThrownStone.class, com.temas.aimaster.ClientProto.ThrownStone.Builder.class);
+      }
+
+      // Construct using com.temas.aimaster.ClientProto.ThrownStone.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        id_ = 0;
+
+        if (startPointBuilder_ == null) {
+          startPoint_ = null;
+        } else {
+          startPoint_ = null;
+          startPointBuilder_ = null;
+        }
+        if (velocityBuilder_ == null) {
+          velocity_ = null;
+        } else {
+          velocity_ = null;
+          velocityBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_descriptor;
+      }
+
+      public com.temas.aimaster.ClientProto.ThrownStone getDefaultInstanceForType() {
+        return com.temas.aimaster.ClientProto.ThrownStone.getDefaultInstance();
+      }
+
+      public com.temas.aimaster.ClientProto.ThrownStone build() {
+        com.temas.aimaster.ClientProto.ThrownStone result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.temas.aimaster.ClientProto.ThrownStone buildPartial() {
+        com.temas.aimaster.ClientProto.ThrownStone result = new com.temas.aimaster.ClientProto.ThrownStone(this);
+        result.id_ = id_;
+        if (startPointBuilder_ == null) {
+          result.startPoint_ = startPoint_;
+        } else {
+          result.startPoint_ = startPointBuilder_.build();
+        }
+        if (velocityBuilder_ == null) {
+          result.velocity_ = velocity_;
+        } else {
+          result.velocity_ = velocityBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.temas.aimaster.ClientProto.ThrownStone) {
+          return mergeFrom((com.temas.aimaster.ClientProto.ThrownStone)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.temas.aimaster.ClientProto.ThrownStone other) {
+        if (other == com.temas.aimaster.ClientProto.ThrownStone.getDefaultInstance()) return this;
+        if (other.getId() != 0) {
+          setId(other.getId());
+        }
+        if (other.hasStartPoint()) {
+          mergeStartPoint(other.getStartPoint());
+        }
+        if (other.hasVelocity()) {
+          mergeVelocity(other.getVelocity());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.temas.aimaster.ClientProto.ThrownStone parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.temas.aimaster.ClientProto.ThrownStone) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int id_ ;
+      /**
+       * <code>optional int32 id = 1;</code>
+       */
+      public int getId() {
+        return id_;
+      }
+      /**
+       * <code>optional int32 id = 1;</code>
+       */
+      public Builder setId(int value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 id = 1;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.temas.aimaster.Common.Vector2 startPoint_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> startPointBuilder_;
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public boolean hasStartPoint() {
+        return startPointBuilder_ != null || startPoint_ != null;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public com.temas.aimaster.Common.Vector2 getStartPoint() {
+        if (startPointBuilder_ == null) {
+          return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+        } else {
+          return startPointBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public Builder setStartPoint(com.temas.aimaster.Common.Vector2 value) {
+        if (startPointBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          startPoint_ = value;
+          onChanged();
+        } else {
+          startPointBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public Builder setStartPoint(
+          com.temas.aimaster.Common.Vector2.Builder builderForValue) {
+        if (startPointBuilder_ == null) {
+          startPoint_ = builderForValue.build();
+          onChanged();
+        } else {
+          startPointBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public Builder mergeStartPoint(com.temas.aimaster.Common.Vector2 value) {
+        if (startPointBuilder_ == null) {
+          if (startPoint_ != null) {
+            startPoint_ =
+              com.temas.aimaster.Common.Vector2.newBuilder(startPoint_).mergeFrom(value).buildPartial();
+          } else {
+            startPoint_ = value;
+          }
+          onChanged();
+        } else {
+          startPointBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public Builder clearStartPoint() {
+        if (startPointBuilder_ == null) {
+          startPoint_ = null;
+          onChanged();
+        } else {
+          startPoint_ = null;
+          startPointBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public com.temas.aimaster.Common.Vector2.Builder getStartPointBuilder() {
+        
+        onChanged();
+        return getStartPointFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
+        if (startPointBuilder_ != null) {
+          return startPointBuilder_.getMessageOrBuilder();
+        } else {
+          return startPoint_ == null ?
+              com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
+        }
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
+          getStartPointFieldBuilder() {
+        if (startPointBuilder_ == null) {
+          startPointBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
+                  getStartPoint(),
+                  getParentForChildren(),
+                  isClean());
+          startPoint_ = null;
+        }
+        return startPointBuilder_;
+      }
+
+      private com.temas.aimaster.Common.Vector2 velocity_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public boolean hasVelocity() {
+        return velocityBuilder_ != null || velocity_ != null;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public com.temas.aimaster.Common.Vector2 getVelocity() {
+        if (velocityBuilder_ == null) {
+          return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
+        } else {
+          return velocityBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
+        if (velocityBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          velocity_ = value;
+          onChanged();
+        } else {
+          velocityBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public Builder setVelocity(
+          com.temas.aimaster.Common.Vector2.Builder builderForValue) {
+        if (velocityBuilder_ == null) {
+          velocity_ = builderForValue.build();
+          onChanged();
+        } else {
+          velocityBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
+        if (velocityBuilder_ == null) {
+          if (velocity_ != null) {
+            velocity_ =
+              com.temas.aimaster.Common.Vector2.newBuilder(velocity_).mergeFrom(value).buildPartial();
+          } else {
+            velocity_ = value;
+          }
+          onChanged();
+        } else {
+          velocityBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public Builder clearVelocity() {
+        if (velocityBuilder_ == null) {
+          velocity_ = null;
+          onChanged();
+        } else {
+          velocity_ = null;
+          velocityBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
+        
+        onChanged();
+        return getVelocityFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
+        if (velocityBuilder_ != null) {
+          return velocityBuilder_.getMessageOrBuilder();
+        } else {
+          return velocity_ == null ?
+              com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
+        }
+      }
+      /**
+       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
+          getVelocityFieldBuilder() {
+        if (velocityBuilder_ == null) {
+          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
+                  getVelocity(),
+                  getParentForChildren(),
+                  isClean());
+          velocity_ = null;
+        }
+        return velocityBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.temas.aimaster.ThrownStone)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.temas.aimaster.ThrownStone)
+    private static final com.temas.aimaster.ClientProto.ThrownStone DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.temas.aimaster.ClientProto.ThrownStone();
+    }
+
+    public static com.temas.aimaster.ClientProto.ThrownStone getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static final com.google.protobuf.Parser<ThrownStone> PARSER =
+        new com.google.protobuf.AbstractParser<ThrownStone>() {
+      public ThrownStone parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new ThrownStone(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThrownStone> getParserForType() {
+      return PARSER;
+    }
+
+    public com.temas.aimaster.ClientProto.ThrownStone getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ClientDataOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.temas.aimaster.ClientData)
       com.google.protobuf.MessageOrBuilder {
@@ -819,27 +1561,32 @@ public final class ClientProto {
     long getTimeStamp();
 
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>optional int64 packId = 2;</code>
      */
-    java.util.List<com.temas.aimaster.ClientProto.Stone> 
-        getStonesList();
+    long getPackId();
+
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    com.temas.aimaster.ClientProto.Stone getStones(int index);
+    java.util.List<com.temas.aimaster.ClientProto.ThrownStone> 
+        getThrowActionsList();
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    int getStonesCount();
+    com.temas.aimaster.ClientProto.ThrownStone getThrowActions(int index);
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    java.util.List<? extends com.temas.aimaster.ClientProto.StoneOrBuilder> 
-        getStonesOrBuilderList();
+    int getThrowActionsCount();
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    com.temas.aimaster.ClientProto.StoneOrBuilder getStonesOrBuilder(
+    java.util.List<? extends com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> 
+        getThrowActionsOrBuilderList();
+    /**
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
+     */
+    com.temas.aimaster.ClientProto.ThrownStoneOrBuilder getThrowActionsOrBuilder(
         int index);
   }
   /**
@@ -855,7 +1602,8 @@ public final class ClientProto {
     }
     private ClientData() {
       timeStamp_ = 0L;
-      stones_ = java.util.Collections.emptyList();
+      packId_ = 0L;
+      throwActions_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -887,12 +1635,17 @@ public final class ClientProto {
               timeStamp_ = input.readInt64();
               break;
             }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                stones_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.Stone>();
-                mutable_bitField0_ |= 0x00000002;
+            case 16: {
+
+              packId_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                throwActions_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.ThrownStone>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              stones_.add(input.readMessage(com.temas.aimaster.ClientProto.Stone.PARSER, extensionRegistry));
+              throwActions_.add(input.readMessage(com.temas.aimaster.ClientProto.ThrownStone.PARSER, extensionRegistry));
               break;
             }
           }
@@ -904,8 +1657,8 @@ public final class ClientProto {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          stones_ = java.util.Collections.unmodifiableList(stones_);
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          throwActions_ = java.util.Collections.unmodifiableList(throwActions_);
         }
         makeExtensionsImmutable();
       }
@@ -932,39 +1685,48 @@ public final class ClientProto {
       return timeStamp_;
     }
 
-    public static final int STONES_FIELD_NUMBER = 2;
-    private java.util.List<com.temas.aimaster.ClientProto.Stone> stones_;
+    public static final int PACKID_FIELD_NUMBER = 2;
+    private long packId_;
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>optional int64 packId = 2;</code>
      */
-    public java.util.List<com.temas.aimaster.ClientProto.Stone> getStonesList() {
-      return stones_;
+    public long getPackId() {
+      return packId_;
+    }
+
+    public static final int THROWACTIONS_FIELD_NUMBER = 3;
+    private java.util.List<com.temas.aimaster.ClientProto.ThrownStone> throwActions_;
+    /**
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
+     */
+    public java.util.List<com.temas.aimaster.ClientProto.ThrownStone> getThrowActionsList() {
+      return throwActions_;
     }
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    public java.util.List<? extends com.temas.aimaster.ClientProto.StoneOrBuilder> 
-        getStonesOrBuilderList() {
-      return stones_;
+    public java.util.List<? extends com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> 
+        getThrowActionsOrBuilderList() {
+      return throwActions_;
     }
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    public int getStonesCount() {
-      return stones_.size();
+    public int getThrowActionsCount() {
+      return throwActions_.size();
     }
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    public com.temas.aimaster.ClientProto.Stone getStones(int index) {
-      return stones_.get(index);
+    public com.temas.aimaster.ClientProto.ThrownStone getThrowActions(int index) {
+      return throwActions_.get(index);
     }
     /**
-     * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+     * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
      */
-    public com.temas.aimaster.ClientProto.StoneOrBuilder getStonesOrBuilder(
+    public com.temas.aimaster.ClientProto.ThrownStoneOrBuilder getThrowActionsOrBuilder(
         int index) {
-      return stones_.get(index);
+      return throwActions_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -982,8 +1744,11 @@ public final class ClientProto {
       if (timeStamp_ != 0L) {
         output.writeInt64(1, timeStamp_);
       }
-      for (int i = 0; i < stones_.size(); i++) {
-        output.writeMessage(2, stones_.get(i));
+      if (packId_ != 0L) {
+        output.writeInt64(2, packId_);
+      }
+      for (int i = 0; i < throwActions_.size(); i++) {
+        output.writeMessage(3, throwActions_.get(i));
       }
     }
 
@@ -997,9 +1762,13 @@ public final class ClientProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, timeStamp_);
       }
-      for (int i = 0; i < stones_.size(); i++) {
+      if (packId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, stones_.get(i));
+          .computeInt64Size(2, packId_);
+      }
+      for (int i = 0; i < throwActions_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, throwActions_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
@@ -1108,18 +1877,20 @@ public final class ClientProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getStonesFieldBuilder();
+          getThrowActionsFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
         timeStamp_ = 0L;
 
-        if (stonesBuilder_ == null) {
-          stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        packId_ = 0L;
+
+        if (throwActionsBuilder_ == null) {
+          throwActions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
-          stonesBuilder_.clear();
+          throwActionsBuilder_.clear();
         }
         return this;
       }
@@ -1146,14 +1917,15 @@ public final class ClientProto {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.timeStamp_ = timeStamp_;
-        if (stonesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            stones_ = java.util.Collections.unmodifiableList(stones_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+        result.packId_ = packId_;
+        if (throwActionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            throwActions_ = java.util.Collections.unmodifiableList(throwActions_);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
-          result.stones_ = stones_;
+          result.throwActions_ = throwActions_;
         } else {
-          result.stones_ = stonesBuilder_.build();
+          result.throwActions_ = throwActionsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1174,29 +1946,32 @@ public final class ClientProto {
         if (other.getTimeStamp() != 0L) {
           setTimeStamp(other.getTimeStamp());
         }
-        if (stonesBuilder_ == null) {
-          if (!other.stones_.isEmpty()) {
-            if (stones_.isEmpty()) {
-              stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+        if (other.getPackId() != 0L) {
+          setPackId(other.getPackId());
+        }
+        if (throwActionsBuilder_ == null) {
+          if (!other.throwActions_.isEmpty()) {
+            if (throwActions_.isEmpty()) {
+              throwActions_ = other.throwActions_;
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureStonesIsMutable();
-              stones_.addAll(other.stones_);
+              ensureThrowActionsIsMutable();
+              throwActions_.addAll(other.throwActions_);
             }
             onChanged();
           }
         } else {
-          if (!other.stones_.isEmpty()) {
-            if (stonesBuilder_.isEmpty()) {
-              stonesBuilder_.dispose();
-              stonesBuilder_ = null;
-              stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              stonesBuilder_ = 
+          if (!other.throwActions_.isEmpty()) {
+            if (throwActionsBuilder_.isEmpty()) {
+              throwActionsBuilder_.dispose();
+              throwActionsBuilder_ = null;
+              throwActions_ = other.throwActions_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              throwActionsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getStonesFieldBuilder() : null;
+                   getThrowActionsFieldBuilder() : null;
             } else {
-              stonesBuilder_.addAllMessages(other.stones_);
+              throwActionsBuilder_.addAllMessages(other.throwActions_);
             }
           }
         }
@@ -1253,244 +2028,270 @@ public final class ClientProto {
         return this;
       }
 
-      private java.util.List<com.temas.aimaster.ClientProto.Stone> stones_ =
+      private long packId_ ;
+      /**
+       * <code>optional int64 packId = 2;</code>
+       */
+      public long getPackId() {
+        return packId_;
+      }
+      /**
+       * <code>optional int64 packId = 2;</code>
+       */
+      public Builder setPackId(long value) {
+        
+        packId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 packId = 2;</code>
+       */
+      public Builder clearPackId() {
+        
+        packId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.temas.aimaster.ClientProto.ThrownStone> throwActions_ =
         java.util.Collections.emptyList();
-      private void ensureStonesIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          stones_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.Stone>(stones_);
-          bitField0_ |= 0x00000002;
+      private void ensureThrowActionsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          throwActions_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.ThrownStone>(throwActions_);
+          bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.temas.aimaster.ClientProto.Stone, com.temas.aimaster.ClientProto.Stone.Builder, com.temas.aimaster.ClientProto.StoneOrBuilder> stonesBuilder_;
+          com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> throwActionsBuilder_;
 
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public java.util.List<com.temas.aimaster.ClientProto.Stone> getStonesList() {
-        if (stonesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(stones_);
+      public java.util.List<com.temas.aimaster.ClientProto.ThrownStone> getThrowActionsList() {
+        if (throwActionsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(throwActions_);
         } else {
-          return stonesBuilder_.getMessageList();
+          return throwActionsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public int getStonesCount() {
-        if (stonesBuilder_ == null) {
-          return stones_.size();
+      public int getThrowActionsCount() {
+        if (throwActionsBuilder_ == null) {
+          return throwActions_.size();
         } else {
-          return stonesBuilder_.getCount();
+          return throwActionsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public com.temas.aimaster.ClientProto.Stone getStones(int index) {
-        if (stonesBuilder_ == null) {
-          return stones_.get(index);
+      public com.temas.aimaster.ClientProto.ThrownStone getThrowActions(int index) {
+        if (throwActionsBuilder_ == null) {
+          return throwActions_.get(index);
         } else {
-          return stonesBuilder_.getMessage(index);
+          return throwActionsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder setStones(
-          int index, com.temas.aimaster.ClientProto.Stone value) {
-        if (stonesBuilder_ == null) {
+      public Builder setThrowActions(
+          int index, com.temas.aimaster.ClientProto.ThrownStone value) {
+        if (throwActionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStonesIsMutable();
-          stones_.set(index, value);
+          ensureThrowActionsIsMutable();
+          throwActions_.set(index, value);
           onChanged();
         } else {
-          stonesBuilder_.setMessage(index, value);
+          throwActionsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder setStones(
-          int index, com.temas.aimaster.ClientProto.Stone.Builder builderForValue) {
-        if (stonesBuilder_ == null) {
-          ensureStonesIsMutable();
-          stones_.set(index, builderForValue.build());
+      public Builder setThrowActions(
+          int index, com.temas.aimaster.ClientProto.ThrownStone.Builder builderForValue) {
+        if (throwActionsBuilder_ == null) {
+          ensureThrowActionsIsMutable();
+          throwActions_.set(index, builderForValue.build());
           onChanged();
         } else {
-          stonesBuilder_.setMessage(index, builderForValue.build());
+          throwActionsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder addStones(com.temas.aimaster.ClientProto.Stone value) {
-        if (stonesBuilder_ == null) {
+      public Builder addThrowActions(com.temas.aimaster.ClientProto.ThrownStone value) {
+        if (throwActionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStonesIsMutable();
-          stones_.add(value);
+          ensureThrowActionsIsMutable();
+          throwActions_.add(value);
           onChanged();
         } else {
-          stonesBuilder_.addMessage(value);
+          throwActionsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder addStones(
-          int index, com.temas.aimaster.ClientProto.Stone value) {
-        if (stonesBuilder_ == null) {
+      public Builder addThrowActions(
+          int index, com.temas.aimaster.ClientProto.ThrownStone value) {
+        if (throwActionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStonesIsMutable();
-          stones_.add(index, value);
+          ensureThrowActionsIsMutable();
+          throwActions_.add(index, value);
           onChanged();
         } else {
-          stonesBuilder_.addMessage(index, value);
+          throwActionsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder addStones(
-          com.temas.aimaster.ClientProto.Stone.Builder builderForValue) {
-        if (stonesBuilder_ == null) {
-          ensureStonesIsMutable();
-          stones_.add(builderForValue.build());
+      public Builder addThrowActions(
+          com.temas.aimaster.ClientProto.ThrownStone.Builder builderForValue) {
+        if (throwActionsBuilder_ == null) {
+          ensureThrowActionsIsMutable();
+          throwActions_.add(builderForValue.build());
           onChanged();
         } else {
-          stonesBuilder_.addMessage(builderForValue.build());
+          throwActionsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder addStones(
-          int index, com.temas.aimaster.ClientProto.Stone.Builder builderForValue) {
-        if (stonesBuilder_ == null) {
-          ensureStonesIsMutable();
-          stones_.add(index, builderForValue.build());
+      public Builder addThrowActions(
+          int index, com.temas.aimaster.ClientProto.ThrownStone.Builder builderForValue) {
+        if (throwActionsBuilder_ == null) {
+          ensureThrowActionsIsMutable();
+          throwActions_.add(index, builderForValue.build());
           onChanged();
         } else {
-          stonesBuilder_.addMessage(index, builderForValue.build());
+          throwActionsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder addAllStones(
-          java.lang.Iterable<? extends com.temas.aimaster.ClientProto.Stone> values) {
-        if (stonesBuilder_ == null) {
-          ensureStonesIsMutable();
+      public Builder addAllThrowActions(
+          java.lang.Iterable<? extends com.temas.aimaster.ClientProto.ThrownStone> values) {
+        if (throwActionsBuilder_ == null) {
+          ensureThrowActionsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, stones_);
+              values, throwActions_);
           onChanged();
         } else {
-          stonesBuilder_.addAllMessages(values);
+          throwActionsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder clearStones() {
-        if (stonesBuilder_ == null) {
-          stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearThrowActions() {
+        if (throwActionsBuilder_ == null) {
+          throwActions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
-          stonesBuilder_.clear();
+          throwActionsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public Builder removeStones(int index) {
-        if (stonesBuilder_ == null) {
-          ensureStonesIsMutable();
-          stones_.remove(index);
+      public Builder removeThrowActions(int index) {
+        if (throwActionsBuilder_ == null) {
+          ensureThrowActionsIsMutable();
+          throwActions_.remove(index);
           onChanged();
         } else {
-          stonesBuilder_.remove(index);
+          throwActionsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public com.temas.aimaster.ClientProto.Stone.Builder getStonesBuilder(
+      public com.temas.aimaster.ClientProto.ThrownStone.Builder getThrowActionsBuilder(
           int index) {
-        return getStonesFieldBuilder().getBuilder(index);
+        return getThrowActionsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public com.temas.aimaster.ClientProto.StoneOrBuilder getStonesOrBuilder(
+      public com.temas.aimaster.ClientProto.ThrownStoneOrBuilder getThrowActionsOrBuilder(
           int index) {
-        if (stonesBuilder_ == null) {
-          return stones_.get(index);  } else {
-          return stonesBuilder_.getMessageOrBuilder(index);
+        if (throwActionsBuilder_ == null) {
+          return throwActions_.get(index);  } else {
+          return throwActionsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public java.util.List<? extends com.temas.aimaster.ClientProto.StoneOrBuilder> 
-           getStonesOrBuilderList() {
-        if (stonesBuilder_ != null) {
-          return stonesBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> 
+           getThrowActionsOrBuilderList() {
+        if (throwActionsBuilder_ != null) {
+          return throwActionsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(stones_);
+          return java.util.Collections.unmodifiableList(throwActions_);
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public com.temas.aimaster.ClientProto.Stone.Builder addStonesBuilder() {
-        return getStonesFieldBuilder().addBuilder(
-            com.temas.aimaster.ClientProto.Stone.getDefaultInstance());
+      public com.temas.aimaster.ClientProto.ThrownStone.Builder addThrowActionsBuilder() {
+        return getThrowActionsFieldBuilder().addBuilder(
+            com.temas.aimaster.ClientProto.ThrownStone.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public com.temas.aimaster.ClientProto.Stone.Builder addStonesBuilder(
+      public com.temas.aimaster.ClientProto.ThrownStone.Builder addThrowActionsBuilder(
           int index) {
-        return getStonesFieldBuilder().addBuilder(
-            index, com.temas.aimaster.ClientProto.Stone.getDefaultInstance());
+        return getThrowActionsFieldBuilder().addBuilder(
+            index, com.temas.aimaster.ClientProto.ThrownStone.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.temas.aimaster.Stone stones = 2;</code>
+       * <code>repeated .com.temas.aimaster.ThrownStone throwActions = 3;</code>
        */
-      public java.util.List<com.temas.aimaster.ClientProto.Stone.Builder> 
-           getStonesBuilderList() {
-        return getStonesFieldBuilder().getBuilderList();
+      public java.util.List<com.temas.aimaster.ClientProto.ThrownStone.Builder> 
+           getThrowActionsBuilderList() {
+        return getThrowActionsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.temas.aimaster.ClientProto.Stone, com.temas.aimaster.ClientProto.Stone.Builder, com.temas.aimaster.ClientProto.StoneOrBuilder> 
-          getStonesFieldBuilder() {
-        if (stonesBuilder_ == null) {
-          stonesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.temas.aimaster.ClientProto.Stone, com.temas.aimaster.ClientProto.Stone.Builder, com.temas.aimaster.ClientProto.StoneOrBuilder>(
-                  stones_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+          com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> 
+          getThrowActionsFieldBuilder() {
+        if (throwActionsBuilder_ == null) {
+          throwActionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder>(
+                  throwActions_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
-          stones_ = null;
+          throwActions_ = null;
         }
-        return stonesBuilder_;
+        return throwActionsBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1552,6 +2353,11 @@ public final class ClientProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_temas_aimaster_Stone_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_temas_aimaster_ThrownStone_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ClientData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -1569,9 +2375,13 @@ public final class ClientProto {
       "\014common.proto\"\206\001\n\005Stone\022\n\n\002id\030\001 \001(\005\022\021\n\tt" +
       "imeDelta\030\002 \001(\003\022/\n\nstartPoint\030\003 \001(\0132\033.com" +
       ".temas.aimaster.Vector2\022-\n\010velocity\030\004 \001(" +
-      "\0132\033.com.temas.aimaster.Vector2\"J\n\nClient" +
-      "Data\022\021\n\ttimeStamp\030\001 \001(\003\022)\n\006stones\030\002 \003(\0132" +
-      "\031.com.temas.aimaster.StoneP\000b\006proto3"
+      "\0132\033.com.temas.aimaster.Vector2\"y\n\013Thrown" +
+      "Stone\022\n\n\002id\030\001 \001(\005\022/\n\nstartPoint\030\002 \001(\0132\033." +
+      "com.temas.aimaster.Vector2\022-\n\010velocity\030\003" +
+      " \001(\0132\033.com.temas.aimaster.Vector2\"f\n\nCli" +
+      "entData\022\021\n\ttimeStamp\030\001 \001(\003\022\016\n\006packId\030\002 \001" +
+      "(\003\0225\n\014throwActions\030\003 \003(\0132\037.com.temas.aim",
+      "aster.ThrownStoneP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1592,12 +2402,18 @@ public final class ClientProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_Stone_descriptor,
         new java.lang.String[] { "Id", "TimeDelta", "StartPoint", "Velocity", });
-    internal_static_com_temas_aimaster_ClientData_descriptor =
+    internal_static_com_temas_aimaster_ThrownStone_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_temas_aimaster_ThrownStone_descriptor,
+        new java.lang.String[] { "Id", "StartPoint", "Velocity", });
+    internal_static_com_temas_aimaster_ClientData_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_com_temas_aimaster_ClientData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ClientData_descriptor,
-        new java.lang.String[] { "TimeStamp", "Stones", });
+        new java.lang.String[] { "TimeStamp", "PackId", "ThrowActions", });
     com.temas.aimaster.Common.getDescriptor();
   }
 

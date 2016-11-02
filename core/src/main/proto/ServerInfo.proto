@@ -19,7 +19,8 @@ message StoneInfo {
 
 message ModelType {
     int64 timestamp = 1;
-    TargetInfo targetInfo = 2;
-    repeated StoneInfo stones = 3;
+    int64 lastPackId = 2;
+    TargetInfo targetInfo = 3;
+    repeated StoneInfo stones = 4;
 }
 

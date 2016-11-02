@@ -4,6 +4,7 @@ import com.google.protobuf.MessageLite
 import com.google.protobuf.MessageLiteOrBuilder
 import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
+import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
 import com.temas.aimaster.core.ServerStone
 import com.temas.aimaster.model.PhysicsWorld
@@ -41,15 +42,16 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
     }
 
-    val players = mutableListOf<PlayerSession>()
+    val players = hashMapOf<Int, SessionEventHandler>()
 
     override fun onLogin(playerSession: PlayerSession) {
         LOG.debug("Player with name: '${playerSession.player.name}' was logged in")
-        playerSession.addHandler(SessionEventHandler(model, playerSession))
-        if (players.isEmpty()) {
+        val sessionHandler = SessionEventHandler(model, playerSession)
+        playerSession.addHandler(sessionHandler)
+        players.put(playerSession.player.id as Int, sessionHandler)
+        if (players.size == 1) {
             startGameSession()
         }
-        players.add(playerSession)
     }
 
     private fun startGameSession() {
@@ -62,8 +64,9 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
             model.update(UPDATE_DELAY.toFloat() / 1000f)
             val serverUpdateData = buildUpdateData()
             getSessions().forEach {
+                serverUpdateData.lastPackId = players[it.player.id]!!.lastPackId
                 val worldStateBuffer = NettyMessageBuffer()
-                val buffer = worldStateBuffer.writeObject({ convertToBuffer(it) }, serverUpdateData)
+                val buffer = worldStateBuffer.writeObject({ convertToBuffer(it) }, serverUpdateData.build())
                 val event = Events.networkEvent(buffer, DeliveryGuarantyOptions.FAST)
                 ++outPacketCount
                 it.onEvent(event)
@@ -81,7 +84,7 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         return Unpooled.wrappedBuffer((obj as MessageLite).toByteArray())
     }
 
-    private fun buildUpdateData(): ServerInfo.ModelType {
+    private fun buildUpdateData(): ServerInfo.ModelType.Builder {
         val builder =  ServerInfo.ModelType.newBuilder().
                 setTimestamp(System.currentTimeMillis()).
                 setTargetInfo(ServerInfo.TargetInfo.newBuilder().
@@ -95,12 +98,12 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         model.stones.forEach {
             builder.addStones(createStoneData(it))
         }
-        return builder.build()
+        return builder
     }
 
-    private fun createStoneData(s: ServerStone): ServerInfo.StoneInfo.Builder {
+    private fun createStoneData(s: PhysicalStone): ServerInfo.StoneInfo.Builder {
         return ServerInfo.StoneInfo.newBuilder()
-                .setPlayerId(s.player.id as Int)
+                .setPlayerId(s.playerId)
                 .setId(s.id)
                 .setPosition(Common.Vector2.newBuilder().setX(s.pos.x).setY(s.pos.y))
                 .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))

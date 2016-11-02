@@ -1620,38 +1620,43 @@ public final class ServerInfo {
     long getTimestamp();
 
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional int64 lastPackId = 2;</code>
+     */
+    long getLastPackId();
+
+    /**
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     boolean hasTargetInfo();
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo();
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder();
 
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     java.util.List<com.temas.aimaster.ServerInfo.StoneInfo> 
         getStonesList();
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     com.temas.aimaster.ServerInfo.StoneInfo getStones(int index);
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     int getStonesCount();
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     java.util.List<? extends com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> 
         getStonesOrBuilderList();
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     com.temas.aimaster.ServerInfo.StoneInfoOrBuilder getStonesOrBuilder(
         int index);
@@ -1669,6 +1674,7 @@ public final class ServerInfo {
     }
     private ModelType() {
       timestamp_ = 0L;
+      lastPackId_ = 0L;
       stones_ = java.util.Collections.emptyList();
     }
 
@@ -1701,7 +1707,12 @@ public final class ServerInfo {
               timestamp_ = input.readInt64();
               break;
             }
-            case 18: {
+            case 16: {
+
+              lastPackId_ = input.readInt64();
+              break;
+            }
+            case 26: {
               com.temas.aimaster.ServerInfo.TargetInfo.Builder subBuilder = null;
               if (targetInfo_ != null) {
                 subBuilder = targetInfo_.toBuilder();
@@ -1714,10 +1725,10 @@ public final class ServerInfo {
 
               break;
             }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 stones_ = new java.util.ArrayList<com.temas.aimaster.ServerInfo.StoneInfo>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000008;
               }
               stones_.add(input.readMessage(com.temas.aimaster.ServerInfo.StoneInfo.PARSER, extensionRegistry));
               break;
@@ -1731,7 +1742,7 @@ public final class ServerInfo {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           stones_ = java.util.Collections.unmodifiableList(stones_);
         }
         makeExtensionsImmutable();
@@ -1759,56 +1770,65 @@ public final class ServerInfo {
       return timestamp_;
     }
 
-    public static final int TARGETINFO_FIELD_NUMBER = 2;
+    public static final int LASTPACKID_FIELD_NUMBER = 2;
+    private long lastPackId_;
+    /**
+     * <code>optional int64 lastPackId = 2;</code>
+     */
+    public long getLastPackId() {
+      return lastPackId_;
+    }
+
+    public static final int TARGETINFO_FIELD_NUMBER = 3;
     private com.temas.aimaster.ServerInfo.TargetInfo targetInfo_;
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public boolean hasTargetInfo() {
       return targetInfo_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo() {
       return targetInfo_ == null ? com.temas.aimaster.ServerInfo.TargetInfo.getDefaultInstance() : targetInfo_;
     }
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder() {
       return getTargetInfo();
     }
 
-    public static final int STONES_FIELD_NUMBER = 3;
+    public static final int STONES_FIELD_NUMBER = 4;
     private java.util.List<com.temas.aimaster.ServerInfo.StoneInfo> stones_;
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     public java.util.List<com.temas.aimaster.ServerInfo.StoneInfo> getStonesList() {
       return stones_;
     }
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     public java.util.List<? extends com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> 
         getStonesOrBuilderList() {
       return stones_;
     }
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     public int getStonesCount() {
       return stones_.size();
     }
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     public com.temas.aimaster.ServerInfo.StoneInfo getStones(int index) {
       return stones_.get(index);
     }
     /**
-     * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+     * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
      */
     public com.temas.aimaster.ServerInfo.StoneInfoOrBuilder getStonesOrBuilder(
         int index) {
@@ -1830,11 +1850,14 @@ public final class ServerInfo {
       if (timestamp_ != 0L) {
         output.writeInt64(1, timestamp_);
       }
+      if (lastPackId_ != 0L) {
+        output.writeInt64(2, lastPackId_);
+      }
       if (targetInfo_ != null) {
-        output.writeMessage(2, getTargetInfo());
+        output.writeMessage(3, getTargetInfo());
       }
       for (int i = 0; i < stones_.size(); i++) {
-        output.writeMessage(3, stones_.get(i));
+        output.writeMessage(4, stones_.get(i));
       }
     }
 
@@ -1848,13 +1871,17 @@ public final class ServerInfo {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, timestamp_);
       }
+      if (lastPackId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, lastPackId_);
+      }
       if (targetInfo_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getTargetInfo());
+          .computeMessageSize(3, getTargetInfo());
       }
       for (int i = 0; i < stones_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, stones_.get(i));
+          .computeMessageSize(4, stones_.get(i));
       }
       memoizedSerializedSize = size;
       return size;
@@ -1970,6 +1997,8 @@ public final class ServerInfo {
         super.clear();
         timestamp_ = 0L;
 
+        lastPackId_ = 0L;
+
         if (targetInfoBuilder_ == null) {
           targetInfo_ = null;
         } else {
@@ -1978,7 +2007,7 @@ public final class ServerInfo {
         }
         if (stonesBuilder_ == null) {
           stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           stonesBuilder_.clear();
         }
@@ -2007,15 +2036,16 @@ public final class ServerInfo {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.timestamp_ = timestamp_;
+        result.lastPackId_ = lastPackId_;
         if (targetInfoBuilder_ == null) {
           result.targetInfo_ = targetInfo_;
         } else {
           result.targetInfo_ = targetInfoBuilder_.build();
         }
         if (stonesBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             stones_ = java.util.Collections.unmodifiableList(stones_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.stones_ = stones_;
         } else {
@@ -2040,6 +2070,9 @@ public final class ServerInfo {
         if (other.getTimestamp() != 0L) {
           setTimestamp(other.getTimestamp());
         }
+        if (other.getLastPackId() != 0L) {
+          setLastPackId(other.getLastPackId());
+        }
         if (other.hasTargetInfo()) {
           mergeTargetInfo(other.getTargetInfo());
         }
@@ -2047,7 +2080,7 @@ public final class ServerInfo {
           if (!other.stones_.isEmpty()) {
             if (stones_.isEmpty()) {
               stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureStonesIsMutable();
               stones_.addAll(other.stones_);
@@ -2060,7 +2093,7 @@ public final class ServerInfo {
               stonesBuilder_.dispose();
               stonesBuilder_ = null;
               stones_ = other.stones_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
               stonesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getStonesFieldBuilder() : null;
@@ -2122,17 +2155,43 @@ public final class ServerInfo {
         return this;
       }
 
+      private long lastPackId_ ;
+      /**
+       * <code>optional int64 lastPackId = 2;</code>
+       */
+      public long getLastPackId() {
+        return lastPackId_;
+      }
+      /**
+       * <code>optional int64 lastPackId = 2;</code>
+       */
+      public Builder setLastPackId(long value) {
+        
+        lastPackId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 lastPackId = 2;</code>
+       */
+      public Builder clearLastPackId() {
+        
+        lastPackId_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private com.temas.aimaster.ServerInfo.TargetInfo targetInfo_ = null;
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.ServerInfo.TargetInfo, com.temas.aimaster.ServerInfo.TargetInfo.Builder, com.temas.aimaster.ServerInfo.TargetInfoOrBuilder> targetInfoBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public boolean hasTargetInfo() {
         return targetInfoBuilder_ != null || targetInfo_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo() {
         if (targetInfoBuilder_ == null) {
@@ -2142,7 +2201,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder setTargetInfo(com.temas.aimaster.ServerInfo.TargetInfo value) {
         if (targetInfoBuilder_ == null) {
@@ -2158,7 +2217,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder setTargetInfo(
           com.temas.aimaster.ServerInfo.TargetInfo.Builder builderForValue) {
@@ -2172,7 +2231,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder mergeTargetInfo(com.temas.aimaster.ServerInfo.TargetInfo value) {
         if (targetInfoBuilder_ == null) {
@@ -2190,7 +2249,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder clearTargetInfo() {
         if (targetInfoBuilder_ == null) {
@@ -2204,7 +2263,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfo.Builder getTargetInfoBuilder() {
         
@@ -2212,7 +2271,7 @@ public final class ServerInfo {
         return getTargetInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder() {
         if (targetInfoBuilder_ != null) {
@@ -2223,7 +2282,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 2;</code>
+       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.temas.aimaster.ServerInfo.TargetInfo, com.temas.aimaster.ServerInfo.TargetInfo.Builder, com.temas.aimaster.ServerInfo.TargetInfoOrBuilder> 
@@ -2242,9 +2301,9 @@ public final class ServerInfo {
       private java.util.List<com.temas.aimaster.ServerInfo.StoneInfo> stones_ =
         java.util.Collections.emptyList();
       private void ensureStonesIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           stones_ = new java.util.ArrayList<com.temas.aimaster.ServerInfo.StoneInfo>(stones_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -2252,7 +2311,7 @@ public final class ServerInfo {
           com.temas.aimaster.ServerInfo.StoneInfo, com.temas.aimaster.ServerInfo.StoneInfo.Builder, com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> stonesBuilder_;
 
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public java.util.List<com.temas.aimaster.ServerInfo.StoneInfo> getStonesList() {
         if (stonesBuilder_ == null) {
@@ -2262,7 +2321,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public int getStonesCount() {
         if (stonesBuilder_ == null) {
@@ -2272,7 +2331,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public com.temas.aimaster.ServerInfo.StoneInfo getStones(int index) {
         if (stonesBuilder_ == null) {
@@ -2282,7 +2341,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder setStones(
           int index, com.temas.aimaster.ServerInfo.StoneInfo value) {
@@ -2299,7 +2358,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder setStones(
           int index, com.temas.aimaster.ServerInfo.StoneInfo.Builder builderForValue) {
@@ -2313,7 +2372,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder addStones(com.temas.aimaster.ServerInfo.StoneInfo value) {
         if (stonesBuilder_ == null) {
@@ -2329,7 +2388,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder addStones(
           int index, com.temas.aimaster.ServerInfo.StoneInfo value) {
@@ -2346,7 +2405,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder addStones(
           com.temas.aimaster.ServerInfo.StoneInfo.Builder builderForValue) {
@@ -2360,7 +2419,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder addStones(
           int index, com.temas.aimaster.ServerInfo.StoneInfo.Builder builderForValue) {
@@ -2374,7 +2433,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder addAllStones(
           java.lang.Iterable<? extends com.temas.aimaster.ServerInfo.StoneInfo> values) {
@@ -2389,12 +2448,12 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder clearStones() {
         if (stonesBuilder_ == null) {
           stones_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           stonesBuilder_.clear();
@@ -2402,7 +2461,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public Builder removeStones(int index) {
         if (stonesBuilder_ == null) {
@@ -2415,14 +2474,14 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public com.temas.aimaster.ServerInfo.StoneInfo.Builder getStonesBuilder(
           int index) {
         return getStonesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public com.temas.aimaster.ServerInfo.StoneInfoOrBuilder getStonesOrBuilder(
           int index) {
@@ -2432,7 +2491,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public java.util.List<? extends com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> 
            getStonesOrBuilderList() {
@@ -2443,14 +2502,14 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public com.temas.aimaster.ServerInfo.StoneInfo.Builder addStonesBuilder() {
         return getStonesFieldBuilder().addBuilder(
             com.temas.aimaster.ServerInfo.StoneInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public com.temas.aimaster.ServerInfo.StoneInfo.Builder addStonesBuilder(
           int index) {
@@ -2458,7 +2517,7 @@ public final class ServerInfo {
             index, com.temas.aimaster.ServerInfo.StoneInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.temas.aimaster.StoneInfo stones = 3;</code>
+       * <code>repeated .com.temas.aimaster.StoneInfo stones = 4;</code>
        */
       public java.util.List<com.temas.aimaster.ServerInfo.StoneInfo.Builder> 
            getStonesBuilderList() {
@@ -2471,7 +2530,7 @@ public final class ServerInfo {
           stonesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.temas.aimaster.ServerInfo.StoneInfo, com.temas.aimaster.ServerInfo.StoneInfo.Builder, com.temas.aimaster.ServerInfo.StoneInfoOrBuilder>(
                   stones_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           stones_ = null;
@@ -2564,10 +2623,11 @@ public final class ServerInfo {
       "eInfo\022\020\n\010playerId\030\001 \001(\005\022\n\n\002id\030\002 \001(\005\022-\n\010p" +
       "osition\030\003 \001(\0132\033.com.temas.aimaster.Vecto" +
       "r2\022-\n\010velocity\030\004 \001(\0132\033.com.temas.aimaste" +
-      "r.Vector2\"\201\001\n\tModelType\022\021\n\ttimestamp\030\001 \001" +
-      "(\003\0222\n\ntargetInfo\030\002 \001(\0132\036.com.temas.aimas",
-      "ter.TargetInfo\022-\n\006stones\030\003 \003(\0132\035.com.tem" +
-      "as.aimaster.StoneInfoP\000b\006proto3"
+      "r.Vector2\"\225\001\n\tModelType\022\021\n\ttimestamp\030\001 \001" +
+      "(\003\022\022\n\nlastPackId\030\002 \001(\003\0222\n\ntargetInfo\030\003 \001",
+      "(\0132\036.com.temas.aimaster.TargetInfo\022-\n\006st" +
+      "ones\030\004 \003(\0132\035.com.temas.aimaster.StoneInf" +
+      "oP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2599,7 +2659,7 @@ public final class ServerInfo {
     internal_static_com_temas_aimaster_ModelType_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ModelType_descriptor,
-        new java.lang.String[] { "Timestamp", "TargetInfo", "Stones", });
+        new java.lang.String[] { "Timestamp", "LastPackId", "TargetInfo", "Stones", });
     com.temas.aimaster.Common.getDescriptor();
   }
 

@@ -19,6 +19,8 @@ open class Model(physics: PhysicsWorld): AbstractModel<Stone>(physics) {
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
 
+    val thrown = mutableListOf<ThrownStone>()
+
 
     open fun update(delta: Float) {
         target.update(delta)
@@ -27,6 +29,7 @@ open class Model(physics: PhysicsWorld): AbstractModel<Stone>(physics) {
         stones.forEach {
             it.update(delta)
         }
+        physics.update(delta)
     }
 
     public fun smooth(input: FixedList<Vector2>, output: ArrayList<Vector2>) {

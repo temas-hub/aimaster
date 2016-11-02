@@ -9,7 +9,7 @@ import com.temas.aimaster.model.PhysicsWorld
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 13.10.2016
  */
-class ServerModel(physics: PhysicsWorld): AbstractModel<ServerStone>(physics) {
+class ServerModel(physics: PhysicsWorld): AbstractModel<PhysicalStone>(physics) {
 
     fun update(delta: Float) {
         target.update(delta)

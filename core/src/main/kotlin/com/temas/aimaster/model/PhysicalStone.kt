@@ -18,6 +18,7 @@ open class PhysicalStone(id: Int = ++Stone.ID_COUNTER,
 
     companion object {
         private val STOP_SPEED_SQUARE = 0.04f
+        val VELOCITY_DAMPING = 0.35f
     }
 
     val body = createStoneBody()
@@ -37,8 +38,8 @@ open class PhysicalStone(id: Int = ++Stone.ID_COUNTER,
         val bodyDef = BodyDef()
         bodyDef.type = BodyDef.BodyType.DynamicBody
         bodyDef.position.set(PhysicsWorld.toMeters(startPoint))
-        bodyDef.linearDamping = Stone.VELOCITY_DAMPING
-        bodyDef.angularDamping = Stone.VELOCITY_DAMPING
+        bodyDef.linearDamping = VELOCITY_DAMPING
+        bodyDef.angularDamping = VELOCITY_DAMPING
 
         val shape = CircleShape()
         shape.position.set(PhysicsWorld.toMeters(startPoint))
@@ -52,7 +53,7 @@ open class PhysicalStone(id: Int = ++Stone.ID_COUNTER,
         val body = world.createBody(bodyDef)
         body.createFixture(fixtureDef)
         body.userData = this
-        body.linearVelocity = PhysicsWorld.toMeters(velocity).scl(2.0f)
+        body.linearVelocity = PhysicsWorld.toMeters(velocity)
 
         shape.dispose()
 

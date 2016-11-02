@@ -2,6 +2,7 @@ package com.temas.aimaster.model
 
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Vector2
+import com.temas.aimaster.core.PhysicalStone
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -17,7 +18,6 @@ open class Stone(val id: Int,
     companion object {
         var ID_COUNTER = 0
         val DEFAULT_RADIUS = 20f
-        val VELOCITY_DAMPING = 0.35f
     }
 
     enum class STATE {
@@ -36,10 +36,10 @@ open class Stone(val id: Int,
 
     open fun update(delta: Float) {
         if (state == STATE.MOVE) {
-//            val newX = pos.x + velocity.x * delta
-//            val newY = pos.y + velocity.y * delta
-//            pos.set(newX, newY)
-//                velocity = -acceleration * delta
+            val newX = pos.x + velocity.x * delta
+            val newY = pos.y + velocity.y * delta
+            pos.set(newX, newY)
+                //velocity.sub(velocity.cpy().scl(PhysicalStone.VELOCITY_DAMPING * delta))
 //
 //                if (Intersections.isBoardHorisontal(circle())) {
 //                    dir.y = -dir.y
