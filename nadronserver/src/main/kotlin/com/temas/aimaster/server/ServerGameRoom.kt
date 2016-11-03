@@ -6,7 +6,6 @@ import com.temas.aimaster.Common
 import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
-import com.temas.aimaster.core.ServerStone
 import com.temas.aimaster.model.PhysicsWorld
 import io.nadron.app.PlayerSession
 import io.nadron.app.impl.GameRoomSession
@@ -52,6 +51,7 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         if (players.size == 1) {
             startGameSession()
         }
+
     }
 
     private fun startGameSession() {

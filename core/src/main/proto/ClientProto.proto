@@ -3,13 +3,6 @@ package com.temas.aimaster;
 
 import public "common.proto";
 
-message Stone {
-    int32 id = 1;
-    int64 timeDelta = 2;
-    Vector2 startPoint = 3;
-    Vector2 velocity = 4;
-}
-
 message ThrownStone {
     int32 id = 1;
     Vector2 startPoint = 2;
@@ -18,7 +11,7 @@ message ThrownStone {
 
 message ClientData {
     int64 timeStamp = 1;
-    int64 packId = 2;
+    int64 packId = 2; //not used yet
     repeated ThrownStone throwActions = 3;
 }
 

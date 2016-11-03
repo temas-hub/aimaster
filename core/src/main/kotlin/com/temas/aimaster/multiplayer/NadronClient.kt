@@ -9,7 +9,6 @@ import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.model.Model
 import com.temas.aimaster.model.Stone
 import com.temas.aimaster.model.ThrownStone
-import io.nadron.client.app.PlayerSession
 import io.nadron.client.app.Session
 import io.nadron.client.app.impl.SessionFactory
 import io.nadron.client.communication.DeliveryGuaranty.*
@@ -94,7 +93,6 @@ class NadronClient(val model: Model) {
                 radius = serverTargetInfo.radius
                 speed = serverTargetInfo.speed
             }
-            //val playerId = (session as PlayerSession).player.id
             serverModel.stonesList.forEach { s->
                 val stone = model.stones.find { it.id == s.id && it.playerId == s.playerId}
                 if (stone == null) {
@@ -105,12 +103,9 @@ class NadronClient(val model: Model) {
                         model.thrown.removeAll { it.id == s.id }
                     }
                 } else {
-//                    stone.pos.set(s.position.x, s.position.y)
-//                    stone.velocity.set(s.velocity.x, s.velocity.y)
                     stone.updateFromServer(Vector2(s.position.x, s.position.y), Vector2(s.velocity.x, s.velocity.y))
                 }
             }
-
         }
     }
 
@@ -139,16 +134,6 @@ class NadronClient(val model: Model) {
     fun convertToBuffer(obj : ClientProto.ClientData): ByteBuf {
         return Unpooled.wrappedBuffer((obj as MessageLite).toByteArray())
     }
-
-//    private fun createThrownStoneData(s: Stone): ClientProto.Stone.Builder {
-//        val serverUpdateAndThrowDiff = Math.max(s.creationTime - latestClientTime, 0)
-//        return ClientProto.Stone.newBuilder()
-//                .setId(s.id)
-//                .setTimeDelta(latestServerUpdateTime + serverUpdateAndThrowDiff)
-//                .setStartPoint(Common.Vector2.newBuilder().setX(s.startPoint.x).setY(s.startPoint.y))
-//                .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))
-//
-//    }
 
     private fun createThrownStoneData(s: ThrownStone): ClientProto.ThrownStone.Builder {
         return ClientProto.ThrownStone.newBuilder()

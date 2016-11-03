@@ -8,807 +8,6 @@ public final class ClientProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface StoneOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.temas.aimaster.Stone)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 id = 1;</code>
-     */
-    int getId();
-
-    /**
-     * <code>optional int64 timeDelta = 2;</code>
-     */
-    long getTimeDelta();
-
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    boolean hasStartPoint();
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    com.temas.aimaster.Common.Vector2 getStartPoint();
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder();
-
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    boolean hasVelocity();
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    com.temas.aimaster.Common.Vector2 getVelocity();
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
-  }
-  /**
-   * Protobuf type {@code com.temas.aimaster.Stone}
-   */
-  public  static final class Stone extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.temas.aimaster.Stone)
-      StoneOrBuilder {
-    // Use Stone.newBuilder() to construct.
-    private Stone(com.google.protobuf.GeneratedMessage.Builder builder) {
-      super(builder);
-    }
-    private Stone() {
-      id_ = 0;
-      timeDelta_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private Stone(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              id_ = input.readInt32();
-              break;
-            }
-            case 16: {
-
-              timeDelta_ = input.readInt64();
-              break;
-            }
-            case 26: {
-              com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
-              if (startPoint_ != null) {
-                subBuilder = startPoint_.toBuilder();
-              }
-              startPoint_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(startPoint_);
-                startPoint_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 34: {
-              com.temas.aimaster.Common.Vector2.Builder subBuilder = null;
-              if (velocity_ != null) {
-                subBuilder = velocity_.toBuilder();
-              }
-              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(velocity_);
-                velocity_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_Stone_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_Stone_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.temas.aimaster.ClientProto.Stone.class, com.temas.aimaster.ClientProto.Stone.Builder.class);
-    }
-
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>optional int32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-
-    public static final int TIMEDELTA_FIELD_NUMBER = 2;
-    private long timeDelta_;
-    /**
-     * <code>optional int64 timeDelta = 2;</code>
-     */
-    public long getTimeDelta() {
-      return timeDelta_;
-    }
-
-    public static final int STARTPOINT_FIELD_NUMBER = 3;
-    private com.temas.aimaster.Common.Vector2 startPoint_;
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    public boolean hasStartPoint() {
-      return startPoint_ != null;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    public com.temas.aimaster.Common.Vector2 getStartPoint() {
-      return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-     */
-    public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
-      return getStartPoint();
-    }
-
-    public static final int VELOCITY_FIELD_NUMBER = 4;
-    private com.temas.aimaster.Common.Vector2 velocity_;
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    public boolean hasVelocity() {
-      return velocity_ != null;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    public com.temas.aimaster.Common.Vector2 getVelocity() {
-      return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
-    }
-    /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-     */
-    public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
-      return getVelocity();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeInt32(1, id_);
-      }
-      if (timeDelta_ != 0L) {
-        output.writeInt64(2, timeDelta_);
-      }
-      if (startPoint_ != null) {
-        output.writeMessage(3, getStartPoint());
-      }
-      if (velocity_ != null) {
-        output.writeMessage(4, getVelocity());
-      }
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
-      }
-      if (timeDelta_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, timeDelta_);
-      }
-      if (startPoint_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getStartPoint());
-      }
-      if (velocity_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getVelocity());
-      }
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.temas.aimaster.ClientProto.Stone parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.temas.aimaster.ClientProto.Stone prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.temas.aimaster.Stone}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.temas.aimaster.Stone)
-        com.temas.aimaster.ClientProto.StoneOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_Stone_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_Stone_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.temas.aimaster.ClientProto.Stone.class, com.temas.aimaster.ClientProto.Stone.Builder.class);
-      }
-
-      // Construct using com.temas.aimaster.ClientProto.Stone.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        id_ = 0;
-
-        timeDelta_ = 0L;
-
-        if (startPointBuilder_ == null) {
-          startPoint_ = null;
-        } else {
-          startPoint_ = null;
-          startPointBuilder_ = null;
-        }
-        if (velocityBuilder_ == null) {
-          velocity_ = null;
-        } else {
-          velocity_ = null;
-          velocityBuilder_ = null;
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_Stone_descriptor;
-      }
-
-      public com.temas.aimaster.ClientProto.Stone getDefaultInstanceForType() {
-        return com.temas.aimaster.ClientProto.Stone.getDefaultInstance();
-      }
-
-      public com.temas.aimaster.ClientProto.Stone build() {
-        com.temas.aimaster.ClientProto.Stone result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.temas.aimaster.ClientProto.Stone buildPartial() {
-        com.temas.aimaster.ClientProto.Stone result = new com.temas.aimaster.ClientProto.Stone(this);
-        result.id_ = id_;
-        result.timeDelta_ = timeDelta_;
-        if (startPointBuilder_ == null) {
-          result.startPoint_ = startPoint_;
-        } else {
-          result.startPoint_ = startPointBuilder_.build();
-        }
-        if (velocityBuilder_ == null) {
-          result.velocity_ = velocity_;
-        } else {
-          result.velocity_ = velocityBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.temas.aimaster.ClientProto.Stone) {
-          return mergeFrom((com.temas.aimaster.ClientProto.Stone)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.temas.aimaster.ClientProto.Stone other) {
-        if (other == com.temas.aimaster.ClientProto.Stone.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
-        if (other.getTimeDelta() != 0L) {
-          setTimeDelta(other.getTimeDelta());
-        }
-        if (other.hasStartPoint()) {
-          mergeStartPoint(other.getStartPoint());
-        }
-        if (other.hasVelocity()) {
-          mergeVelocity(other.getVelocity());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.temas.aimaster.ClientProto.Stone parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.temas.aimaster.ClientProto.Stone) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int id_ ;
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long timeDelta_ ;
-      /**
-       * <code>optional int64 timeDelta = 2;</code>
-       */
-      public long getTimeDelta() {
-        return timeDelta_;
-      }
-      /**
-       * <code>optional int64 timeDelta = 2;</code>
-       */
-      public Builder setTimeDelta(long value) {
-        
-        timeDelta_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timeDelta = 2;</code>
-       */
-      public Builder clearTimeDelta() {
-        
-        timeDelta_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private com.temas.aimaster.Common.Vector2 startPoint_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> startPointBuilder_;
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public boolean hasStartPoint() {
-        return startPointBuilder_ != null || startPoint_ != null;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public com.temas.aimaster.Common.Vector2 getStartPoint() {
-        if (startPointBuilder_ == null) {
-          return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
-        } else {
-          return startPointBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public Builder setStartPoint(com.temas.aimaster.Common.Vector2 value) {
-        if (startPointBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          startPoint_ = value;
-          onChanged();
-        } else {
-          startPointBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public Builder setStartPoint(
-          com.temas.aimaster.Common.Vector2.Builder builderForValue) {
-        if (startPointBuilder_ == null) {
-          startPoint_ = builderForValue.build();
-          onChanged();
-        } else {
-          startPointBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public Builder mergeStartPoint(com.temas.aimaster.Common.Vector2 value) {
-        if (startPointBuilder_ == null) {
-          if (startPoint_ != null) {
-            startPoint_ =
-              com.temas.aimaster.Common.Vector2.newBuilder(startPoint_).mergeFrom(value).buildPartial();
-          } else {
-            startPoint_ = value;
-          }
-          onChanged();
-        } else {
-          startPointBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public Builder clearStartPoint() {
-        if (startPointBuilder_ == null) {
-          startPoint_ = null;
-          onChanged();
-        } else {
-          startPoint_ = null;
-          startPointBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public com.temas.aimaster.Common.Vector2.Builder getStartPointBuilder() {
-        
-        onChanged();
-        return getStartPointFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
-        if (startPointBuilder_ != null) {
-          return startPointBuilder_.getMessageOrBuilder();
-        } else {
-          return startPoint_ == null ?
-              com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
-        }
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
-          getStartPointFieldBuilder() {
-        if (startPointBuilder_ == null) {
-          startPointBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
-                  getStartPoint(),
-                  getParentForChildren(),
-                  isClean());
-          startPoint_ = null;
-        }
-        return startPointBuilder_;
-      }
-
-      private com.temas.aimaster.Common.Vector2 velocity_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public boolean hasVelocity() {
-        return velocityBuilder_ != null || velocity_ != null;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public com.temas.aimaster.Common.Vector2 getVelocity() {
-        if (velocityBuilder_ == null) {
-          return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
-        } else {
-          return velocityBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
-        if (velocityBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          velocity_ = value;
-          onChanged();
-        } else {
-          velocityBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public Builder setVelocity(
-          com.temas.aimaster.Common.Vector2.Builder builderForValue) {
-        if (velocityBuilder_ == null) {
-          velocity_ = builderForValue.build();
-          onChanged();
-        } else {
-          velocityBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
-        if (velocityBuilder_ == null) {
-          if (velocity_ != null) {
-            velocity_ =
-              com.temas.aimaster.Common.Vector2.newBuilder(velocity_).mergeFrom(value).buildPartial();
-          } else {
-            velocity_ = value;
-          }
-          onChanged();
-        } else {
-          velocityBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public Builder clearVelocity() {
-        if (velocityBuilder_ == null) {
-          velocity_ = null;
-          onChanged();
-        } else {
-          velocity_ = null;
-          velocityBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
-        
-        onChanged();
-        return getVelocityFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
-        if (velocityBuilder_ != null) {
-          return velocityBuilder_.getMessageOrBuilder();
-        } else {
-          return velocity_ == null ?
-              com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
-        }
-      }
-      /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
-          getVelocityFieldBuilder() {
-        if (velocityBuilder_ == null) {
-          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
-                  getVelocity(),
-                  getParentForChildren(),
-                  isClean());
-          velocity_ = null;
-        }
-        return velocityBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:com.temas.aimaster.Stone)
-    }
-
-    // @@protoc_insertion_point(class_scope:com.temas.aimaster.Stone)
-    private static final com.temas.aimaster.ClientProto.Stone DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.temas.aimaster.ClientProto.Stone();
-    }
-
-    public static com.temas.aimaster.ClientProto.Stone getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    public static final com.google.protobuf.Parser<Stone> PARSER =
-        new com.google.protobuf.AbstractParser<Stone>() {
-      public Stone parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new Stone(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Stone> getParserForType() {
-      return PARSER;
-    }
-
-    public com.temas.aimaster.ClientProto.Stone getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface ThrownStoneOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.temas.aimaster.ThrownStone)
       com.google.protobuf.MessageOrBuilder {
@@ -1562,6 +761,10 @@ public final class ClientProto {
 
     /**
      * <code>optional int64 packId = 2;</code>
+     *
+     * <pre>
+     *not used yet
+     * </pre>
      */
     long getPackId();
 
@@ -1689,6 +892,10 @@ public final class ClientProto {
     private long packId_;
     /**
      * <code>optional int64 packId = 2;</code>
+     *
+     * <pre>
+     *not used yet
+     * </pre>
      */
     public long getPackId() {
       return packId_;
@@ -2031,12 +1238,20 @@ public final class ClientProto {
       private long packId_ ;
       /**
        * <code>optional int64 packId = 2;</code>
+       *
+       * <pre>
+       *not used yet
+       * </pre>
        */
       public long getPackId() {
         return packId_;
       }
       /**
        * <code>optional int64 packId = 2;</code>
+       *
+       * <pre>
+       *not used yet
+       * </pre>
        */
       public Builder setPackId(long value) {
         
@@ -2046,6 +1261,10 @@ public final class ClientProto {
       }
       /**
        * <code>optional int64 packId = 2;</code>
+       *
+       * <pre>
+       *not used yet
+       * </pre>
        */
       public Builder clearPackId() {
         
@@ -2348,11 +1567,6 @@ public final class ClientProto {
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_temas_aimaster_Stone_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_temas_aimaster_Stone_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ThrownStone_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2372,16 +1586,13 @@ public final class ClientProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021ClientProto.proto\022\022com.temas.aimaster\032" +
-      "\014common.proto\"\206\001\n\005Stone\022\n\n\002id\030\001 \001(\005\022\021\n\tt" +
-      "imeDelta\030\002 \001(\003\022/\n\nstartPoint\030\003 \001(\0132\033.com" +
-      ".temas.aimaster.Vector2\022-\n\010velocity\030\004 \001(" +
-      "\0132\033.com.temas.aimaster.Vector2\"y\n\013Thrown" +
-      "Stone\022\n\n\002id\030\001 \001(\005\022/\n\nstartPoint\030\002 \001(\0132\033." +
-      "com.temas.aimaster.Vector2\022-\n\010velocity\030\003" +
-      " \001(\0132\033.com.temas.aimaster.Vector2\"f\n\nCli" +
-      "entData\022\021\n\ttimeStamp\030\001 \001(\003\022\016\n\006packId\030\002 \001" +
-      "(\003\0225\n\014throwActions\030\003 \003(\0132\037.com.temas.aim",
-      "aster.ThrownStoneP\000b\006proto3"
+      "\014common.proto\"y\n\013ThrownStone\022\n\n\002id\030\001 \001(\005" +
+      "\022/\n\nstartPoint\030\002 \001(\0132\033.com.temas.aimaste" +
+      "r.Vector2\022-\n\010velocity\030\003 \001(\0132\033.com.temas." +
+      "aimaster.Vector2\"f\n\nClientData\022\021\n\ttimeSt" +
+      "amp\030\001 \001(\003\022\016\n\006packId\030\002 \001(\003\0225\n\014throwAction" +
+      "s\030\003 \003(\0132\037.com.temas.aimaster.ThrownStone" +
+      "P\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2396,20 +1607,14 @@ public final class ClientProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.temas.aimaster.Common.getDescriptor(),
         }, assigner);
-    internal_static_com_temas_aimaster_Stone_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_temas_aimaster_Stone_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_temas_aimaster_Stone_descriptor,
-        new java.lang.String[] { "Id", "TimeDelta", "StartPoint", "Velocity", });
     internal_static_com_temas_aimaster_ThrownStone_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ThrownStone_descriptor,
         new java.lang.String[] { "Id", "StartPoint", "Velocity", });
     internal_static_com_temas_aimaster_ClientData_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_com_temas_aimaster_ClientData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ClientData_descriptor,

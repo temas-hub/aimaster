@@ -45,7 +45,6 @@ public class Renderer(val model: Model) {
         shaper.color = Color.BROWN
         drawTarget()
         shaper.color = Color.BLACK
-        //drawBall()
         drawStones()
         shaper.end()
         shaper.begin(ShapeRenderer.ShapeType.Line)
@@ -69,16 +68,10 @@ public class Renderer(val model: Model) {
     private fun drawStones() {
         model.stones.forEach {
             shaper.circle(it.pos.x, it.pos.y, it.rad)
+            // DEBUG vector
+            //shaper.rectLine(it.pos, it.pos.cpy().add(it.velocity), 3f)
         }
     }
-
-//    private fun drawBall() {
-//        if (model.ball != null) {
-//            val ball = model.ball!!
-//            val defBallRadius = 10f
-//            shaper.circle(ball.pos3.x, ball.pos3.y, ball.pos3.z + defBallRadius)
-//        }
-//    }
 
     private fun drawArrow() {
         val a = model.arrow

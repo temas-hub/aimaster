@@ -51,8 +51,8 @@ open class Stone(val id: Int,
         }
     }
 
-    open fun updateFromServer(position: Vector2, velocity: Vector2) {
+    open fun updateFromServer(position: Vector2, vel: Vector2) {
         pos.set(position.x, position.y)
-        velocity.set(velocity.x, velocity.y)
+        velocity.set(vel.x, vel.y)
     }
 }
