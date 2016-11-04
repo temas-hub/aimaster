@@ -8,6 +8,98 @@ public final class ServerInfo {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.temas.aimaster.PlayerType}
+   */
+  public enum PlayerType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>RED = 0;</code>
+     */
+    RED(0, 0),
+    /**
+     * <code>BLUE = 1;</code>
+     */
+    BLUE(1, 1),
+    UNRECOGNIZED(-1, -1),
+    ;
+
+    /**
+     * <code>RED = 0;</code>
+     */
+    public static final int RED_VALUE = 0;
+    /**
+     * <code>BLUE = 1;</code>
+     */
+    public static final int BLUE_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (index == -1) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    public static PlayerType valueOf(int value) {
+      switch (value) {
+        case 0: return RED;
+        case 1: return BLUE;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<PlayerType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<PlayerType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<PlayerType>() {
+            public PlayerType findValueByNumber(int number) {
+              return PlayerType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.temas.aimaster.ServerInfo.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final PlayerType[] VALUES = values();
+
+    public static PlayerType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private PlayerType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.temas.aimaster.PlayerType)
+  }
+
   public interface TargetInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.temas.aimaster.TargetInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -1610,6 +1702,1181 @@ public final class ServerInfo {
 
   }
 
+  public interface PlayerInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.temas.aimaster.PlayerInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 playerId = 1;</code>
+     */
+    int getPlayerId();
+
+    /**
+     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     */
+    int getTypeValue();
+    /**
+     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     */
+    com.temas.aimaster.ServerInfo.PlayerType getType();
+
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional int32 score = 4;</code>
+     */
+    int getScore();
+  }
+  /**
+   * Protobuf type {@code com.temas.aimaster.PlayerInfo}
+   */
+  public  static final class PlayerInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.temas.aimaster.PlayerInfo)
+      PlayerInfoOrBuilder {
+    // Use PlayerInfo.newBuilder() to construct.
+    private PlayerInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+      super(builder);
+    }
+    private PlayerInfo() {
+      playerId_ = 0;
+      type_ = 0;
+      name_ = "";
+      score_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private PlayerInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              playerId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              type_ = rawValue;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+
+              name_ = bs;
+              break;
+            }
+            case 32: {
+
+              score_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.temas.aimaster.ServerInfo.PlayerInfo.class, com.temas.aimaster.ServerInfo.PlayerInfo.Builder.class);
+    }
+
+    public static final int PLAYERID_FIELD_NUMBER = 1;
+    private int playerId_;
+    /**
+     * <code>optional int32 playerId = 1;</code>
+     */
+    public int getPlayerId() {
+      return playerId_;
+    }
+
+    public static final int TYPE_FIELD_NUMBER = 2;
+    private int type_;
+    /**
+     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     */
+    public int getTypeValue() {
+      return type_;
+    }
+    /**
+     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     */
+    public com.temas.aimaster.ServerInfo.PlayerType getType() {
+      com.temas.aimaster.ServerInfo.PlayerType result = com.temas.aimaster.ServerInfo.PlayerType.valueOf(type_);
+      return result == null ? com.temas.aimaster.ServerInfo.PlayerType.UNRECOGNIZED : result;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SCORE_FIELD_NUMBER = 4;
+    private int score_;
+    /**
+     * <code>optional int32 score = 4;</code>
+     */
+    public int getScore() {
+      return score_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (playerId_ != 0) {
+        output.writeInt32(1, playerId_);
+      }
+      if (type_ != com.temas.aimaster.ServerInfo.PlayerType.RED.getNumber()) {
+        output.writeEnum(2, type_);
+      }
+      if (!getNameBytes().isEmpty()) {
+        output.writeBytes(3, getNameBytes());
+      }
+      if (score_ != 0) {
+        output.writeInt32(4, score_);
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (playerId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, playerId_);
+      }
+      if (type_ != com.temas.aimaster.ServerInfo.PlayerType.RED.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, type_);
+      }
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getNameBytes());
+      }
+      if (score_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, score_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.temas.aimaster.ServerInfo.PlayerInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.temas.aimaster.PlayerInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.temas.aimaster.PlayerInfo)
+        com.temas.aimaster.ServerInfo.PlayerInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.temas.aimaster.ServerInfo.PlayerInfo.class, com.temas.aimaster.ServerInfo.PlayerInfo.Builder.class);
+      }
+
+      // Construct using com.temas.aimaster.ServerInfo.PlayerInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        playerId_ = 0;
+
+        type_ = 0;
+
+        name_ = "";
+
+        score_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_descriptor;
+      }
+
+      public com.temas.aimaster.ServerInfo.PlayerInfo getDefaultInstanceForType() {
+        return com.temas.aimaster.ServerInfo.PlayerInfo.getDefaultInstance();
+      }
+
+      public com.temas.aimaster.ServerInfo.PlayerInfo build() {
+        com.temas.aimaster.ServerInfo.PlayerInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.temas.aimaster.ServerInfo.PlayerInfo buildPartial() {
+        com.temas.aimaster.ServerInfo.PlayerInfo result = new com.temas.aimaster.ServerInfo.PlayerInfo(this);
+        result.playerId_ = playerId_;
+        result.type_ = type_;
+        result.name_ = name_;
+        result.score_ = score_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.temas.aimaster.ServerInfo.PlayerInfo) {
+          return mergeFrom((com.temas.aimaster.ServerInfo.PlayerInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.temas.aimaster.ServerInfo.PlayerInfo other) {
+        if (other == com.temas.aimaster.ServerInfo.PlayerInfo.getDefaultInstance()) return this;
+        if (other.getPlayerId() != 0) {
+          setPlayerId(other.getPlayerId());
+        }
+        if (other.type_ != 0) {
+          setTypeValue(other.getTypeValue());
+        }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.getScore() != 0) {
+          setScore(other.getScore());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.temas.aimaster.ServerInfo.PlayerInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.temas.aimaster.ServerInfo.PlayerInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int playerId_ ;
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public int getPlayerId() {
+        return playerId_;
+      }
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public Builder setPlayerId(int value) {
+        
+        playerId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 playerId = 1;</code>
+       */
+      public Builder clearPlayerId() {
+        
+        playerId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int type_ = 0;
+      /**
+       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       */
+      public int getTypeValue() {
+        return type_;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       */
+      public Builder setTypeValue(int value) {
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       */
+      public com.temas.aimaster.ServerInfo.PlayerType getType() {
+        com.temas.aimaster.ServerInfo.PlayerType result = com.temas.aimaster.ServerInfo.PlayerType.valueOf(type_);
+        return result == null ? com.temas.aimaster.ServerInfo.PlayerType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       */
+      public Builder setType(com.temas.aimaster.ServerInfo.PlayerType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        type_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 3;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int score_ ;
+      /**
+       * <code>optional int32 score = 4;</code>
+       */
+      public int getScore() {
+        return score_;
+      }
+      /**
+       * <code>optional int32 score = 4;</code>
+       */
+      public Builder setScore(int value) {
+        
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 score = 4;</code>
+       */
+      public Builder clearScore() {
+        
+        score_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.temas.aimaster.PlayerInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.temas.aimaster.PlayerInfo)
+    private static final com.temas.aimaster.ServerInfo.PlayerInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.temas.aimaster.ServerInfo.PlayerInfo();
+    }
+
+    public static com.temas.aimaster.ServerInfo.PlayerInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static final com.google.protobuf.Parser<PlayerInfo> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerInfo>() {
+      public PlayerInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new PlayerInfo(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerInfo> getParserForType() {
+      return PARSER;
+    }
+
+    public com.temas.aimaster.ServerInfo.PlayerInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GameInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.temas.aimaster.GameInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+    java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+    getPlayersInfo();
+
+    /**
+     * <code>optional int32 wonPlayer = 2;</code>
+     */
+    int getWonPlayer();
+  }
+  /**
+   * Protobuf type {@code com.temas.aimaster.GameInfo}
+   */
+  public  static final class GameInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.temas.aimaster.GameInfo)
+      GameInfoOrBuilder {
+    // Use GameInfo.newBuilder() to construct.
+    private GameInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+      super(builder);
+    }
+    private GameInfo() {
+      wonPlayer_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private GameInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                playersInfo_ = com.google.protobuf.MapField.newMapField(
+                    PlayersInfoDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000001;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+              playersInfo = input.readMessage(
+                  PlayersInfoDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              playersInfo_.getMutableMap().put(playersInfo.getKey(), playersInfo.getValue());
+              break;
+            }
+            case 16: {
+
+              wonPlayer_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 1:
+          return internalGetPlayersInfo();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.temas.aimaster.ServerInfo.GameInfo.class, com.temas.aimaster.ServerInfo.GameInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int PLAYERSINFO_FIELD_NUMBER = 1;
+    private static final class PlayersInfoDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>newDefaultInstance(
+                  com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.temas.aimaster.ServerInfo.PlayerInfo.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> playersInfo_;
+    private com.google.protobuf.MapField<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+    internalGetPlayersInfo() {
+      if (playersInfo_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            PlayersInfoDefaultEntryHolder.defaultEntry);
+     }
+      return playersInfo_;
+    }
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfo() {
+      return internalGetPlayersInfo().getMap();
+    }
+
+    public static final int WONPLAYER_FIELD_NUMBER = 2;
+    private int wonPlayer_;
+    /**
+     * <code>optional int32 wonPlayer = 2;</code>
+     */
+    public int getWonPlayer() {
+      return wonPlayer_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (java.util.Map.Entry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> entry
+           : internalGetPlayersInfo().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+        playersInfo = PlayersInfoDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        output.writeMessage(1, playersInfo);
+      }
+      if (wonPlayer_ != 0) {
+        output.writeInt32(2, wonPlayer_);
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (java.util.Map.Entry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> entry
+           : internalGetPlayersInfo().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+        playersInfo = PlayersInfoDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, playersInfo);
+      }
+      if (wonPlayer_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, wonPlayer_);
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.temas.aimaster.ServerInfo.GameInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.temas.aimaster.GameInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.temas.aimaster.GameInfo)
+        com.temas.aimaster.ServerInfo.GameInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 1:
+            return internalGetPlayersInfo();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 1:
+            return internalGetMutablePlayersInfo();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.temas.aimaster.ServerInfo.GameInfo.class, com.temas.aimaster.ServerInfo.GameInfo.Builder.class);
+      }
+
+      // Construct using com.temas.aimaster.ServerInfo.GameInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        internalGetMutablePlayersInfo().clear();
+        wonPlayer_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_descriptor;
+      }
+
+      public com.temas.aimaster.ServerInfo.GameInfo getDefaultInstanceForType() {
+        return com.temas.aimaster.ServerInfo.GameInfo.getDefaultInstance();
+      }
+
+      public com.temas.aimaster.ServerInfo.GameInfo build() {
+        com.temas.aimaster.ServerInfo.GameInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.temas.aimaster.ServerInfo.GameInfo buildPartial() {
+        com.temas.aimaster.ServerInfo.GameInfo result = new com.temas.aimaster.ServerInfo.GameInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.playersInfo_ = internalGetPlayersInfo();
+        result.playersInfo_.makeImmutable();
+        result.wonPlayer_ = wonPlayer_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.temas.aimaster.ServerInfo.GameInfo) {
+          return mergeFrom((com.temas.aimaster.ServerInfo.GameInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.temas.aimaster.ServerInfo.GameInfo other) {
+        if (other == com.temas.aimaster.ServerInfo.GameInfo.getDefaultInstance()) return this;
+        internalGetMutablePlayersInfo().mergeFrom(
+            other.internalGetPlayersInfo());
+        if (other.getWonPlayer() != 0) {
+          setWonPlayer(other.getWonPlayer());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.temas.aimaster.ServerInfo.GameInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.temas.aimaster.ServerInfo.GameInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> playersInfo_;
+      private com.google.protobuf.MapField<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+      internalGetPlayersInfo() {
+        if (playersInfo_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              PlayersInfoDefaultEntryHolder.defaultEntry);
+       }
+        return playersInfo_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+      internalGetMutablePlayersInfo() {
+        onChanged();;
+        if (playersInfo_ == null) {
+          playersInfo_ = com.google.protobuf.MapField.newMapField(
+              PlayersInfoDefaultEntryHolder.defaultEntry);
+        }
+        if (!playersInfo_.isMutable()) {
+          playersInfo_ = playersInfo_.copy();
+        }
+        return playersInfo_;
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+      public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfo() {
+        return internalGetPlayersInfo().getMap();
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+      public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+      getMutablePlayersInfo() {
+        return internalGetMutablePlayersInfo().getMutableMap();
+      }
+
+      private int wonPlayer_ ;
+      /**
+       * <code>optional int32 wonPlayer = 2;</code>
+       */
+      public int getWonPlayer() {
+        return wonPlayer_;
+      }
+      /**
+       * <code>optional int32 wonPlayer = 2;</code>
+       */
+      public Builder setWonPlayer(int value) {
+        
+        wonPlayer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 wonPlayer = 2;</code>
+       */
+      public Builder clearWonPlayer() {
+        
+        wonPlayer_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.temas.aimaster.GameInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.temas.aimaster.GameInfo)
+    private static final com.temas.aimaster.ServerInfo.GameInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.temas.aimaster.ServerInfo.GameInfo();
+    }
+
+    public static com.temas.aimaster.ServerInfo.GameInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static final com.google.protobuf.Parser<GameInfo> PARSER =
+        new com.google.protobuf.AbstractParser<GameInfo>() {
+      public GameInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new GameInfo(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GameInfo> getParserForType() {
+      return PARSER;
+    }
+
+    public com.temas.aimaster.ServerInfo.GameInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ModelTypeOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.temas.aimaster.ModelType)
       com.google.protobuf.MessageOrBuilder {
@@ -2602,6 +3869,21 @@ public final class ServerInfo {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_temas_aimaster_PlayerInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_temas_aimaster_GameInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ModelType_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2623,11 +3905,19 @@ public final class ServerInfo {
       "eInfo\022\020\n\010playerId\030\001 \001(\005\022\n\n\002id\030\002 \001(\005\022-\n\010p" +
       "osition\030\003 \001(\0132\033.com.temas.aimaster.Vecto" +
       "r2\022-\n\010velocity\030\004 \001(\0132\033.com.temas.aimaste" +
-      "r.Vector2\"\225\001\n\tModelType\022\021\n\ttimestamp\030\001 \001" +
-      "(\003\022\022\n\nlastPackId\030\002 \001(\003\0222\n\ntargetInfo\030\003 \001",
-      "(\0132\036.com.temas.aimaster.TargetInfo\022-\n\006st" +
-      "ones\030\004 \003(\0132\035.com.temas.aimaster.StoneInf" +
-      "oP\000b\006proto3"
+      "r.Vector2\"i\n\nPlayerInfo\022\020\n\010playerId\030\001 \001(" +
+      "\005\022,\n\004type\030\002 \001(\0162\036.com.temas.aimaster.Pla",
+      "yerType\022\014\n\004name\030\003 \001(\t\022\r\n\005score\030\004 \001(\005\"\265\001\n" +
+      "\010GameInfo\022B\n\013playersInfo\030\001 \003(\0132-.com.tem" +
+      "as.aimaster.GameInfo.PlayersInfoEntry\022\021\n" +
+      "\twonPlayer\030\002 \001(\005\032R\n\020PlayersInfoEntry\022\013\n\003" +
+      "key\030\001 \001(\005\022-\n\005value\030\002 \001(\0132\036.com.temas.aim" +
+      "aster.PlayerInfo:\0028\001\"\225\001\n\tModelType\022\021\n\tti" +
+      "mestamp\030\001 \001(\003\022\022\n\nlastPackId\030\002 \001(\003\0222\n\ntar" +
+      "getInfo\030\003 \001(\0132\036.com.temas.aimaster.Targe" +
+      "tInfo\022-\n\006stones\030\004 \003(\0132\035.com.temas.aimast" +
+      "er.StoneInfo*\037\n\nPlayerType\022\007\n\003RED\020\000\022\010\n\004B",
+      "LUE\020\001P\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2654,8 +3944,26 @@ public final class ServerInfo {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_StoneInfo_descriptor,
         new java.lang.String[] { "PlayerId", "Id", "Position", "Velocity", });
-    internal_static_com_temas_aimaster_ModelType_descriptor =
+    internal_static_com_temas_aimaster_PlayerInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_temas_aimaster_PlayerInfo_descriptor,
+        new java.lang.String[] { "PlayerId", "Type", "Name", "Score", });
+    internal_static_com_temas_aimaster_GameInfo_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_temas_aimaster_GameInfo_descriptor,
+        new java.lang.String[] { "PlayersInfo", "WonPlayer", });
+    internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor =
+      internal_static_com_temas_aimaster_GameInfo_descriptor.getNestedTypes().get(0);
+    internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_com_temas_aimaster_ModelType_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_temas_aimaster_ModelType_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_temas_aimaster_ModelType_descriptor,

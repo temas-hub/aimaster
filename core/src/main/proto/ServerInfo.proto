@@ -17,6 +17,23 @@ message StoneInfo {
     Vector2 velocity = 4;
 }
 
+enum PlayerType {
+    RED = 0;
+    BLUE = 1;
+}
+
+message PlayerInfo {
+    int32 playerId = 1;
+    PlayerType type = 2;
+    string name = 3;
+    int32 score = 4;
+}
+
+message GameInfo {
+    map<int32, PlayerInfo> playersInfo = 1;
+    int32 wonPlayer = 2;
+}
+
 message ModelType {
     int64 timestamp = 1;
     int64 lastPackId = 2;

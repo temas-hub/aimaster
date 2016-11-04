@@ -7,7 +7,11 @@ import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
 import com.temas.aimaster.model.PhysicsWorld
+import com.temas.aimaster.multiplayer.NadronClient
+import com.temas.aimaster.server.Users
+import io.nadron.app.Player
 import io.nadron.app.PlayerSession
+import io.nadron.app.impl.DefaultPlayer
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
 import io.nadron.communication.NettyMessageBuffer
@@ -30,6 +34,9 @@ private var outPacketCount: Long = 0
 
 class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder) {
 
+    private lateinit var redSlot: Player
+    private lateinit var blueSlot: Player
+
     val model = ServerModel(PhysicsWorld())
 
     companion object {
@@ -51,7 +58,6 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
         if (players.size == 1) {
             startGameSession()
         }
-
     }
 
     private fun startGameSession() {
@@ -64,15 +70,15 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
             model.update(UPDATE_DELAY.toFloat() / 1000f)
             val serverUpdateData = buildUpdateData()
             getSessions().forEach {
-                serverUpdateData.lastPackId = players[it.player.id]!!.lastPackId
+                //serverUpdateData.lastPackId = players[it.player.id]!!.lastPackId
                 val worldStateBuffer = NettyMessageBuffer()
                 val buffer = worldStateBuffer.writeObject({ convertToBuffer(it) }, serverUpdateData.build())
                 val event = Events.networkEvent(buffer, DeliveryGuarantyOptions.FAST)
                 ++outPacketCount
                 it.onEvent(event)
-                LOG.debug("Sent state timestamp = ${simpleDateFormat.format(Date(serverUpdateData.timestamp))} " +
-                        "x= ${serverUpdateData.targetInfo.position.x}, y=${serverUpdateData.targetInfo.position.y} " +
-                        "Packet number = $outPacketCount to client ${it.player.name}")
+//                LOG.debug("Sent state timestamp = ${simpleDateFormat.format(Date(serverUpdateData.timestamp))} " +
+//                        "x= ${serverUpdateData.targetInfo.position.x}, y=${serverUpdateData.targetInfo.position.y} " +
+//                        "Packet number = $outPacketCount to client ${it.player.name}")
             }
         } catch (ex: Exception) {
             LOG.error("Error during update task", ex)
@@ -109,5 +115,19 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
                 .setVelocity(Common.Vector2.newBuilder().setX(s.velocity.x).setY(s.velocity.y))
     }
 
+    override fun createPlayerSession(player: Player?): PlayerSession {
+        return super.createPlayerSession(player)
+    }
 
+    override fun afterSessionConnect(playerSession: PlayerSession) {
+        if (redSlot == null) {
+            redSlot = playerSession.player
+        } else if (blueSlot == null) {
+            blueSlot = playerSession.player
+        }
+        super.afterSessionConnect(playerSession)
+    }
+
+
+    fun isFull() = redSlot != null && blueSlot != null
 }

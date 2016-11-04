@@ -1,5 +1,6 @@
 package com.temas.gameserver.aimmaster
 
+import com.temas.aimaster.multiplayer.NadronClient
 import com.temas.aimaster.server.DefaultLookupService
 import io.nadron.app.Game
 import io.nadron.app.GameRoom
@@ -7,6 +8,7 @@ import io.nadron.app.impl.GameRoomSession
 import io.nadron.app.impl.SimpleGame
 import io.nadron.protocols.Protocol
 import io.nadron.service.LookupService
+import io.nadron.service.impl.GameStateManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
@@ -33,16 +35,19 @@ open class SpringConfig {
     @Bean(name = arrayOf("gameRoom"))
     open fun gameRoom() : GameRoom {
         val sessionBuilder = GameRoomSession.GameRoomSessionBuilder()
-        sessionBuilder.parentGame(game).gameRoomName("defaultRoom").protocol(messageBufferProtocol)
+        sessionBuilder.
+                parentGame(game).
+                gameRoomName(NadronClient.DEFAULT_ROOM_NAME).
+                protocol(messageBufferProtocol)
         return ServerGameRoom(sessionBuilder)
     }
 
 
     @Bean(name = arrayOf("lookupService"))
     open fun lookupService(): LookupService {
-        val refKeyGameRoomMap = HashMap<String, GameRoom>()
-        val gameRoom = gameRoom()
-        refKeyGameRoomMap.put(gameRoom.gameRoomName, gameRoom)
+//        val refKeyGameRoomMap = HashMap<String, GameRoom>()
+//        val gameRoom = gameRoom()
+//        refKeyGameRoomMap.put(gameRoom.gameRoomName, gameRoom)
         val service = DefaultLookupService(game, refKeyGameRoomMap)
         return service
     }

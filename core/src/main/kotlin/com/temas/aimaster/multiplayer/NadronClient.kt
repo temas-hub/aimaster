@@ -1,5 +1,6 @@
 package com.temas.aimaster.multiplayer
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.math.Vector2
 import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
@@ -35,8 +36,17 @@ private var inPacketCount: Long = 0
 class NadronClient(val model: Model) {
 
     companion object {
+        // server info
+        val SERVER_HOST_NAME = "localhost"
+        val DEFAULT_LOGIN = "default_login"
+        val DEFAULT_PASSWORD = ""
+        val DEFAULT_ROOM_NAME = "defaultRoom"
+        val PLAYER_ID = "playerId"
+
+        // logger
         private val LOG = LoggerFactory.getLogger(NadronClient::class.java)
         val simpleDateFormat = SimpleDateFormat("HH:mm:ss:SSS")
+
         private var outPacketCount: Long = 0
     }
 
@@ -144,13 +154,16 @@ class NadronClient(val model: Model) {
     }
 
     fun init() {
+        val preferences = Gdx.app.getPreferences("aimaster.saves")
+        var playerId = preferences.getInteger(PLAYER_ID)
+        val login = if (playerId == null) DEFAULT_LOGIN else "player"+playerId
         val builder = LoginHelper.LoginBuilder().
-                username("test" ).
-                password("pass").
-                connectionKey("defaultRoom").
-                nadronTcpHostName("localhost").
+                username(login).
+                password(DEFAULT_PASSWORD).
+                connectionKey(DEFAULT_ROOM_NAME).
+                nadronTcpHostName(SERVER_HOST_NAME).
                 tcpPort(18090).
-                nadronUdpHostName("localhost").
+                nadronUdpHostName(SERVER_HOST_NAME).
                 udpPort(50122)
 
         val loginHelper = builder.build()
@@ -162,6 +175,7 @@ class NadronClient(val model: Model) {
             override fun onEvent(event: Event) {
                 val buffer = event.source as NettyMessageBuffer
                 playerId = buffer.readInt()
+                preferences.putInteger(PLAYER_ID, playerId)
                 session.removeHandler(this)
             }
         })
