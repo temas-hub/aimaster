@@ -48,7 +48,11 @@ open class SpringConfig {
 //        val refKeyGameRoomMap = HashMap<String, GameRoom>()
 //        val gameRoom = gameRoom()
 //        refKeyGameRoomMap.put(gameRoom.gameRoomName, gameRoom)
-        val service = DefaultLookupService(game, refKeyGameRoomMap)
+        val sessionBuilder = GameRoomSession.GameRoomSessionBuilder()
+        sessionBuilder.
+                parentGame(game).
+                protocol(messageBufferProtocol)
+        val service = DefaultLookupService(game, sessionBuilder)
         return service
     }
 

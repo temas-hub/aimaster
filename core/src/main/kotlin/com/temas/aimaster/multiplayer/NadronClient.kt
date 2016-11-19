@@ -156,7 +156,7 @@ class NadronClient(val model: Model) {
     fun init() {
         val preferences = Gdx.app.getPreferences("aimaster.saves")
         var playerId = preferences.getInteger(PLAYER_ID)
-        val login = if (playerId == null) DEFAULT_LOGIN else "player"+playerId
+        val login = if (playerId == null) DEFAULT_LOGIN else playerId.toString()
         val builder = LoginHelper.LoginBuilder().
                 username(login).
                 password(DEFAULT_PASSWORD).

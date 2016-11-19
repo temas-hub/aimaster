@@ -2,6 +2,7 @@ package com.temas.aimaster.server
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
+import com.temas.aimaster.dao.UserRepository
 import io.nadron.app.Player
 import io.nadron.app.impl.DefaultPlayer
 
@@ -11,16 +12,28 @@ import io.nadron.app.impl.DefaultPlayer
  */
 object Users {
 
-    val LAST_USER_ID = "lastUserId"
-
-    val preferences: Preferences = Gdx.app.getPreferences("users")
-    var lastUserId = preferences.getInteger(LAST_USER_ID, 0)
-
     fun generateUser(): Player {
-        val nextUserName = "player" + (++lastUserId)
-        val nextUserEmail = nextUserName + "@email.com"
+        val lastUserId = UserRepository.lastUserId.incrementAndGet()
+        val nextUserName = "player" + lastUserId
+        val nextUserEmail = generateEmail(nextUserName)
+        UserRepository.storeUser(lastUserId, nextUserName, nextUserEmail)
 
-        preferences.putInteger(LAST_USER_ID, lastUserId)
         return DefaultPlayer(lastUserId, nextUserName, nextUserEmail)
     }
+
+    private fun generateEmail(nextUserName: String) = nextUserName + "@email.com"
+
+    fun createUser(id: Int, user: String): Player {
+        return DefaultPlayer(id, user, generateEmail(user))
+    }
+
+    fun findUser(userId: Int): Player? {
+        val userInfo = UserRepository.findRecordById(userId)
+        if (userInfo != null) {
+            return DefaultPlayer(userId, userInfo.first, userInfo.second)
+        }
+        return null
+    }
+
+
 }

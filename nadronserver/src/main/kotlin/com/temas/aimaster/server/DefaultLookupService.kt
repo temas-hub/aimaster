@@ -1,11 +1,11 @@
 package com.temas.aimaster.server
 
+import com.temas.aimaster.dao.UserRepository
 import com.temas.aimaster.multiplayer.NadronClient
 import com.temas.gameserver.aimmaster.ServerGameRoom
 import io.nadron.app.Game
 import io.nadron.app.GameRoom
 import io.nadron.app.Player
-import io.nadron.app.impl.DefaultPlayer
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.service.LookupService
 import io.nadron.util.Credentials
@@ -17,19 +17,26 @@ import io.nadron.util.Credentials
 class DefaultLookupService(val game: Game,
                            val roomSessionBuilder: GameRoomSession.GameRoomSessionBuilder) : LookupService {
 
+    companion object {
+        private var ROOM_ID = 0
+    }
+
     var currentRoom : ServerGameRoom? = null
+    val rooms = mutableListOf<ServerGameRoom>()
+
 
     override fun gameRoomLookup(gameContextKey: Any): GameRoom? {
         //return refKeyGameRoomMap[gameContextKey as String]
-
         synchronized(this, {
             if (currentRoom == null || currentRoom!!.isFull()) {
+                roomSessionBuilder.gameRoomName(game.gameName + (ROOM_ID++))
                 val newRoom = ServerGameRoom(roomSessionBuilder)
+                rooms.add(newRoom)
                 currentRoom = newRoom
             }
+            return currentRoom
         })
 
-        return
     }
 
     override fun gameLookup(gameContextKey: Any): Game {
@@ -40,6 +47,8 @@ class DefaultLookupService(val game: Game,
         if (loginDetail.username.equals(NadronClient.DEFAULT_LOGIN)) {
             return Users.generateUser()
         }
-        return null // all slots are busy
+        val userId = loginDetail.username.toInt()
+
+        return Users.findUser(userId)
     }
 }
