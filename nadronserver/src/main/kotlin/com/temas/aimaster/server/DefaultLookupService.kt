@@ -9,6 +9,7 @@ import io.nadron.app.Player
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.service.LookupService
 import io.nadron.util.Credentials
+import org.slf4j.LoggerFactory
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -19,6 +20,7 @@ class DefaultLookupService(val game: Game,
 
     companion object {
         private var ROOM_ID = 0
+        private val LOG = LoggerFactory.getLogger(DefaultLookupService::class.java)
     }
 
     var currentRoom : ServerGameRoom? = null
@@ -49,6 +51,11 @@ class DefaultLookupService(val game: Game,
         }
         val userId = loginDetail.username.toInt()
 
-        return Users.findUser(userId)
+        val user = Users.findUser(userId)
+        if (user == null) {
+            LOG.error("User with login ${loginDetail.username} is not found")
+            return Users.generateUser(userId)
+        }
+        return user
     }
 }

@@ -19,6 +19,8 @@ public class DesktopLauncher {
 		cfg.x = -1; // center
 		cfg.y = -1;
 
-		new LwjglApplication(new MainGame(), cfg);
+		Integer playerId = args.length > 2 ? Integer.valueOf(args[2]) : null;
+
+		new LwjglApplication(new MainGame(playerId), cfg);
 	}
 }

@@ -15,7 +15,7 @@ import java.util.*
  */
 
 
-open class Model(physics: PhysicsWorld): AbstractModel<Stone>(physics) {
+open class Model(physics: PhysicsWorld, val playerId: Int? = null): AbstractModel<Stone>(physics) {
 
     val lastPoints: FixedList<Vector2> = FixedList(10, Vector2::class.java)
 

@@ -27,8 +27,8 @@ buildscript {
 dependencies {
     compile project(":core")
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "com.github.menacher:nadron:0.8-SNAPSHOT"
-    compile "com.github.menacher:nadclient:0.8-SNAPSHOT"
+    compile "com.github.menacher:nadron:0.8-TEMAS"
+    compile "com.github.menacher:nadclient:0.8-TEMAS"
     compile "com.google.protobuf:protobuf-java:$protobufVersion"
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"

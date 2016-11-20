@@ -56,7 +56,7 @@ class NadronClient(val model: Model) {
     var playerId: Int = -1
         get() {
             if (field == -1) {
-                throw IllegalStateException("PlayerId is not initialized")
+                LOG.error("Player id is not initialized")
             }
             return field
         }
@@ -66,14 +66,16 @@ class NadronClient(val model: Model) {
         private val prototype: MessageLite = ServerInfo.ModelType.getDefaultInstance()
 
         override fun onDataIn(event: Event) {
+            if (playerId == -1) return
+
             val buffer = event.source as NettyMessageBuffer
             val worldState = buffer.readObject { convertToProto(it) } as ServerInfo.ModelType
             if (worldState.timestamp > latestServerUpdateTime) {
                 latestClientTime = System.currentTimeMillis()
                 latestServerUpdateTime = worldState.timestamp
                 ++inPacketCount
-                LOG.debug("Received state timestamp = ${simpleDateFormat.format(Date(worldState.timestamp))} " +
-                        "x= ${worldState.targetInfo.position.x}, y=${worldState.targetInfo.position.y} Packet number = $inPacketCount")
+//                LOG.debug("Received state timestamp = ${simpleDateFormat.format(Date(worldState.timestamp))} " +
+//                        "x= ${worldState.targetInfo.position.x}, y=${worldState.targetInfo.position.y} Packet number = $inPacketCount")
                 updateModel(worldState)
             }
         }
@@ -155,8 +157,10 @@ class NadronClient(val model: Model) {
 
     fun init() {
         val preferences = Gdx.app.getPreferences("aimaster.saves")
-        var playerId = preferences.getInteger(PLAYER_ID)
-        val login = if (playerId == null) DEFAULT_LOGIN else playerId.toString()
+        var pId = preferences.getInteger(PLAYER_ID)
+        val login = if (model.playerId != null) model.playerId.toString()
+                else if (pId == null) DEFAULT_LOGIN else pId.toString()
+
         val builder = LoginHelper.LoginBuilder().
                 username(login).
                 password(DEFAULT_PASSWORD).
@@ -171,14 +175,23 @@ class NadronClient(val model: Model) {
         val clientSession = sessionFactory.createSession()
         val handler = InBoundHandler(clientSession)
         clientSession.addHandler(handler)
-        clientSession.addHandler(object : StartEventHandler(clientSession) {
-            override fun onEvent(event: Event) {
-                val buffer = event.source as NettyMessageBuffer
-                playerId = buffer.readInt()
-                preferences.putInteger(PLAYER_ID, playerId)
-                session.removeHandler(this)
-            }
-        })
+        if (model.playerId == null && pId == null) {
+            clientSession.addHandler(object : StartEventHandler(clientSession) {
+                override fun onEvent(event: Event) {
+                    val buffer = event.source as NettyMessageBuffer
+                    if (buffer.readableBytes() == 0) {
+                        LOG.error("Player id was not received from server")
+                        throw IllegalStateException()
+                    }
+                    playerId = buffer.readInt()
+                    preferences.putInteger(PLAYER_ID, playerId)
+                    preferences.flush()
+                    session.removeHandler(this)
+                }
+            })
+        } else {
+            playerId = model.playerId ?: pId
+        }
         sessionFactory.connectSession(clientSession)
         session = clientSession
     }

@@ -3,8 +3,10 @@ package com.temas.aimaster.server
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
 import com.temas.aimaster.dao.UserRepository
+import com.temas.gameserver.aimmaster.ServerGameRoom
 import io.nadron.app.Player
 import io.nadron.app.impl.DefaultPlayer
+import org.slf4j.LoggerFactory
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -12,20 +14,26 @@ import io.nadron.app.impl.DefaultPlayer
  */
 object Users {
 
-    fun generateUser(): Player {
-        val lastUserId = UserRepository.lastUserId.incrementAndGet()
-        val nextUserName = "player" + lastUserId
-        val nextUserEmail = generateEmail(nextUserName)
-        UserRepository.storeUser(lastUserId, nextUserName, nextUserEmail)
+    private val LOG = LoggerFactory.getLogger(Users::class.java)
 
-        return DefaultPlayer(lastUserId, nextUserName, nextUserEmail)
+    init {
+        try {
+            LOG.debug(UserRepository.db.toString())
+        } catch (e: Exception) {
+            LOG.error("Error during user repository initialization", e)
+        }
+
+    }
+
+    fun generateUser(userId: Int = UserRepository.lastUserId.incrementAndGet()): Player {
+        val nextUserName = "player" + userId
+        val nextUserEmail = generateEmail(nextUserName)
+        UserRepository.storeUser(userId, nextUserName, nextUserEmail)
+
+        return DefaultPlayer(userId, nextUserName, nextUserEmail)
     }
 
     private fun generateEmail(nextUserName: String) = nextUserName + "@email.com"
-
-    fun createUser(id: Int, user: String): Player {
-        return DefaultPlayer(id, user, generateEmail(user))
-    }
 
     fun findUser(userId: Int): Player? {
         val userInfo = UserRepository.findRecordById(userId)

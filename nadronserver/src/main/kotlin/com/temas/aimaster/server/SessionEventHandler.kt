@@ -50,8 +50,8 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
         val buffer = event.source as NettyMessageBuffer
         val clientData = buffer.readObject { convertToProto(it) } as ClientProto.ClientData
         ++inPacketCount
-        LOG.debug("Received client state server timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
-                "stones count= ${clientData.throwActionsCount}, Packet number = $inPacketCount; ")
+//        LOG.debug("Received client state server timestamp = ${simpleDateFormat.format(Date(event.timeStamp))} " +
+//                "stones count= ${clientData.throwActionsCount}, Packet number = $inPacketCount; ")
         updateModel(clientData)
     }
 

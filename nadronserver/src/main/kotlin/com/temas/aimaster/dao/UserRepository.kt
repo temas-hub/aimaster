@@ -19,14 +19,14 @@ object UserRepository {
 
     fun findRecordById(id: Int): Pair<String,String>? {
         if (usersDb[id] != null) {
-            return Pair(usersDb[id].get(0) as String, usersDb[id].get(1) as String)
+            return Pair(usersDb[id]?.get(0) as String, usersDb[id]?.get(1) as String)
         }
         return null
     }
 
     fun storeUser(id: Int, name: String, email: String) {
         usersDb.put(id, arrayOf(name, email))
-        usersDb.commit()
+        db.commit()
     }
 
 

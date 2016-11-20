@@ -14,9 +14,9 @@ import com.temas.aimaster.multiplayer.NadronClient
  * @since 08/09/2015
  */
 
-class MainScreen(s: Screen) : Screen by s {
+class MainScreen(s: Screen, val playerId: Int? = null) : Screen by s {
 
-    val model = Model(PhysicsWorld())
+    val model = Model(PhysicsWorld(), playerId)
     val renderer = Renderer(model)
     val controller = Controller(model, renderer)
 

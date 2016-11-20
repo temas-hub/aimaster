@@ -34,8 +34,8 @@ private var outPacketCount: Long = 0
 
 class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder) {
 
-    private lateinit var redSlot: Player
-    private lateinit var blueSlot: Player
+    private var redSlot: Player? = null
+    private var blueSlot: Player? = null
 
     val model = ServerModel(PhysicsWorld())
 
