@@ -7,10 +7,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Matrix4
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 //import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
 import com.badlogic.gdx.utils.Scaling
 import com.temas.aimaster.model.Model
+import com.temas.aimaster.model.PhysicsWorld
 import java.util.*
+import kotlin.concurrent.read
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -31,34 +34,34 @@ public class Renderer(val model: Model) {
     private var viewportHeight: Int = 0
     private val shaper = ShapeRenderer()
     private val cam = OrthographicCamera()
-    //private val debugRenderer = Box2DDebugRenderer()
-    //private var debugMatrix: Matrix4? = null
+    private val debugRenderer = Box2DDebugRenderer(true, true,true,true,true,true)
+    private var debugMatrix: Matrix4? = null
 
     fun load() {
         //TODO textures
     }
 
     fun render(delta: Float) {
-        cam.update();
-        shaper.projectionMatrix = cam.combined
-        shaper.begin(ShapeRenderer.ShapeType.Filled)
-        shaper.color = Color.BROWN
-        drawTarget()
-        shaper.color = Color.BLACK
-        drawStones()
-        shaper.end()
-        shaper.begin(ShapeRenderer.ShapeType.Line)
-        shaper.color = Color.WHITE
-        drawArrow()
-//        debugMatrix = shaper.projectionMatrix.cpy().scale(com.temas.aimaster.core.PhysicsWorld.PIXELS_TO_METERS,
-//                com.temas.aimaster.core.PhysicsWorld.PIXELS_TO_METERS, 0f)
-        shaper.end()
-//        drawPhysicsDebug()
+        model.lock.read {
+            cam.update();
+            shaper.projectionMatrix = cam.combined
+            shaper.begin(ShapeRenderer.ShapeType.Filled)
+            drawTarget()
+            drawStones()
+            shaper.end()
+            shaper.begin(ShapeRenderer.ShapeType.Line)
+            shaper.color = Color.WHITE
+            drawArrow()
+            debugMatrix = shaper.projectionMatrix.cpy().scale(PhysicsWorld.PIXELS_TO_METERS,
+                    PhysicsWorld.PIXELS_TO_METERS, 0f)
+            shaper.end()
+            drawPhysicsDebug()
+        }
     }
 
-//    private fun drawPhysicsDebug() {
-//        debugRenderer.render(model.physics.world, debugMatrix)
-//    }
+    private fun drawPhysicsDebug() {
+        debugRenderer.render(model.physics.world, debugMatrix)
+    }
 
     private fun drawTarget() {
         shaper.color = Color.OLIVE
@@ -66,6 +69,7 @@ public class Renderer(val model: Model) {
     }
 
     private fun drawStones() {
+        shaper.color = Color.BLACK
         model.stones.forEach {
             shaper.circle(it.pos.x, it.pos.y, it.rad)
             // DEBUG vector

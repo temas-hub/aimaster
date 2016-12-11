@@ -1,6 +1,7 @@
 package com.temas.aimaster.model
 
 import java.util.*
+import java.util.concurrent.locks.ReentrantReadWriteLock
 
 /**
  * Created by temas on 10/23/2016.
@@ -22,4 +23,6 @@ open class AbstractModel<T: Stone>(val physics: PhysicsWorld) {
     open fun createTarget(): Target {
         return Target(TARGET_SPEED, TARGET_RADIUS)
     }
+
+    val lock = ReentrantReadWriteLock()
 }

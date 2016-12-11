@@ -1,13 +1,10 @@
 package com.temas.aimaster.model
 
-import com.badlogic.gdx.ai.steer.behaviors.MatchVelocity
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Vector2
-import com.temas.aimaster.model.Arrow
 import com.temas.aimaster.FixedList
-import com.temas.aimaster.core.PhysicalStone
-import com.temas.aimaster.model.Target
 import java.util.*
+import kotlin.concurrent.write
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -23,13 +20,15 @@ open class Model(physics: PhysicsWorld, val playerId: Int? = null): AbstractMode
 
 
     open fun update(delta: Float) {
-        target.update(delta)
-        arrow.update(delta)
-        //ball?.update(delta)
-        stones.forEach {
-            it.update(delta)
+        lock.write {
+            target.update(delta)
+            arrow.update(delta)
+            //ball?.update(delta)
+            stones.forEach {
+                it.update(delta)
+            }
+            physics.update(delta)
         }
-        physics.update(delta)
     }
 
     public fun smooth(input: FixedList<Vector2>, output: ArrayList<Vector2>) {

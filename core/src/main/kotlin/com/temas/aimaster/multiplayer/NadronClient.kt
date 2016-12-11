@@ -23,7 +23,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
-import java.util.*
+import kotlin.concurrent.write
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -97,25 +97,27 @@ class NadronClient(val model: Model) {
         }
         private fun updateModel(serverModel: ServerInfo.ModelType) {
             val serverTargetInfo = serverModel.targetInfo
-            with(model.target) {
-                center.x = serverTargetInfo.position.x
-                center.y = serverTargetInfo.position.y
-                moveDir.x = serverTargetInfo.moveDir.x
-                moveDir.y = serverTargetInfo.moveDir.y
-                radius = serverTargetInfo.radius
-                speed = serverTargetInfo.speed
-            }
-            serverModel.stonesList.forEach { s->
-                val stone = model.stones.find { it.id == s.id && it.playerId == s.playerId}
-                if (stone == null) {
-                    val newStone = Stone(s.id, s.playerId, startPoint = Vector2(s.position.x, s.position.y),
-                            velocity = Vector2(s.velocity.x, s.velocity.y))
-                    model.stones.add(newStone)
-                    if (s.playerId == playerId) {
-                        model.thrown.removeAll { it.id == s.id }
+            model.lock.write {
+                with(model.target) {
+                    center.x = serverTargetInfo.position.x
+                    center.y = serverTargetInfo.position.y
+                    moveDir.x = serverTargetInfo.moveDir.x
+                    moveDir.y = serverTargetInfo.moveDir.y
+                    radius = serverTargetInfo.radius
+                    speed = serverTargetInfo.speed
+                }
+                serverModel.stonesList.forEach { s ->
+                    val stone = model.stones.find { it.id == s.id && it.playerId == s.playerId }
+                    if (stone == null) {
+                        val newStone = Stone(s.id, s.playerId, startPoint = Vector2(s.position.x, s.position.y),
+                                velocity = Vector2(s.velocity.x, s.velocity.y))
+                        model.stones.add(newStone)
+                        if (s.playerId == playerId) {
+                            model.thrown.removeAll { it.id == s.id }
+                        }
+                    } else {
+                        stone.updateFromServer(Vector2(s.position.x, s.position.y), Vector2(s.velocity.x, s.velocity.y))
                     }
-                } else {
-                    stone.updateFromServer(Vector2(s.position.x, s.position.y), Vector2(s.velocity.x, s.velocity.y))
                 }
             }
         }
