@@ -6,40 +6,46 @@ package com.temas.aimaster;
 public final class ClientProto {
   private ClientProto() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface ThrownStoneOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.temas.aimaster.ThrownStone)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     int getId();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     boolean hasStartPoint();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     com.temas.aimaster.Common.Vector2 getStartPoint();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     boolean hasVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     com.temas.aimaster.Common.Vector2 getVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
   }
@@ -47,11 +53,11 @@ public final class ClientProto {
    * Protobuf type {@code com.temas.aimaster.ThrownStone}
    */
   public  static final class ThrownStone extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.ThrownStone)
       ThrownStoneOrBuilder {
     // Use ThrownStone.newBuilder() to construct.
-    private ThrownStone(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private ThrownStone(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ThrownStone() {
@@ -65,7 +71,8 @@ public final class ClientProto {
     }
     private ThrownStone(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -92,7 +99,7 @@ public final class ClientProto {
               if (startPoint_ != null) {
                 subBuilder = startPoint_.toBuilder();
               }
-              startPoint_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              startPoint_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(startPoint_);
                 startPoint_ = subBuilder.buildPartial();
@@ -105,7 +112,7 @@ public final class ClientProto {
               if (velocity_ != null) {
                 subBuilder = velocity_.toBuilder();
               }
-              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(velocity_);
                 velocity_ = subBuilder.buildPartial();
@@ -116,11 +123,10 @@ public final class ClientProto {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
@@ -130,7 +136,7 @@ public final class ClientProto {
       return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -140,7 +146,7 @@ public final class ClientProto {
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     public int getId() {
       return id_;
@@ -149,19 +155,19 @@ public final class ClientProto {
     public static final int STARTPOINT_FIELD_NUMBER = 2;
     private com.temas.aimaster.Common.Vector2 startPoint_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     public boolean hasStartPoint() {
       return startPoint_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     public com.temas.aimaster.Common.Vector2 getStartPoint() {
       return startPoint_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : startPoint_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
       return getStartPoint();
@@ -170,19 +176,19 @@ public final class ClientProto {
     public static final int VELOCITY_FIELD_NUMBER = 3;
     private com.temas.aimaster.Common.Vector2 velocity_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     public boolean hasVelocity() {
       return velocity_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2 getVelocity() {
       return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
       return getVelocity();
@@ -211,9 +217,8 @@ public final class ClientProto {
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -229,11 +234,70 @@ public final class ClientProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getVelocity());
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ClientProto.ThrownStone)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ClientProto.ThrownStone other = (com.temas.aimaster.ClientProto.ThrownStone) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && (hasStartPoint() == other.hasStartPoint());
+      if (hasStartPoint()) {
+        result = result && getStartPoint()
+            .equals(other.getStartPoint());
+      }
+      result = result && (hasVelocity() == other.hasVelocity());
+      if (hasVelocity()) {
+        result = result && getVelocity()
+            .equals(other.getVelocity());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      if (hasStartPoint()) {
+        hash = (37 * hash) + STARTPOINT_FIELD_NUMBER;
+        hash = (53 * hash) + getStartPoint().hashCode();
+      }
+      if (hasVelocity()) {
+        hash = (37 * hash) + VELOCITY_FIELD_NUMBER;
+        hash = (53 * hash) + getVelocity().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -257,34 +321,40 @@ public final class ClientProto {
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ThrownStone parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -301,7 +371,7 @@ public final class ClientProto {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -309,7 +379,7 @@ public final class ClientProto {
      * Protobuf type {@code com.temas.aimaster.ThrownStone}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.ThrownStone)
         com.temas.aimaster.ClientProto.ThrownStoneOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -317,7 +387,7 @@ public final class ClientProto {
         return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -330,12 +400,13 @@ public final class ClientProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -391,6 +462,32 @@ public final class ClientProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ClientProto.ThrownStone) {
           return mergeFrom((com.temas.aimaster.ClientProto.ThrownStone)other);
@@ -428,7 +525,7 @@ public final class ClientProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ClientProto.ThrownStone) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -439,13 +536,13 @@ public final class ClientProto {
 
       private int id_ ;
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder setId(int value) {
         
@@ -454,7 +551,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder clearId() {
         
@@ -464,16 +561,16 @@ public final class ClientProto {
       }
 
       private com.temas.aimaster.Common.Vector2 startPoint_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> startPointBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public boolean hasStartPoint() {
         return startPointBuilder_ != null || startPoint_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2 getStartPoint() {
         if (startPointBuilder_ == null) {
@@ -483,7 +580,7 @@ public final class ClientProto {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public Builder setStartPoint(com.temas.aimaster.Common.Vector2 value) {
         if (startPointBuilder_ == null) {
@@ -499,7 +596,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public Builder setStartPoint(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -513,7 +610,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public Builder mergeStartPoint(com.temas.aimaster.Common.Vector2 value) {
         if (startPointBuilder_ == null) {
@@ -531,7 +628,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public Builder clearStartPoint() {
         if (startPointBuilder_ == null) {
@@ -545,7 +642,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getStartPointBuilder() {
         
@@ -553,7 +650,7 @@ public final class ClientProto {
         return getStartPointFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getStartPointOrBuilder() {
         if (startPointBuilder_ != null) {
@@ -564,13 +661,13 @@ public final class ClientProto {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 startPoint = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 startPoint = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getStartPointFieldBuilder() {
         if (startPointBuilder_ == null) {
-          startPointBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          startPointBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getStartPoint(),
                   getParentForChildren(),
@@ -581,16 +678,16 @@ public final class ClientProto {
       }
 
       private com.temas.aimaster.Common.Vector2 velocity_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public boolean hasVelocity() {
         return velocityBuilder_ != null || velocity_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2 getVelocity() {
         if (velocityBuilder_ == null) {
@@ -600,7 +697,7 @@ public final class ClientProto {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -616,7 +713,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public Builder setVelocity(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -630,7 +727,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -648,7 +745,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public Builder clearVelocity() {
         if (velocityBuilder_ == null) {
@@ -662,7 +759,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
         
@@ -670,7 +767,7 @@ public final class ClientProto {
         return getVelocityFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
         if (velocityBuilder_ != null) {
@@ -681,13 +778,13 @@ public final class ClientProto {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getVelocityFieldBuilder() {
         if (velocityBuilder_ == null) {
-          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getVelocity(),
                   getParentForChildren(),
@@ -720,24 +817,19 @@ public final class ClientProto {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<ThrownStone> PARSER =
-        new com.google.protobuf.AbstractParser<ThrownStone>() {
+    private static final com.google.protobuf.Parser<ThrownStone>
+        PARSER = new com.google.protobuf.AbstractParser<ThrownStone>() {
       public ThrownStone parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new ThrownStone(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<ThrownStone> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<ThrownStone> getParserForType() {
@@ -755,16 +847,16 @@ public final class ClientProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 timeStamp = 1;</code>
+     * <code>int64 timeStamp = 1;</code>
      */
     long getTimeStamp();
 
     /**
-     * <code>optional int64 packId = 2;</code>
-     *
      * <pre>
      *not used yet
      * </pre>
+     *
+     * <code>int64 packId = 2;</code>
      */
     long getPackId();
 
@@ -796,11 +888,11 @@ public final class ClientProto {
    * Protobuf type {@code com.temas.aimaster.ClientData}
    */
   public  static final class ClientData extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.ClientData)
       ClientDataOrBuilder {
     // Use ClientData.newBuilder() to construct.
-    private ClientData(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private ClientData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ClientData() {
@@ -816,7 +908,8 @@ public final class ClientProto {
     }
     private ClientData(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -848,17 +941,17 @@ public final class ClientProto {
                 throwActions_ = new java.util.ArrayList<com.temas.aimaster.ClientProto.ThrownStone>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              throwActions_.add(input.readMessage(com.temas.aimaster.ClientProto.ThrownStone.PARSER, extensionRegistry));
+              throwActions_.add(
+                  input.readMessage(com.temas.aimaster.ClientProto.ThrownStone.parser(), extensionRegistry));
               break;
             }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           throwActions_ = java.util.Collections.unmodifiableList(throwActions_);
@@ -871,7 +964,7 @@ public final class ClientProto {
       return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ClientData_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ClientData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -882,7 +975,7 @@ public final class ClientProto {
     public static final int TIMESTAMP_FIELD_NUMBER = 1;
     private long timeStamp_;
     /**
-     * <code>optional int64 timeStamp = 1;</code>
+     * <code>int64 timeStamp = 1;</code>
      */
     public long getTimeStamp() {
       return timeStamp_;
@@ -891,11 +984,11 @@ public final class ClientProto {
     public static final int PACKID_FIELD_NUMBER = 2;
     private long packId_;
     /**
-     * <code>optional int64 packId = 2;</code>
-     *
      * <pre>
      *not used yet
      * </pre>
+     *
+     * <code>int64 packId = 2;</code>
      */
     public long getPackId() {
       return packId_;
@@ -959,9 +1052,8 @@ public final class ClientProto {
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -977,11 +1069,64 @@ public final class ClientProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, throwActions_.get(i));
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ClientProto.ClientData)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ClientProto.ClientData other = (com.temas.aimaster.ClientProto.ClientData) obj;
+
+      boolean result = true;
+      result = result && (getTimeStamp()
+          == other.getTimeStamp());
+      result = result && (getPackId()
+          == other.getPackId());
+      result = result && getThrowActionsList()
+          .equals(other.getThrowActionsList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTimeStamp());
+      hash = (37 * hash) + PACKID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getPackId());
+      if (getThrowActionsCount() > 0) {
+        hash = (37 * hash) + THROWACTIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getThrowActionsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ClientProto.ClientData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ClientProto.ClientData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ClientProto.ClientData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1005,34 +1150,40 @@ public final class ClientProto {
     }
     public static com.temas.aimaster.ClientProto.ClientData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ClientData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ClientProto.ClientData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ClientData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ClientProto.ClientData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ClientProto.ClientData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1049,7 +1200,7 @@ public final class ClientProto {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1057,7 +1208,7 @@ public final class ClientProto {
      * Protobuf type {@code com.temas.aimaster.ClientData}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.ClientData)
         com.temas.aimaster.ClientProto.ClientDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -1065,7 +1216,7 @@ public final class ClientProto {
         return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ClientData_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ClientProto.internal_static_com_temas_aimaster_ClientData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1078,12 +1229,13 @@ public final class ClientProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
           getThrowActionsFieldBuilder();
         }
       }
@@ -1139,6 +1291,32 @@ public final class ClientProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ClientProto.ClientData) {
           return mergeFrom((com.temas.aimaster.ClientProto.ClientData)other);
@@ -1175,7 +1353,7 @@ public final class ClientProto {
               throwActions_ = other.throwActions_;
               bitField0_ = (bitField0_ & ~0x00000004);
               throwActionsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getThrowActionsFieldBuilder() : null;
             } else {
               throwActionsBuilder_.addAllMessages(other.throwActions_);
@@ -1199,7 +1377,7 @@ public final class ClientProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ClientProto.ClientData) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1211,13 +1389,13 @@ public final class ClientProto {
 
       private long timeStamp_ ;
       /**
-       * <code>optional int64 timeStamp = 1;</code>
+       * <code>int64 timeStamp = 1;</code>
        */
       public long getTimeStamp() {
         return timeStamp_;
       }
       /**
-       * <code>optional int64 timeStamp = 1;</code>
+       * <code>int64 timeStamp = 1;</code>
        */
       public Builder setTimeStamp(long value) {
         
@@ -1226,7 +1404,7 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional int64 timeStamp = 1;</code>
+       * <code>int64 timeStamp = 1;</code>
        */
       public Builder clearTimeStamp() {
         
@@ -1237,21 +1415,21 @@ public final class ClientProto {
 
       private long packId_ ;
       /**
-       * <code>optional int64 packId = 2;</code>
-       *
        * <pre>
        *not used yet
        * </pre>
+       *
+       * <code>int64 packId = 2;</code>
        */
       public long getPackId() {
         return packId_;
       }
       /**
-       * <code>optional int64 packId = 2;</code>
-       *
        * <pre>
        *not used yet
        * </pre>
+       *
+       * <code>int64 packId = 2;</code>
        */
       public Builder setPackId(long value) {
         
@@ -1260,11 +1438,11 @@ public final class ClientProto {
         return this;
       }
       /**
-       * <code>optional int64 packId = 2;</code>
-       *
        * <pre>
        *not used yet
        * </pre>
+       *
+       * <code>int64 packId = 2;</code>
        */
       public Builder clearPackId() {
         
@@ -1282,7 +1460,7 @@ public final class ClientProto {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> throwActionsBuilder_;
 
       /**
@@ -1498,11 +1676,11 @@ public final class ClientProto {
            getThrowActionsBuilderList() {
         return getThrowActionsFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder> 
           getThrowActionsFieldBuilder() {
         if (throwActionsBuilder_ == null) {
-          throwActionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          throwActionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.temas.aimaster.ClientProto.ThrownStone, com.temas.aimaster.ClientProto.ThrownStone.Builder, com.temas.aimaster.ClientProto.ThrownStoneOrBuilder>(
                   throwActions_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
@@ -1536,24 +1714,19 @@ public final class ClientProto {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<ClientData> PARSER =
-        new com.google.protobuf.AbstractParser<ClientData>() {
+    private static final com.google.protobuf.Parser<ClientData>
+        PARSER = new com.google.protobuf.AbstractParser<ClientData>() {
       public ClientData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new ClientData(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<ClientData> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<ClientData> getParserForType() {
@@ -1566,22 +1739,22 @@ public final class ClientProto {
 
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ThrownStone_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ClientData_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_ClientData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -1610,13 +1783,13 @@ public final class ClientProto {
     internal_static_com_temas_aimaster_ThrownStone_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_temas_aimaster_ThrownStone_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_ThrownStone_descriptor,
         new java.lang.String[] { "Id", "StartPoint", "Velocity", });
     internal_static_com_temas_aimaster_ClientData_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_temas_aimaster_ClientData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_ClientData_descriptor,
         new java.lang.String[] { "TimeStamp", "PackId", "ThrowActions", });
     com.temas.aimaster.Common.getDescriptor();

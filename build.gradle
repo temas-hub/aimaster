@@ -1,7 +1,7 @@
 
 ext {
     nettyVersion = '4.1.0.Beta8'
-    protobufVersion = '3.0.0-alpha-3'
+    protobufVersion = '3.0.0'
 }
 
 allprojects {
@@ -39,5 +39,5 @@ tasks.eclipse.doLast {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
+    gradleVersion = '3.5.1'
 }

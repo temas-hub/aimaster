@@ -6,7 +6,13 @@ package com.temas.aimaster;
 public final class ServerInfo {
   private ServerInfo() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
    * Protobuf enum {@code com.temas.aimaster.PlayerType}
@@ -16,12 +22,12 @@ public final class ServerInfo {
     /**
      * <code>RED = 0;</code>
      */
-    RED(0, 0),
+    RED(0),
     /**
      * <code>BLUE = 1;</code>
      */
-    BLUE(1, 1),
-    UNRECOGNIZED(-1, -1),
+    BLUE(1),
+    UNRECOGNIZED(-1),
     ;
 
     /**
@@ -35,14 +41,22 @@ public final class ServerInfo {
 
 
     public final int getNumber() {
-      if (index == -1) {
+      if (this == UNRECOGNIZED) {
         throw new java.lang.IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
     }
 
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static PlayerType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static PlayerType forNumber(int value) {
       switch (value) {
         case 0: return RED;
         case 1: return BLUE;
@@ -54,17 +68,17 @@ public final class ServerInfo {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<PlayerType>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        PlayerType> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<PlayerType>() {
             public PlayerType findValueByNumber(int number) {
-              return PlayerType.valueOf(number);
+              return PlayerType.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -89,11 +103,9 @@ public final class ServerInfo {
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private PlayerType(int index, int value) {
-      this.index = index;
+    private PlayerType(int value) {
       this.value = value;
     }
 
@@ -105,38 +117,38 @@ public final class ServerInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     boolean hasPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     com.temas.aimaster.Common.Vector2 getPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     boolean hasMoveDir();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     com.temas.aimaster.Common.Vector2 getMoveDir();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getMoveDirOrBuilder();
 
     /**
-     * <code>optional float radius = 3;</code>
+     * <code>float radius = 3;</code>
      */
     float getRadius();
 
     /**
-     * <code>optional float speed = 4;</code>
+     * <code>float speed = 4;</code>
      */
     float getSpeed();
   }
@@ -144,11 +156,11 @@ public final class ServerInfo {
    * Protobuf type {@code com.temas.aimaster.TargetInfo}
    */
   public  static final class TargetInfo extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.TargetInfo)
       TargetInfoOrBuilder {
     // Use TargetInfo.newBuilder() to construct.
-    private TargetInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private TargetInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private TargetInfo() {
@@ -163,7 +175,8 @@ public final class ServerInfo {
     }
     private TargetInfo(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -185,7 +198,7 @@ public final class ServerInfo {
               if (position_ != null) {
                 subBuilder = position_.toBuilder();
               }
-              position_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              position_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(position_);
                 position_ = subBuilder.buildPartial();
@@ -198,7 +211,7 @@ public final class ServerInfo {
               if (moveDir_ != null) {
                 subBuilder = moveDir_.toBuilder();
               }
-              moveDir_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              moveDir_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(moveDir_);
                 moveDir_ = subBuilder.buildPartial();
@@ -219,11 +232,10 @@ public final class ServerInfo {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
@@ -233,7 +245,7 @@ public final class ServerInfo {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_TargetInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_TargetInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -243,19 +255,19 @@ public final class ServerInfo {
     public static final int POSITION_FIELD_NUMBER = 1;
     private com.temas.aimaster.Common.Vector2 position_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     public boolean hasPosition() {
       return position_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     public com.temas.aimaster.Common.Vector2 getPosition() {
       return position_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 1;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
       return getPosition();
@@ -264,19 +276,19 @@ public final class ServerInfo {
     public static final int MOVEDIR_FIELD_NUMBER = 2;
     private com.temas.aimaster.Common.Vector2 moveDir_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     public boolean hasMoveDir() {
       return moveDir_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     public com.temas.aimaster.Common.Vector2 getMoveDir() {
       return moveDir_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : moveDir_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+     * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getMoveDirOrBuilder() {
       return getMoveDir();
@@ -285,7 +297,7 @@ public final class ServerInfo {
     public static final int RADIUS_FIELD_NUMBER = 3;
     private float radius_;
     /**
-     * <code>optional float radius = 3;</code>
+     * <code>float radius = 3;</code>
      */
     public float getRadius() {
       return radius_;
@@ -294,7 +306,7 @@ public final class ServerInfo {
     public static final int SPEED_FIELD_NUMBER = 4;
     private float speed_;
     /**
-     * <code>optional float speed = 4;</code>
+     * <code>float speed = 4;</code>
      */
     public float getSpeed() {
       return speed_;
@@ -326,9 +338,8 @@ public final class ServerInfo {
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -348,11 +359,80 @@ public final class ServerInfo {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(4, speed_);
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ServerInfo.TargetInfo)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ServerInfo.TargetInfo other = (com.temas.aimaster.ServerInfo.TargetInfo) obj;
+
+      boolean result = true;
+      result = result && (hasPosition() == other.hasPosition());
+      if (hasPosition()) {
+        result = result && getPosition()
+            .equals(other.getPosition());
+      }
+      result = result && (hasMoveDir() == other.hasMoveDir());
+      if (hasMoveDir()) {
+        result = result && getMoveDir()
+            .equals(other.getMoveDir());
+      }
+      result = result && (
+          java.lang.Float.floatToIntBits(getRadius())
+          == java.lang.Float.floatToIntBits(
+              other.getRadius()));
+      result = result && (
+          java.lang.Float.floatToIntBits(getSpeed())
+          == java.lang.Float.floatToIntBits(
+              other.getSpeed()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
+      }
+      if (hasMoveDir()) {
+        hash = (37 * hash) + MOVEDIR_FIELD_NUMBER;
+        hash = (53 * hash) + getMoveDir().hashCode();
+      }
+      hash = (37 * hash) + RADIUS_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getRadius());
+      hash = (37 * hash) + SPEED_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getSpeed());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -376,34 +456,40 @@ public final class ServerInfo {
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.TargetInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -420,7 +506,7 @@ public final class ServerInfo {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -428,7 +514,7 @@ public final class ServerInfo {
      * Protobuf type {@code com.temas.aimaster.TargetInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.TargetInfo)
         com.temas.aimaster.ServerInfo.TargetInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -436,7 +522,7 @@ public final class ServerInfo {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_TargetInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_TargetInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -449,12 +535,13 @@ public final class ServerInfo {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -513,6 +600,32 @@ public final class ServerInfo {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ServerInfo.TargetInfo) {
           return mergeFrom((com.temas.aimaster.ServerInfo.TargetInfo)other);
@@ -553,7 +666,7 @@ public final class ServerInfo {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ServerInfo.TargetInfo) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -563,16 +676,16 @@ public final class ServerInfo {
       }
 
       private com.temas.aimaster.Common.Vector2 position_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> positionBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public boolean hasPosition() {
         return positionBuilder_ != null || position_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public com.temas.aimaster.Common.Vector2 getPosition() {
         if (positionBuilder_ == null) {
@@ -582,7 +695,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public Builder setPosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -598,7 +711,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public Builder setPosition(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -612,7 +725,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public Builder mergePosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -630,7 +743,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public Builder clearPosition() {
         if (positionBuilder_ == null) {
@@ -644,7 +757,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getPositionBuilder() {
         
@@ -652,7 +765,7 @@ public final class ServerInfo {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -663,13 +776,13 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 1;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getPositionFieldBuilder() {
         if (positionBuilder_ == null) {
-          positionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getPosition(),
                   getParentForChildren(),
@@ -680,16 +793,16 @@ public final class ServerInfo {
       }
 
       private com.temas.aimaster.Common.Vector2 moveDir_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> moveDirBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public boolean hasMoveDir() {
         return moveDirBuilder_ != null || moveDir_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2 getMoveDir() {
         if (moveDirBuilder_ == null) {
@@ -699,7 +812,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public Builder setMoveDir(com.temas.aimaster.Common.Vector2 value) {
         if (moveDirBuilder_ == null) {
@@ -715,7 +828,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public Builder setMoveDir(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -729,7 +842,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public Builder mergeMoveDir(com.temas.aimaster.Common.Vector2 value) {
         if (moveDirBuilder_ == null) {
@@ -747,7 +860,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public Builder clearMoveDir() {
         if (moveDirBuilder_ == null) {
@@ -761,7 +874,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getMoveDirBuilder() {
         
@@ -769,7 +882,7 @@ public final class ServerInfo {
         return getMoveDirFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getMoveDirOrBuilder() {
         if (moveDirBuilder_ != null) {
@@ -780,13 +893,13 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 moveDir = 2;</code>
+       * <code>.com.temas.aimaster.Vector2 moveDir = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getMoveDirFieldBuilder() {
         if (moveDirBuilder_ == null) {
-          moveDirBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          moveDirBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getMoveDir(),
                   getParentForChildren(),
@@ -798,13 +911,13 @@ public final class ServerInfo {
 
       private float radius_ ;
       /**
-       * <code>optional float radius = 3;</code>
+       * <code>float radius = 3;</code>
        */
       public float getRadius() {
         return radius_;
       }
       /**
-       * <code>optional float radius = 3;</code>
+       * <code>float radius = 3;</code>
        */
       public Builder setRadius(float value) {
         
@@ -813,7 +926,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional float radius = 3;</code>
+       * <code>float radius = 3;</code>
        */
       public Builder clearRadius() {
         
@@ -824,13 +937,13 @@ public final class ServerInfo {
 
       private float speed_ ;
       /**
-       * <code>optional float speed = 4;</code>
+       * <code>float speed = 4;</code>
        */
       public float getSpeed() {
         return speed_;
       }
       /**
-       * <code>optional float speed = 4;</code>
+       * <code>float speed = 4;</code>
        */
       public Builder setSpeed(float value) {
         
@@ -839,7 +952,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional float speed = 4;</code>
+       * <code>float speed = 4;</code>
        */
       public Builder clearSpeed() {
         
@@ -871,24 +984,19 @@ public final class ServerInfo {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<TargetInfo> PARSER =
-        new com.google.protobuf.AbstractParser<TargetInfo>() {
+    private static final com.google.protobuf.Parser<TargetInfo>
+        PARSER = new com.google.protobuf.AbstractParser<TargetInfo>() {
       public TargetInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new TargetInfo(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<TargetInfo> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<TargetInfo> getParserForType() {
@@ -906,38 +1014,38 @@ public final class ServerInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 playerId = 1;</code>
+     * <code>int32 playerId = 1;</code>
      */
     int getPlayerId();
 
     /**
-     * <code>optional int32 id = 2;</code>
+     * <code>int32 id = 2;</code>
      */
     int getId();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     boolean hasPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     com.temas.aimaster.Common.Vector2 getPosition();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder();
 
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     boolean hasVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     com.temas.aimaster.Common.Vector2 getVelocity();
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder();
   }
@@ -945,11 +1053,11 @@ public final class ServerInfo {
    * Protobuf type {@code com.temas.aimaster.StoneInfo}
    */
   public  static final class StoneInfo extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.StoneInfo)
       StoneInfoOrBuilder {
     // Use StoneInfo.newBuilder() to construct.
-    private StoneInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private StoneInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private StoneInfo() {
@@ -964,7 +1072,8 @@ public final class ServerInfo {
     }
     private StoneInfo(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -996,7 +1105,7 @@ public final class ServerInfo {
               if (position_ != null) {
                 subBuilder = position_.toBuilder();
               }
-              position_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              position_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(position_);
                 position_ = subBuilder.buildPartial();
@@ -1009,7 +1118,7 @@ public final class ServerInfo {
               if (velocity_ != null) {
                 subBuilder = velocity_.toBuilder();
               }
-              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.PARSER, extensionRegistry);
+              velocity_ = input.readMessage(com.temas.aimaster.Common.Vector2.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(velocity_);
                 velocity_ = subBuilder.buildPartial();
@@ -1020,11 +1129,10 @@ public final class ServerInfo {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
@@ -1034,7 +1142,7 @@ public final class ServerInfo {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_StoneInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -1044,7 +1152,7 @@ public final class ServerInfo {
     public static final int PLAYERID_FIELD_NUMBER = 1;
     private int playerId_;
     /**
-     * <code>optional int32 playerId = 1;</code>
+     * <code>int32 playerId = 1;</code>
      */
     public int getPlayerId() {
       return playerId_;
@@ -1053,7 +1161,7 @@ public final class ServerInfo {
     public static final int ID_FIELD_NUMBER = 2;
     private int id_;
     /**
-     * <code>optional int32 id = 2;</code>
+     * <code>int32 id = 2;</code>
      */
     public int getId() {
       return id_;
@@ -1062,19 +1170,19 @@ public final class ServerInfo {
     public static final int POSITION_FIELD_NUMBER = 3;
     private com.temas.aimaster.Common.Vector2 position_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     public boolean hasPosition() {
       return position_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2 getPosition() {
       return position_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : position_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+     * <code>.com.temas.aimaster.Vector2 position = 3;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
       return getPosition();
@@ -1083,19 +1191,19 @@ public final class ServerInfo {
     public static final int VELOCITY_FIELD_NUMBER = 4;
     private com.temas.aimaster.Common.Vector2 velocity_;
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public boolean hasVelocity() {
       return velocity_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public com.temas.aimaster.Common.Vector2 getVelocity() {
       return velocity_ == null ? com.temas.aimaster.Common.Vector2.getDefaultInstance() : velocity_;
     }
     /**
-     * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+     * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
      */
     public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
       return getVelocity();
@@ -1127,9 +1235,8 @@ public final class ServerInfo {
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -1149,11 +1256,74 @@ public final class ServerInfo {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getVelocity());
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ServerInfo.StoneInfo)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ServerInfo.StoneInfo other = (com.temas.aimaster.ServerInfo.StoneInfo) obj;
+
+      boolean result = true;
+      result = result && (getPlayerId()
+          == other.getPlayerId());
+      result = result && (getId()
+          == other.getId());
+      result = result && (hasPosition() == other.hasPosition());
+      if (hasPosition()) {
+        result = result && getPosition()
+            .equals(other.getPosition());
+      }
+      result = result && (hasVelocity() == other.hasVelocity());
+      if (hasVelocity()) {
+        result = result && getVelocity()
+            .equals(other.getVelocity());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+      hash = (53 * hash) + getPlayerId();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
+      }
+      if (hasVelocity()) {
+        hash = (37 * hash) + VELOCITY_FIELD_NUMBER;
+        hash = (53 * hash) + getVelocity().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1177,34 +1347,40 @@ public final class ServerInfo {
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.StoneInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1221,7 +1397,7 @@ public final class ServerInfo {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1229,7 +1405,7 @@ public final class ServerInfo {
      * Protobuf type {@code com.temas.aimaster.StoneInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.StoneInfo)
         com.temas.aimaster.ServerInfo.StoneInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -1237,7 +1413,7 @@ public final class ServerInfo {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_StoneInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1250,12 +1426,13 @@ public final class ServerInfo {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -1314,6 +1491,32 @@ public final class ServerInfo {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ServerInfo.StoneInfo) {
           return mergeFrom((com.temas.aimaster.ServerInfo.StoneInfo)other);
@@ -1354,7 +1557,7 @@ public final class ServerInfo {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ServerInfo.StoneInfo) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1365,13 +1568,13 @@ public final class ServerInfo {
 
       private int playerId_ ;
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public int getPlayerId() {
         return playerId_;
       }
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public Builder setPlayerId(int value) {
         
@@ -1380,7 +1583,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public Builder clearPlayerId() {
         
@@ -1391,13 +1594,13 @@ public final class ServerInfo {
 
       private int id_ ;
       /**
-       * <code>optional int32 id = 2;</code>
+       * <code>int32 id = 2;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>optional int32 id = 2;</code>
+       * <code>int32 id = 2;</code>
        */
       public Builder setId(int value) {
         
@@ -1406,7 +1609,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 id = 2;</code>
+       * <code>int32 id = 2;</code>
        */
       public Builder clearId() {
         
@@ -1416,16 +1619,16 @@ public final class ServerInfo {
       }
 
       private com.temas.aimaster.Common.Vector2 position_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> positionBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public boolean hasPosition() {
         return positionBuilder_ != null || position_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2 getPosition() {
         if (positionBuilder_ == null) {
@@ -1435,7 +1638,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder setPosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -1451,7 +1654,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder setPosition(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -1465,7 +1668,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder mergePosition(com.temas.aimaster.Common.Vector2 value) {
         if (positionBuilder_ == null) {
@@ -1483,7 +1686,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public Builder clearPosition() {
         if (positionBuilder_ == null) {
@@ -1497,7 +1700,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getPositionBuilder() {
         
@@ -1505,7 +1708,7 @@ public final class ServerInfo {
         return getPositionFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getPositionOrBuilder() {
         if (positionBuilder_ != null) {
@@ -1516,13 +1719,13 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 position = 3;</code>
+       * <code>.com.temas.aimaster.Vector2 position = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getPositionFieldBuilder() {
         if (positionBuilder_ == null) {
-          positionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getPosition(),
                   getParentForChildren(),
@@ -1533,16 +1736,16 @@ public final class ServerInfo {
       }
 
       private com.temas.aimaster.Common.Vector2 velocity_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> velocityBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public boolean hasVelocity() {
         return velocityBuilder_ != null || velocity_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2 getVelocity() {
         if (velocityBuilder_ == null) {
@@ -1552,7 +1755,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder setVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -1568,7 +1771,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder setVelocity(
           com.temas.aimaster.Common.Vector2.Builder builderForValue) {
@@ -1582,7 +1785,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder mergeVelocity(com.temas.aimaster.Common.Vector2 value) {
         if (velocityBuilder_ == null) {
@@ -1600,7 +1803,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public Builder clearVelocity() {
         if (velocityBuilder_ == null) {
@@ -1614,7 +1817,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2.Builder getVelocityBuilder() {
         
@@ -1622,7 +1825,7 @@ public final class ServerInfo {
         return getVelocityFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
       public com.temas.aimaster.Common.Vector2OrBuilder getVelocityOrBuilder() {
         if (velocityBuilder_ != null) {
@@ -1633,13 +1836,13 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.Vector2 velocity = 4;</code>
+       * <code>.com.temas.aimaster.Vector2 velocity = 4;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder> 
           getVelocityFieldBuilder() {
         if (velocityBuilder_ == null) {
-          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          velocityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.Common.Vector2, com.temas.aimaster.Common.Vector2.Builder, com.temas.aimaster.Common.Vector2OrBuilder>(
                   getVelocity(),
                   getParentForChildren(),
@@ -1672,24 +1875,19 @@ public final class ServerInfo {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<StoneInfo> PARSER =
-        new com.google.protobuf.AbstractParser<StoneInfo>() {
+    private static final com.google.protobuf.Parser<StoneInfo>
+        PARSER = new com.google.protobuf.AbstractParser<StoneInfo>() {
       public StoneInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new StoneInfo(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<StoneInfo> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<StoneInfo> getParserForType() {
@@ -1707,31 +1905,31 @@ public final class ServerInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 playerId = 1;</code>
+     * <code>int32 playerId = 1;</code>
      */
     int getPlayerId();
 
     /**
-     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     * <code>.com.temas.aimaster.PlayerType type = 2;</code>
      */
     int getTypeValue();
     /**
-     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     * <code>.com.temas.aimaster.PlayerType type = 2;</code>
      */
     com.temas.aimaster.ServerInfo.PlayerType getType();
 
     /**
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     java.lang.String getName();
     /**
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>optional int32 score = 4;</code>
+     * <code>int32 score = 4;</code>
      */
     int getScore();
   }
@@ -1739,11 +1937,11 @@ public final class ServerInfo {
    * Protobuf type {@code com.temas.aimaster.PlayerInfo}
    */
   public  static final class PlayerInfo extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.PlayerInfo)
       PlayerInfoOrBuilder {
     // Use PlayerInfo.newBuilder() to construct.
-    private PlayerInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private PlayerInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private PlayerInfo() {
@@ -1760,7 +1958,8 @@ public final class ServerInfo {
     }
     private PlayerInfo(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -1789,9 +1988,9 @@ public final class ServerInfo {
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = bs;
+              name_ = s;
               break;
             }
             case 32: {
@@ -1802,11 +2001,10 @@ public final class ServerInfo {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
@@ -1816,7 +2014,7 @@ public final class ServerInfo {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -1826,7 +2024,7 @@ public final class ServerInfo {
     public static final int PLAYERID_FIELD_NUMBER = 1;
     private int playerId_;
     /**
-     * <code>optional int32 playerId = 1;</code>
+     * <code>int32 playerId = 1;</code>
      */
     public int getPlayerId() {
       return playerId_;
@@ -1835,13 +2033,13 @@ public final class ServerInfo {
     public static final int TYPE_FIELD_NUMBER = 2;
     private int type_;
     /**
-     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     * <code>.com.temas.aimaster.PlayerType type = 2;</code>
      */
     public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+     * <code>.com.temas.aimaster.PlayerType type = 2;</code>
      */
     public com.temas.aimaster.ServerInfo.PlayerType getType() {
       com.temas.aimaster.ServerInfo.PlayerType result = com.temas.aimaster.ServerInfo.PlayerType.valueOf(type_);
@@ -1851,7 +2049,7 @@ public final class ServerInfo {
     public static final int NAME_FIELD_NUMBER = 3;
     private volatile java.lang.Object name_;
     /**
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -1861,14 +2059,12 @@ public final class ServerInfo {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
+        name_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -1887,7 +2083,7 @@ public final class ServerInfo {
     public static final int SCORE_FIELD_NUMBER = 4;
     private int score_;
     /**
-     * <code>optional int32 score = 4;</code>
+     * <code>int32 score = 4;</code>
      */
     public int getScore() {
       return score_;
@@ -1912,16 +2108,15 @@ public final class ServerInfo {
         output.writeEnum(2, type_);
       }
       if (!getNameBytes().isEmpty()) {
-        output.writeBytes(3, getNameBytes());
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, name_);
       }
       if (score_ != 0) {
         output.writeInt32(4, score_);
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -1934,18 +2129,69 @@ public final class ServerInfo {
           .computeEnumSize(2, type_);
       }
       if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getNameBytes());
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, name_);
       }
       if (score_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, score_);
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ServerInfo.PlayerInfo)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ServerInfo.PlayerInfo other = (com.temas.aimaster.ServerInfo.PlayerInfo) obj;
+
+      boolean result = true;
+      result = result && (getPlayerId()
+          == other.getPlayerId());
+      result = result && type_ == other.type_;
+      result = result && getName()
+          .equals(other.getName());
+      result = result && (getScore()
+          == other.getScore());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+      hash = (53 * hash) + getPlayerId();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + type_;
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + SCORE_FIELD_NUMBER;
+      hash = (53 * hash) + getScore();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1969,34 +2215,40 @@ public final class ServerInfo {
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.PlayerInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -2013,7 +2265,7 @@ public final class ServerInfo {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2021,7 +2273,7 @@ public final class ServerInfo {
      * Protobuf type {@code com.temas.aimaster.PlayerInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.PlayerInfo)
         com.temas.aimaster.ServerInfo.PlayerInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -2029,7 +2281,7 @@ public final class ServerInfo {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2042,12 +2294,13 @@ public final class ServerInfo {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -2090,6 +2343,32 @@ public final class ServerInfo {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ServerInfo.PlayerInfo) {
           return mergeFrom((com.temas.aimaster.ServerInfo.PlayerInfo)other);
@@ -2131,7 +2410,7 @@ public final class ServerInfo {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ServerInfo.PlayerInfo) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2142,13 +2421,13 @@ public final class ServerInfo {
 
       private int playerId_ ;
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public int getPlayerId() {
         return playerId_;
       }
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public Builder setPlayerId(int value) {
         
@@ -2157,7 +2436,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 playerId = 1;</code>
+       * <code>int32 playerId = 1;</code>
        */
       public Builder clearPlayerId() {
         
@@ -2168,13 +2447,13 @@ public final class ServerInfo {
 
       private int type_ = 0;
       /**
-       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       * <code>.com.temas.aimaster.PlayerType type = 2;</code>
        */
       public int getTypeValue() {
         return type_;
       }
       /**
-       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       * <code>.com.temas.aimaster.PlayerType type = 2;</code>
        */
       public Builder setTypeValue(int value) {
         type_ = value;
@@ -2182,14 +2461,14 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       * <code>.com.temas.aimaster.PlayerType type = 2;</code>
        */
       public com.temas.aimaster.ServerInfo.PlayerType getType() {
         com.temas.aimaster.ServerInfo.PlayerType result = com.temas.aimaster.ServerInfo.PlayerType.valueOf(type_);
         return result == null ? com.temas.aimaster.ServerInfo.PlayerType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       * <code>.com.temas.aimaster.PlayerType type = 2;</code>
        */
       public Builder setType(com.temas.aimaster.ServerInfo.PlayerType value) {
         if (value == null) {
@@ -2201,7 +2480,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.PlayerType type = 2;</code>
+       * <code>.com.temas.aimaster.PlayerType type = 2;</code>
        */
       public Builder clearType() {
         
@@ -2212,7 +2491,7 @@ public final class ServerInfo {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -2220,16 +2499,14 @@ public final class ServerInfo {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -2245,7 +2522,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -2258,7 +2535,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder clearName() {
         
@@ -2267,14 +2544,15 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+  checkByteStringIsUtf8(value);
+        
         name_ = value;
         onChanged();
         return this;
@@ -2282,13 +2560,13 @@ public final class ServerInfo {
 
       private int score_ ;
       /**
-       * <code>optional int32 score = 4;</code>
+       * <code>int32 score = 4;</code>
        */
       public int getScore() {
         return score_;
       }
       /**
-       * <code>optional int32 score = 4;</code>
+       * <code>int32 score = 4;</code>
        */
       public Builder setScore(int value) {
         
@@ -2297,7 +2575,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 score = 4;</code>
+       * <code>int32 score = 4;</code>
        */
       public Builder clearScore() {
         
@@ -2329,24 +2607,19 @@ public final class ServerInfo {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<PlayerInfo> PARSER =
-        new com.google.protobuf.AbstractParser<PlayerInfo>() {
+    private static final com.google.protobuf.Parser<PlayerInfo>
+        PARSER = new com.google.protobuf.AbstractParser<PlayerInfo>() {
       public PlayerInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new PlayerInfo(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<PlayerInfo> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<PlayerInfo> getParserForType() {
@@ -2366,11 +2639,39 @@ public final class ServerInfo {
     /**
      * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
      */
+    int getPlayersInfoCount();
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+    boolean containsPlayersInfo(
+        int key);
+    /**
+     * Use {@link #getPlayersInfoMap()} instead.
+     */
+    @java.lang.Deprecated
     java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
     getPlayersInfo();
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+    java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
+    getPlayersInfoMap();
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrDefault(
+        int key,
+        com.temas.aimaster.ServerInfo.PlayerInfo defaultValue);
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrThrow(
+        int key);
 
     /**
-     * <code>optional int32 wonPlayer = 2;</code>
+     * <code>int32 wonPlayer = 2;</code>
      */
     int getWonPlayer();
   }
@@ -2378,11 +2679,11 @@ public final class ServerInfo {
    * Protobuf type {@code com.temas.aimaster.GameInfo}
    */
   public  static final class GameInfo extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.GameInfo)
       GameInfoOrBuilder {
     // Use GameInfo.newBuilder() to construct.
-    private GameInfo(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private GameInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private GameInfo() {
@@ -2396,7 +2697,8 @@ public final class ServerInfo {
     }
     private GameInfo(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -2420,9 +2722,10 @@ public final class ServerInfo {
                 mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
-              playersInfo = input.readMessage(
+              playersInfo__ = input.readMessage(
                   PlayersInfoDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              playersInfo_.getMutableMap().put(playersInfo.getKey(), playersInfo.getValue());
+              playersInfo_.getMutableMap().put(
+                  playersInfo__.getKey(), playersInfo__.getValue());
               break;
             }
             case 16: {
@@ -2433,11 +2736,10 @@ public final class ServerInfo {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
@@ -2458,7 +2760,7 @@ public final class ServerInfo {
               "Invalid map field number: " + number);
       }
     }
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2485,21 +2787,67 @@ public final class ServerInfo {
       if (playersInfo_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
             PlayersInfoDefaultEntryHolder.defaultEntry);
-     }
+      }
       return playersInfo_;
+    }
+
+    public int getPlayersInfoCount() {
+      return internalGetPlayersInfo().getMap().size();
     }
     /**
      * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
      */
 
+    public boolean containsPlayersInfo(
+        int key) {
+      
+      return internalGetPlayersInfo().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getPlayersInfoMap()} instead.
+     */
+    @java.lang.Deprecated
     public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfo() {
+      return getPlayersInfoMap();
+    }
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfoMap() {
       return internalGetPlayersInfo().getMap();
+    }
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    public com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrDefault(
+        int key,
+        com.temas.aimaster.ServerInfo.PlayerInfo defaultValue) {
+      
+      java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> map =
+          internalGetPlayersInfo().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+     */
+
+    public com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> map =
+          internalGetPlayersInfo().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
     }
 
     public static final int WONPLAYER_FIELD_NUMBER = 2;
     private int wonPlayer_;
     /**
-     * <code>optional int32 wonPlayer = 2;</code>
+     * <code>int32 wonPlayer = 2;</code>
      */
     public int getWonPlayer() {
       return wonPlayer_;
@@ -2517,45 +2865,88 @@ public final class ServerInfo {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (java.util.Map.Entry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> entry
-           : internalGetPlayersInfo().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
-        playersInfo = PlayersInfoDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(1, playersInfo);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetPlayersInfo(),
+          PlayersInfoDefaultEntryHolder.defaultEntry,
+          1);
       if (wonPlayer_ != 0) {
         output.writeInt32(2, wonPlayer_);
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       for (java.util.Map.Entry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> entry
            : internalGetPlayersInfo().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
-        playersInfo = PlayersInfoDefaultEntryHolder.defaultEntry.newBuilderForType()
+        playersInfo__ = PlayersInfoDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, playersInfo);
+            .computeMessageSize(1, playersInfo__);
       }
       if (wonPlayer_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, wonPlayer_);
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ServerInfo.GameInfo)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ServerInfo.GameInfo other = (com.temas.aimaster.ServerInfo.GameInfo) obj;
+
+      boolean result = true;
+      result = result && internalGetPlayersInfo().equals(
+          other.internalGetPlayersInfo());
+      result = result && (getWonPlayer()
+          == other.getWonPlayer());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (!internalGetPlayersInfo().getMap().isEmpty()) {
+        hash = (37 * hash) + PLAYERSINFO_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetPlayersInfo().hashCode();
+      }
+      hash = (37 * hash) + WONPLAYER_FIELD_NUMBER;
+      hash = (53 * hash) + getWonPlayer();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2579,34 +2970,40 @@ public final class ServerInfo {
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.GameInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -2623,7 +3020,7 @@ public final class ServerInfo {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2631,7 +3028,7 @@ public final class ServerInfo {
      * Protobuf type {@code com.temas.aimaster.GameInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.GameInfo)
         com.temas.aimaster.ServerInfo.GameInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -2661,7 +3058,7 @@ public final class ServerInfo {
                 "Invalid map field number: " + number);
         }
       }
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2674,12 +3071,13 @@ public final class ServerInfo {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -2719,6 +3117,32 @@ public final class ServerInfo {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ServerInfo.GameInfo) {
           return mergeFrom((com.temas.aimaster.ServerInfo.GameInfo)other);
@@ -2752,7 +3176,7 @@ public final class ServerInfo {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ServerInfo.GameInfo) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2769,7 +3193,7 @@ public final class ServerInfo {
         if (playersInfo_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
               PlayersInfoDefaultEntryHolder.defaultEntry);
-       }
+        }
         return playersInfo_;
       }
       private com.google.protobuf.MapField<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
@@ -2784,29 +3208,116 @@ public final class ServerInfo {
         }
         return playersInfo_;
       }
+
+      public int getPlayersInfoCount() {
+        return internalGetPlayersInfo().getMap().size();
+      }
       /**
        * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
        */
+
+      public boolean containsPlayersInfo(
+          int key) {
+        
+        return internalGetPlayersInfo().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getPlayersInfoMap()} instead.
+       */
+      @java.lang.Deprecated
       public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfo() {
+        return getPlayersInfoMap();
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> getPlayersInfoMap() {
         return internalGetPlayersInfo().getMap();
       }
       /**
        * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
        */
+
+      public com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrDefault(
+          int key,
+          com.temas.aimaster.ServerInfo.PlayerInfo defaultValue) {
+        
+        java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> map =
+            internalGetPlayersInfo().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+
+      public com.temas.aimaster.ServerInfo.PlayerInfo getPlayersInfoOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> map =
+            internalGetPlayersInfo().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearPlayersInfo() {
+        internalGetMutablePlayersInfo().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+
+      public Builder removePlayersInfo(
+          int key) {
+        
+        internalGetMutablePlayersInfo().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
       public java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo>
       getMutablePlayersInfo() {
         return internalGetMutablePlayersInfo().getMutableMap();
       }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+      public Builder putPlayersInfo(
+          int key,
+          com.temas.aimaster.ServerInfo.PlayerInfo value) {
+        
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutablePlayersInfo().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .com.temas.aimaster.PlayerInfo&gt; playersInfo = 1;</code>
+       */
+
+      public Builder putAllPlayersInfo(
+          java.util.Map<java.lang.Integer, com.temas.aimaster.ServerInfo.PlayerInfo> values) {
+        internalGetMutablePlayersInfo().getMutableMap()
+            .putAll(values);
+        return this;
+      }
 
       private int wonPlayer_ ;
       /**
-       * <code>optional int32 wonPlayer = 2;</code>
+       * <code>int32 wonPlayer = 2;</code>
        */
       public int getWonPlayer() {
         return wonPlayer_;
       }
       /**
-       * <code>optional int32 wonPlayer = 2;</code>
+       * <code>int32 wonPlayer = 2;</code>
        */
       public Builder setWonPlayer(int value) {
         
@@ -2815,7 +3326,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int32 wonPlayer = 2;</code>
+       * <code>int32 wonPlayer = 2;</code>
        */
       public Builder clearWonPlayer() {
         
@@ -2847,24 +3358,19 @@ public final class ServerInfo {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<GameInfo> PARSER =
-        new com.google.protobuf.AbstractParser<GameInfo>() {
+    private static final com.google.protobuf.Parser<GameInfo>
+        PARSER = new com.google.protobuf.AbstractParser<GameInfo>() {
       public GameInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new GameInfo(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<GameInfo> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<GameInfo> getParserForType() {
@@ -2882,25 +3388,25 @@ public final class ServerInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 timestamp = 1;</code>
+     * <code>int64 timestamp = 1;</code>
      */
     long getTimestamp();
 
     /**
-     * <code>optional int64 lastPackId = 2;</code>
+     * <code>int64 lastPackId = 2;</code>
      */
     long getLastPackId();
 
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     boolean hasTargetInfo();
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo();
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder();
 
@@ -2932,11 +3438,11 @@ public final class ServerInfo {
    * Protobuf type {@code com.temas.aimaster.ModelType}
    */
   public  static final class ModelType extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.temas.aimaster.ModelType)
       ModelTypeOrBuilder {
     // Use ModelType.newBuilder() to construct.
-    private ModelType(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private ModelType(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ModelType() {
@@ -2952,7 +3458,8 @@ public final class ServerInfo {
     }
     private ModelType(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -2984,7 +3491,7 @@ public final class ServerInfo {
               if (targetInfo_ != null) {
                 subBuilder = targetInfo_.toBuilder();
               }
-              targetInfo_ = input.readMessage(com.temas.aimaster.ServerInfo.TargetInfo.PARSER, extensionRegistry);
+              targetInfo_ = input.readMessage(com.temas.aimaster.ServerInfo.TargetInfo.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(targetInfo_);
                 targetInfo_ = subBuilder.buildPartial();
@@ -2997,17 +3504,17 @@ public final class ServerInfo {
                 stones_ = new java.util.ArrayList<com.temas.aimaster.ServerInfo.StoneInfo>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              stones_.add(input.readMessage(com.temas.aimaster.ServerInfo.StoneInfo.PARSER, extensionRegistry));
+              stones_.add(
+                  input.readMessage(com.temas.aimaster.ServerInfo.StoneInfo.parser(), extensionRegistry));
               break;
             }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           stones_ = java.util.Collections.unmodifiableList(stones_);
@@ -3020,7 +3527,7 @@ public final class ServerInfo {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_ModelType_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_ModelType_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -3031,7 +3538,7 @@ public final class ServerInfo {
     public static final int TIMESTAMP_FIELD_NUMBER = 1;
     private long timestamp_;
     /**
-     * <code>optional int64 timestamp = 1;</code>
+     * <code>int64 timestamp = 1;</code>
      */
     public long getTimestamp() {
       return timestamp_;
@@ -3040,7 +3547,7 @@ public final class ServerInfo {
     public static final int LASTPACKID_FIELD_NUMBER = 2;
     private long lastPackId_;
     /**
-     * <code>optional int64 lastPackId = 2;</code>
+     * <code>int64 lastPackId = 2;</code>
      */
     public long getLastPackId() {
       return lastPackId_;
@@ -3049,19 +3556,19 @@ public final class ServerInfo {
     public static final int TARGETINFO_FIELD_NUMBER = 3;
     private com.temas.aimaster.ServerInfo.TargetInfo targetInfo_;
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public boolean hasTargetInfo() {
       return targetInfo_ != null;
     }
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo() {
       return targetInfo_ == null ? com.temas.aimaster.ServerInfo.TargetInfo.getDefaultInstance() : targetInfo_;
     }
     /**
-     * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+     * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
      */
     public com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder() {
       return getTargetInfo();
@@ -3128,9 +3635,8 @@ public final class ServerInfo {
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -3150,11 +3656,73 @@ public final class ServerInfo {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, stones_.get(i));
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.temas.aimaster.ServerInfo.ModelType)) {
+        return super.equals(obj);
+      }
+      com.temas.aimaster.ServerInfo.ModelType other = (com.temas.aimaster.ServerInfo.ModelType) obj;
+
+      boolean result = true;
+      result = result && (getTimestamp()
+          == other.getTimestamp());
+      result = result && (getLastPackId()
+          == other.getLastPackId());
+      result = result && (hasTargetInfo() == other.hasTargetInfo());
+      if (hasTargetInfo()) {
+        result = result && getTargetInfo()
+            .equals(other.getTargetInfo());
+      }
+      result = result && getStonesList()
+          .equals(other.getStonesList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTimestamp());
+      hash = (37 * hash) + LASTPACKID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getLastPackId());
+      if (hasTargetInfo()) {
+        hash = (37 * hash) + TARGETINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getTargetInfo().hashCode();
+      }
+      if (getStonesCount() > 0) {
+        hash = (37 * hash) + STONES_FIELD_NUMBER;
+        hash = (53 * hash) + getStonesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3178,34 +3746,40 @@ public final class ServerInfo {
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.temas.aimaster.ServerInfo.ModelType parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -3222,7 +3796,7 @@ public final class ServerInfo {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3230,7 +3804,7 @@ public final class ServerInfo {
      * Protobuf type {@code com.temas.aimaster.ModelType}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.temas.aimaster.ModelType)
         com.temas.aimaster.ServerInfo.ModelTypeOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -3238,7 +3812,7 @@ public final class ServerInfo {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_ModelType_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.temas.aimaster.ServerInfo.internal_static_com_temas_aimaster_ModelType_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3251,12 +3825,13 @@ public final class ServerInfo {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
           getStonesFieldBuilder();
         }
       }
@@ -3323,6 +3898,32 @@ public final class ServerInfo {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.temas.aimaster.ServerInfo.ModelType) {
           return mergeFrom((com.temas.aimaster.ServerInfo.ModelType)other);
@@ -3362,7 +3963,7 @@ public final class ServerInfo {
               stones_ = other.stones_;
               bitField0_ = (bitField0_ & ~0x00000008);
               stonesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getStonesFieldBuilder() : null;
             } else {
               stonesBuilder_.addAllMessages(other.stones_);
@@ -3386,7 +3987,7 @@ public final class ServerInfo {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.temas.aimaster.ServerInfo.ModelType) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3398,13 +3999,13 @@ public final class ServerInfo {
 
       private long timestamp_ ;
       /**
-       * <code>optional int64 timestamp = 1;</code>
+       * <code>int64 timestamp = 1;</code>
        */
       public long getTimestamp() {
         return timestamp_;
       }
       /**
-       * <code>optional int64 timestamp = 1;</code>
+       * <code>int64 timestamp = 1;</code>
        */
       public Builder setTimestamp(long value) {
         
@@ -3413,7 +4014,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int64 timestamp = 1;</code>
+       * <code>int64 timestamp = 1;</code>
        */
       public Builder clearTimestamp() {
         
@@ -3424,13 +4025,13 @@ public final class ServerInfo {
 
       private long lastPackId_ ;
       /**
-       * <code>optional int64 lastPackId = 2;</code>
+       * <code>int64 lastPackId = 2;</code>
        */
       public long getLastPackId() {
         return lastPackId_;
       }
       /**
-       * <code>optional int64 lastPackId = 2;</code>
+       * <code>int64 lastPackId = 2;</code>
        */
       public Builder setLastPackId(long value) {
         
@@ -3439,7 +4040,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional int64 lastPackId = 2;</code>
+       * <code>int64 lastPackId = 2;</code>
        */
       public Builder clearLastPackId() {
         
@@ -3449,16 +4050,16 @@ public final class ServerInfo {
       }
 
       private com.temas.aimaster.ServerInfo.TargetInfo targetInfo_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.ServerInfo.TargetInfo, com.temas.aimaster.ServerInfo.TargetInfo.Builder, com.temas.aimaster.ServerInfo.TargetInfoOrBuilder> targetInfoBuilder_;
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public boolean hasTargetInfo() {
         return targetInfoBuilder_ != null || targetInfo_ != null;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfo getTargetInfo() {
         if (targetInfoBuilder_ == null) {
@@ -3468,7 +4069,7 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder setTargetInfo(com.temas.aimaster.ServerInfo.TargetInfo value) {
         if (targetInfoBuilder_ == null) {
@@ -3484,7 +4085,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder setTargetInfo(
           com.temas.aimaster.ServerInfo.TargetInfo.Builder builderForValue) {
@@ -3498,7 +4099,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder mergeTargetInfo(com.temas.aimaster.ServerInfo.TargetInfo value) {
         if (targetInfoBuilder_ == null) {
@@ -3516,7 +4117,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public Builder clearTargetInfo() {
         if (targetInfoBuilder_ == null) {
@@ -3530,7 +4131,7 @@ public final class ServerInfo {
         return this;
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfo.Builder getTargetInfoBuilder() {
         
@@ -3538,7 +4139,7 @@ public final class ServerInfo {
         return getTargetInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
       public com.temas.aimaster.ServerInfo.TargetInfoOrBuilder getTargetInfoOrBuilder() {
         if (targetInfoBuilder_ != null) {
@@ -3549,13 +4150,13 @@ public final class ServerInfo {
         }
       }
       /**
-       * <code>optional .com.temas.aimaster.TargetInfo targetInfo = 3;</code>
+       * <code>.com.temas.aimaster.TargetInfo targetInfo = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           com.temas.aimaster.ServerInfo.TargetInfo, com.temas.aimaster.ServerInfo.TargetInfo.Builder, com.temas.aimaster.ServerInfo.TargetInfoOrBuilder> 
           getTargetInfoFieldBuilder() {
         if (targetInfoBuilder_ == null) {
-          targetInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          targetInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.temas.aimaster.ServerInfo.TargetInfo, com.temas.aimaster.ServerInfo.TargetInfo.Builder, com.temas.aimaster.ServerInfo.TargetInfoOrBuilder>(
                   getTargetInfo(),
                   getParentForChildren(),
@@ -3574,7 +4175,7 @@ public final class ServerInfo {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.temas.aimaster.ServerInfo.StoneInfo, com.temas.aimaster.ServerInfo.StoneInfo.Builder, com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> stonesBuilder_;
 
       /**
@@ -3790,11 +4391,11 @@ public final class ServerInfo {
            getStonesBuilderList() {
         return getStonesFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.temas.aimaster.ServerInfo.StoneInfo, com.temas.aimaster.ServerInfo.StoneInfo.Builder, com.temas.aimaster.ServerInfo.StoneInfoOrBuilder> 
           getStonesFieldBuilder() {
         if (stonesBuilder_ == null) {
-          stonesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          stonesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.temas.aimaster.ServerInfo.StoneInfo, com.temas.aimaster.ServerInfo.StoneInfo.Builder, com.temas.aimaster.ServerInfo.StoneInfoOrBuilder>(
                   stones_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
@@ -3828,24 +4429,19 @@ public final class ServerInfo {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<ModelType> PARSER =
-        new com.google.protobuf.AbstractParser<ModelType>() {
+    private static final com.google.protobuf.Parser<ModelType>
+        PARSER = new com.google.protobuf.AbstractParser<ModelType>() {
       public ModelType parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new ModelType(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<ModelType> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<ModelType> getParserForType() {
@@ -3858,42 +4454,42 @@ public final class ServerInfo {
 
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_TargetInfo_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_TargetInfo_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_StoneInfo_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_PlayerInfo_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_GameInfo_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_temas_aimaster_ModelType_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_temas_aimaster_ModelType_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -3935,37 +4531,37 @@ public final class ServerInfo {
     internal_static_com_temas_aimaster_TargetInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_temas_aimaster_TargetInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_TargetInfo_descriptor,
         new java.lang.String[] { "Position", "MoveDir", "Radius", "Speed", });
     internal_static_com_temas_aimaster_StoneInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_temas_aimaster_StoneInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_StoneInfo_descriptor,
         new java.lang.String[] { "PlayerId", "Id", "Position", "Velocity", });
     internal_static_com_temas_aimaster_PlayerInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_temas_aimaster_PlayerInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_PlayerInfo_descriptor,
         new java.lang.String[] { "PlayerId", "Type", "Name", "Score", });
     internal_static_com_temas_aimaster_GameInfo_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_temas_aimaster_GameInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_GameInfo_descriptor,
         new java.lang.String[] { "PlayersInfo", "WonPlayer", });
     internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor =
       internal_static_com_temas_aimaster_GameInfo_descriptor.getNestedTypes().get(0);
     internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_GameInfo_PlayersInfoEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_com_temas_aimaster_ModelType_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_temas_aimaster_ModelType_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_temas_aimaster_ModelType_descriptor,
         new java.lang.String[] { "Timestamp", "LastPackId", "TargetInfo", "Stones", });
     com.temas.aimaster.Common.getDescriptor();
