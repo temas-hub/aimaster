@@ -41,8 +41,8 @@ dependencies {
 }
 
 android {
-    buildToolsVersion '26.0.2'
-    compileSdkVersion 24
+    buildToolsVersion "27.0.1"
+    compileSdkVersion 26
     defaultConfig {
         jackOptions {
             enabled true

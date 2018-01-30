@@ -1,7 +1,8 @@
 
 ext {
     nettyVersion = '4.1.0.Beta8'
-    protobufVersion = '3.0.0'
+    protobufVersion = '3.3.0'
+    kotlinVer = '1.2.10'
 }
 
 allprojects {
