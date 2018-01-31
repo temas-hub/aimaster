@@ -27,7 +27,7 @@ class GameServer {
         val serverManager = ctx.getBean(ServerManager::class.java)
         try {
             //serverManager.startServers();
-            serverManager.startServers(18090, 843, 50122)
+            serverManager.startServers(18090, 0, 50122)
         } catch (e: Exception) {
             LOG.error("Unable to start servers cleanly: {}", e)
         }

@@ -13,8 +13,8 @@ public class DesktopLauncher {
 			cfg.width = Integer.valueOf(args[0]);
 			cfg.height = Integer.valueOf(args[1]);
 		} else {        // 0.6453
-			cfg.width = 839;
-			cfg.height = 1300;
+			cfg.width = 452;
+			cfg.height = 700;
 		}
 		cfg.x = -1; // center
 		cfg.y = -1;
