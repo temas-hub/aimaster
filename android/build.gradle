@@ -2,9 +2,10 @@ buildscript {
     System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.1.0'
     }
 }
 
@@ -41,12 +42,11 @@ dependencies {
 }
 
 android {
-    buildToolsVersion "27.0.1"
+    buildToolsVersion "27.0.3"
     compileSdkVersion 26
     defaultConfig {
-        jackOptions {
-            enabled true
-        }
+        minSdkVersion 19
+        targetSdkVersion 19
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -63,7 +63,7 @@ android {
             jniLibs.srcDirs = ['libs']
         }
 
-        instrumentTest.setRoot('tests')
+        androidTest.setRoot('tests')
     }
 }
 

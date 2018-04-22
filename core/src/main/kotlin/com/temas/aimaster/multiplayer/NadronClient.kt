@@ -37,7 +37,7 @@ class NadronClient(val model: Model) {
 
     companion object {
         // server info
-        val SERVER_HOST_NAME = "localhost"
+        val SERVER_HOST_NAME = System.getProperty("serverHost","localhost")
         val DEFAULT_LOGIN = "default_login"
         val DEFAULT_PASSWORD = ""
         val DEFAULT_ROOM_NAME = "defaultRoom"

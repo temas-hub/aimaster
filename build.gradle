@@ -31,6 +31,7 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
+        google()
     }
 }
 
@@ -41,4 +42,9 @@ tasks.eclipse.doLast {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5.1'
+}
+buildscript {
+    repositories {
+        google()
+    }
 }
