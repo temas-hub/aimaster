@@ -1,6 +1,6 @@
 buildscript {
     ext{
-        kotlinVer = '1.2.10'
+        kotlinVer = '1.3.21'
     }
     repositories {
         mavenCentral()
@@ -21,8 +21,4 @@ sourceCompatibility = 1.8
 
 dependencies {
     compile project(":core")
-}
-
-eclipse.project {
-    name = appName + "-core"
 }

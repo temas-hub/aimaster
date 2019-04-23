@@ -1,4 +1,4 @@
-package com.temas.gameserver.aimmaster
+package com.temas.aimaster.server
 
 import io.nadron.server.ServerManager
 import org.slf4j.LoggerFactory
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @since 21.09.2016
  */
 
-fun main(args: Array<String>) {
+fun main() {
     GameServer().start()
 }
 

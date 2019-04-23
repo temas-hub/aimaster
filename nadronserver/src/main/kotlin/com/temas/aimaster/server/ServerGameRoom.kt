@@ -1,4 +1,4 @@
-package com.temas.gameserver.aimmaster
+package com.temas.aimaster.server
 
 import com.google.protobuf.MessageLite
 import com.google.protobuf.MessageLiteOrBuilder
@@ -7,11 +7,8 @@ import com.temas.aimaster.ServerInfo
 import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
 import com.temas.aimaster.model.PhysicsWorld
-import com.temas.aimaster.multiplayer.NadronClient
-import com.temas.aimaster.server.Users
 import io.nadron.app.Player
 import io.nadron.app.PlayerSession
-import io.nadron.app.impl.DefaultPlayer
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.communication.DeliveryGuaranty.*
 import io.nadron.communication.NettyMessageBuffer
@@ -20,9 +17,9 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
-import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.read
 
 
 /**
@@ -91,20 +88,22 @@ class ServerGameRoom(builder: GameRoomSessionBuilder) : GameRoomSession(builder)
     }
 
     private fun buildUpdateData(): ServerInfo.ModelType.Builder {
-        val builder =  ServerInfo.ModelType.newBuilder().
-                setTimestamp(System.currentTimeMillis()).
-                setTargetInfo(ServerInfo.TargetInfo.newBuilder().
-                        setPosition(
-                                Common.Vector2.newBuilder().setX(model.target.center.x).
-                                        setY(model.target.center.y)).
-                        setMoveDir(Common.Vector2.newBuilder().setX(model.target.moveDir.x).
-                                setY(model.target.moveDir.y)).
-                        setRadius(model.target.radius).
-                        setSpeed(model.target.speed))
-        model.stones.forEach {
-            builder.addStones(createStoneData(it))
+        model.lock.read {
+            val builder =  ServerInfo.ModelType.newBuilder().
+                    setTimestamp(System.currentTimeMillis()).
+                    setTargetInfo(ServerInfo.TargetInfo.newBuilder().
+                            setPosition(
+                                    Common.Vector2.newBuilder().setX(model.target.center.x).
+                                            setY(model.target.center.y)).
+                            setMoveDir(Common.Vector2.newBuilder().setX(model.target.moveDir.x).
+                                    setY(model.target.moveDir.y)).
+                            setRadius(model.target.radius).
+                            setSpeed(model.target.speed))
+            model.stones.forEach {
+                builder.addStones(createStoneData(it))
+            }
+            return builder
         }
-        return builder
     }
 
     private fun createStoneData(s: PhysicalStone): ServerInfo.StoneInfo.Builder {

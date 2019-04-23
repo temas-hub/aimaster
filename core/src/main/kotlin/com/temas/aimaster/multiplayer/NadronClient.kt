@@ -30,8 +30,6 @@ import kotlin.concurrent.write
  * @since 22.09.2016
  */
 
-private var inPacketCount: Long = 0
-
 
 class NadronClient(val model: Model) {
 
@@ -60,6 +58,8 @@ class NadronClient(val model: Model) {
             }
             return field
         }
+
+    private var inPacketCount: Long = 0
 
     private inner class InBoundHandler(session: Session) : AbstractSessionEventHandler(session) {
 

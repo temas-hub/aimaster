@@ -1,8 +1,6 @@
 package com.temas.aimaster.server
 
-import com.temas.aimaster.dao.UserRepository
 import com.temas.aimaster.multiplayer.NadronClient
-import com.temas.gameserver.aimmaster.ServerGameRoom
 import io.nadron.app.Game
 import io.nadron.app.GameRoom
 import io.nadron.app.Player

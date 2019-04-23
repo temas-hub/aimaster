@@ -1,9 +1,6 @@
 package com.temas.aimaster.server
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Preferences
 import com.temas.aimaster.dao.UserRepository
-import com.temas.gameserver.aimmaster.ServerGameRoom
 import io.nadron.app.Player
 import io.nadron.app.impl.DefaultPlayer
 import org.slf4j.LoggerFactory

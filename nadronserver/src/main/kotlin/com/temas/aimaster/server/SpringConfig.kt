@@ -1,20 +1,17 @@
-package com.temas.gameserver.aimmaster
+package com.temas.aimaster.server
 
 import com.temas.aimaster.multiplayer.NadronClient
-import com.temas.aimaster.server.DefaultLookupService
 import io.nadron.app.Game
 import io.nadron.app.GameRoom
 import io.nadron.app.impl.GameRoomSession
 import io.nadron.app.impl.SimpleGame
 import io.nadron.protocols.Protocol
 import io.nadron.service.LookupService
-import io.nadron.service.impl.GameStateManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.ImportResource
-import java.util.*
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>

@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body
 import com.temas.aimaster.model.AbstractModel
 import com.temas.aimaster.model.Target
 import com.temas.aimaster.model.PhysicsWorld
+import kotlin.concurrent.write
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -12,11 +13,13 @@ import com.temas.aimaster.model.PhysicsWorld
 class ServerModel(physics: PhysicsWorld): AbstractModel<PhysicalStone>(physics) {
 
     fun update(delta: Float) {
-        target.update(delta)
-        stones.forEach {
-            it.update(delta)
+        lock.write {
+            target.update(delta)
+            stones.forEach {
+                it.update(delta)
+            }
+            physics.update(delta)
         }
-        physics.update(delta)
     }
 
     override fun createTarget(): Target {

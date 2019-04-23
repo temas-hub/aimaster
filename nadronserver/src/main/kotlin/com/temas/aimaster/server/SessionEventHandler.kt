@@ -1,4 +1,4 @@
-package com.temas.gameserver.aimmaster
+package com.temas.aimaster.server
 
 import com.badlogic.gdx.math.Vector2
 import com.google.protobuf.MessageLite
@@ -14,6 +14,8 @@ import io.netty.buffer.ByteBuf
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.read
+import kotlin.concurrent.write
 
 /**
  * @author Artem Zhdanov <temas_coder@yahoo.com>
@@ -59,15 +61,17 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
         if (lastPackId < clientData.packId) {
             lastPackId = clientData.packId
             val currentTime = System.currentTimeMillis()
-            clientData.throwActionsList.forEach {
-                if (it.id > lastStoneId) {
-                    val stone = PhysicalStone(playerId = session.player.id as Int,
-                            id = it.id,
-                            startPoint = Vector2(it.startPoint.x, it.startPoint.y),
-                            velocity = Vector2(it.velocity.x, it.velocity.y),
-                            world = model.physics.world)
-                    lastStoneId = it.id
-                    model.stones.add(stone)
+            model.lock.write {
+                clientData.throwActionsList.forEach {
+                    if (it.id > lastStoneId) {
+                        val stone = PhysicalStone(playerId = session.player.id as Int,
+                                id = it.id,
+                                startPoint = Vector2(it.startPoint.x, it.startPoint.y),
+                                velocity = Vector2(it.velocity.x, it.velocity.y),
+                                world = model.physics.world)
+                        lastStoneId = it.id
+                        model.stones.add(stone)
+                    }
                 }
             }
         }
