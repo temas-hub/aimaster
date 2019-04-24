@@ -5,7 +5,6 @@ import com.google.protobuf.MessageLite
 import com.temas.aimaster.ClientProto
 import com.temas.aimaster.core.PhysicalStone
 import com.temas.aimaster.core.ServerModel
-import com.temas.aimaster.server.SimulationRoom
 import io.nadron.app.PlayerSession
 import io.nadron.communication.NettyMessageBuffer
 import io.nadron.event.Event
@@ -13,8 +12,7 @@ import io.nadron.event.impl.DefaultSessionEventHandler
 import io.netty.buffer.ByteBuf
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.concurrent.read
+import kotlin.collections.HashMap
 import kotlin.concurrent.write
 
 /**
@@ -24,7 +22,7 @@ import kotlin.concurrent.write
 
 
 
-class SessionEventHandler(val model: ServerModel, val session : PlayerSession) : DefaultSessionEventHandler(session) {
+class SessionEventHandler(val model: ServerModel, session : PlayerSession) : DefaultSessionEventHandler(session) {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(SessionEventHandler::class.java)
@@ -32,13 +30,14 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
         var inPacketCount: Long = 0
     }
 
+    private val lastStoneIds: MutableMap<Int, Int> = HashMap()
     private val prototype: MessageLite = ClientProto.ClientData.getDefaultInstance()
     var lastUpdateTime: Long = 0
-    var lastStoneId: Int = -1
 
-    var lastPackId: Long = -1
+    var lastPackIds: MutableMap<Int, Long> = HashMap()
     val simulationRoom = SimulationRoom()
 
+    fun getPlayer() = (session as PlayerSession).player
 
     override fun onDataIn(event: Event) {
         if (event.timeStamp > lastUpdateTime) {
@@ -58,26 +57,29 @@ class SessionEventHandler(val model: ServerModel, val session : PlayerSession) :
     }
 
     private fun updateModel(clientData: ClientProto.ClientData) {
-        if (lastPackId < clientData.packId) {
-            lastPackId = clientData.packId
-            val currentTime = System.currentTimeMillis()
+        val playerId = getPlayer().id as Int
+        val lastPacketId = lastPackIds.getOrPut(playerId, { clientData.packId })
+        if (lastPacketId < clientData.packId) {
             model.lock.write {
                 clientData.throwActionsList.forEach {
-                    if (it.id > lastStoneId) {
-                        val stone = PhysicalStone(playerId = session.player.id as Int,
-                                id = it.id,
+                    val stoneId = it.id
+                    val lastStoneId = lastStoneIds.getOrPut(playerId, { stoneId })
+                    if (lastStoneId < stoneId) {
+                        val stone = PhysicalStone(playerId = playerId,
+                                id = stoneId,
                                 startPoint = Vector2(it.startPoint.x, it.startPoint.y),
                                 velocity = Vector2(it.velocity.x, it.velocity.y),
                                 world = model.physics.world)
-                        lastStoneId = it.id
                         model.stones.add(stone)
+                        lastStoneIds[playerId] = stoneId
                     }
                 }
             }
+            lastPackIds[playerId] = clientData.packId
         }
     }
 
-    fun convertToProto(msg: ByteBuf): MessageLite {
+    private fun convertToProto(msg: ByteBuf): MessageLite {
         val array: ByteArray
         val offset: Int
         val length = msg.readableBytes()

@@ -9,11 +9,11 @@ import com.temas.aimaster.model.Stone
  * @author Artem Zhdanov <temas_coder@yahoo.com>
  * @since 12.10.2016
  */
-open class PhysicalStone(id: Int = ++Stone.ID_COUNTER,
+open class PhysicalStone(id: Int,
                          playerId: Int,
-                        startPoint: Vector2,
-                        velocity: Vector2,
-                        val world: World):
+                         startPoint: Vector2,
+                         velocity: Vector2,
+                         val world: World):
         Stone(id, playerId = playerId, startPoint = startPoint, velocity = velocity) {
 
     companion object {

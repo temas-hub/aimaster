@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     cfg.x = -1 // center
     cfg.y = -1
 
-    val playerId = if (args.size > 2) Integer.valueOf(args[2]) else null
+    val playerId = if (args.isNotEmpty()) Integer.valueOf(args[0]) else null
 
     LwjglApplication(MainGame(playerId), cfg)
 }

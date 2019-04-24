@@ -107,14 +107,14 @@ class NadronClient(val model: Model) {
                     speed = serverTargetInfo.speed
                 }
                 serverModel.stonesList.forEach { s ->
+                    if (s.playerId == playerId) {
+                        model.thrown.removeAll { it.id == s.id }
+                    }
                     val stone = model.stones.find { it.id == s.id && it.playerId == s.playerId }
                     if (stone == null) {
                         val newStone = Stone(s.id, s.playerId, startPoint = Vector2(s.position.x, s.position.y),
                                 velocity = Vector2(s.velocity.x, s.velocity.y))
                         model.stones.add(newStone)
-                        if (s.playerId == playerId) {
-                            model.thrown.removeAll { it.id == s.id }
-                        }
                     } else {
                         stone.updateFromServer(Vector2(s.position.x, s.position.y), Vector2(s.velocity.x, s.velocity.y))
                     }
@@ -134,7 +134,7 @@ class NadronClient(val model: Model) {
     private fun sendUpdate() {
 
         val clientData = ClientData.newBuilder().setTimeStamp(System.currentTimeMillis()).setPackId(++outPacketCount)
-        model.thrown.filter { it.id > 0 }.forEach {
+        model.thrown.forEach {
             val stoneData = createThrownStoneData(it)
             clientData.addThrowActions(stoneData)
         }
