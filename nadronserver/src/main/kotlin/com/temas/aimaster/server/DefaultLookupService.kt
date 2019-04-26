@@ -27,15 +27,16 @@ class DefaultLookupService(val game: Game,
 
     override fun gameRoomLookup(gameContextKey: Any): GameRoom? {
         //return refKeyGameRoomMap[gameContextKey as String]
-        synchronized(this, {
+        synchronized(this) {
             if (currentRoom == null || currentRoom!!.isFull()) {
                 roomSessionBuilder.gameRoomName(game.gameName + (ROOM_ID++))
+                roomSessionBuilder.sessions(HashSet())
                 val newRoom = ServerGameRoom(roomSessionBuilder)
                 rooms.add(newRoom)
                 currentRoom = newRoom
             }
             return currentRoom
-        })
+        }
 
     }
 

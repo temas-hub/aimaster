@@ -31,14 +31,14 @@ project.ext.mainClassName = "com.temas.aimaster.desktop.LauncherKt"
 project.ext.assetsDir = new File("../android/assets")
 
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.temas.aimaster.desktop.LauncherKt'
-    }
-    doFirst {
-        from {
-            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-        }
-    }
-    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
-}
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'com.temas.aimaster.desktop.LauncherKt'
+//    }
+//    doFirst {
+//        from {
+//            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//        }
+//    }
+//    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+//}

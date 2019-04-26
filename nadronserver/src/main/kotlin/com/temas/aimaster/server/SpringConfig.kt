@@ -29,7 +29,7 @@ open class SpringConfig {
 
     private val game : Game = SimpleGame(1, "aimmaster")
 
-    @Bean(name = arrayOf("gameRoom"))
+    @Bean(name = ["gameRoom"])
     open fun gameRoom() : GameRoom {
         val sessionBuilder = GameRoomSession.GameRoomSessionBuilder()
         sessionBuilder.
@@ -40,7 +40,7 @@ open class SpringConfig {
     }
 
 
-    @Bean(name = arrayOf("lookupService"))
+    @Bean(name = ["lookupService"])
     open fun lookupService(): LookupService {
 //        val refKeyGameRoomMap = HashMap<String, GameRoom>()
 //        val gameRoom = gameRoom()
